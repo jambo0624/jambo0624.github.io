@@ -2264,6 +2264,9 @@ pre .tag .name {
   font-weight: 700;
   color: #574c4c;
   padding-bottom: 5px;
+}
+
+.article-entry h3{
   border-bottom: 1px solid #ddd
 }
 
