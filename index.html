@@ -189,7 +189,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text"> 字数统计: </span>
-      <span class="post-count">577字</span>
+      <span class="post-count">575字</span>
     </span>
   </span>
 
@@ -208,11 +208,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h1><p>这是一篇自己推崇的前端基础代码规范，如果之后在实践的过程中有更适合自己的，会再更新。<br>首先奉上一句话：</p>
+        <h1 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h1><p>这是一篇自己推崇的前端基础代码规范，如果之后在实践的过程中有更适合自己的，会再更新。首先奉上一句话：</p>
 <ul>
 <li>谨记代码是给人看的，它们只是恰巧能跑而已</li>
 </ul>
-<h2 id="关于规范"><a href="#关于规范" class="headerlink" title="关于规范"></a>关于规范</h2><h3 id="能愿动词说明"><a href="#能愿动词说明" class="headerlink" title="能愿动词说明"></a>能愿动词说明</h3><p> 本文统一采用以下几个能愿动词作为规范的约束强度</p>
+<h3 id="能愿动词说明"><a href="#能愿动词说明" class="headerlink" title="能愿动词说明"></a>能愿动词说明</h3><p> 本文统一采用以下几个能愿动词作为规范的约束强度</p>
 <ul>
 <li><code>必须（Must）</code>：只能这样做，请无条件遵守</li>
 <li><code>绝不（Must Not）</code>：严令禁止，在任何情况下都不能这么做</li>
@@ -227,14 +227,16 @@
 <li><code>kebab-case</code>：小写 + 中划线</li>
 <li><code>kebab_ase</code>：小写 + 下划线</li>
 </ul>
-<h2 id="代码风格"><a href="#代码风格" class="headerlink" title="代码风格"></a>代码风格</h2><h3 id="HTML部分"><a href="#HTML部分" class="headerlink" title="HTML部分"></a>HTML部分</h3><h4 id="lang属性"><a href="#lang属性" class="headerlink" title="lang属性"></a>lang属性</h4><p>html 标签 <strong>必须</strong> 设置 lang 属性，此属性值 <strong>应该</strong> 与目标用户的第一语言保持一致<br>当使用i18n等工具进行页面语言的切换时，此属性值也 <strong>应该</strong> 一并切换</p>
+<h1 id="代码风格"><a href="#代码风格" class="headerlink" title="代码风格"></a>代码风格</h1><p>HTML部分</p>
+<h4 id="lang属性"><a href="#lang属性" class="headerlink" title="lang属性"></a>lang属性</h4><p>html 标签 <strong>必须</strong> 设置 lang 属性，此属性值 <strong>应该</strong> 与目标用户的第一语言保持一致<br>当使用i18n等工具进行页面语言的切换时，此属性值也 <strong>应该</strong> 一并切换</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh_CN"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="img-标签的-alt-属性"><a href="#img-标签的-alt-属性" class="headerlink" title="img 标签的 alt 属性"></a>img 标签的 alt 属性</h4><p>每一个 img 标签都 <strong>应该</strong> 有一个 alt 属性， 且它的内容 <strong>应该</strong> 尽可能详尽地描述这张图片的作用<br>它除了能提供信息以及更好的 seo 之外，还能帮助视障人士</p>
 <h4 id="中文和西文之间的空格"><a href="#中文和西文之间的空格" class="headerlink" title="中文和西文之间的空格"></a>中文和西文之间的空格</h4><p>页面上的中文和西文（数字）之间 <strong>必须</strong> 有一个空格</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- bad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Wikipedia是混成词，分别取自于网站核心技术Wiki以及英文中百科全书之意的encyclopedia。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- good --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Wikipedia 是混成词，分别取自于网站核心技术 Wiki 以及英文中百科全书之意的 encyclopedia。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- good --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>皇后乐队是英国摇滚乐乐队，成立于 1970 年。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="CSS部分"><a href="#CSS部分" class="headerlink" title="CSS部分"></a>CSS部分</h3><h4 id="CSS-Reset"><a href="#CSS-Reset" class="headerlink" title="CSS Reset"></a>CSS Reset</h4><p><strong>必须</strong> 在所有样式文件前引入 Normalize.css(<a href="https://necolas.github.io/normalize.css/" target="_blank" rel="noopener">https://necolas.github.io/normalize.css/</a>) 用于消除各个浏览器之间的差异。<br>对于不同的项目，<strong>应该</strong> 根据需求设立 reset 样式集， 并在 Normalize.css 之后引入。 Reset 样式集应该秉承最小化原则。</p>
+<p>CSS部分</p>
+<h4 id="CSS-Reset"><a href="#CSS-Reset" class="headerlink" title="CSS Reset"></a>CSS Reset</h4><p><strong>必须</strong> 在所有样式文件前引入 Normalize.css(<a href="https://necolas.github.io/normalize.css/" target="_blank" rel="noopener">https://necolas.github.io/normalize.css/</a>) 用于消除各个浏览器之间的差异。<br>对于不同的项目，<strong>应该</strong> 根据需求设立 reset 样式集， 并在 Normalize.css 之后引入。 Reset 样式集应该秉承最小化原则。</p>
 
       
       
