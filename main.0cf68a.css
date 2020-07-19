@@ -2121,7 +2121,7 @@ pre .tag .name {
 }
 
 .article-inner p {
-  margin: 0 0 1.75em
+  margin: 0
 }
 
 .article-inner {
@@ -2267,7 +2267,14 @@ pre .tag .name {
 }
 
 .article-entry h3{
-  border-bottom: 1px solid #ddd
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  color: #4f86ec;
+  margin-bottom: 10px;
+}
+.article-entry h4{
+  margin: 10px 0 !important;
+  color: #d95140;
 }
 
 .article-entry video {
