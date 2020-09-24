@@ -16,7 +16,7 @@
 <meta property="og:description" content="过滤器(filter) 什么是: 接收原始数据后，执行再加工，才显示  何时: 原始数据不能直接使用时，都要用过滤器  比如:   性别(1,0-&gt;男，女)   钱(345.5-&gt; ¥345.50) 时间(ms-&gt;字符串格式) 状态(10,20,30,40-&gt;未付款，已付款，已发货，已签收)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-08-19T05:40:27.000Z">
-<meta property="article:modified_time" content="2020-09-22T02:41:07.689Z">
+<meta property="article:modified_time" content="2020-09-24T09:10:07.376Z">
 <meta property="article:author" content="Jambo">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="note">
@@ -187,7 +187,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text"> 字数统计: </span>
-      <span class="post-count">769字</span>
+      <span class="post-count">767字</span>
     </span>
   </span>
 
@@ -262,20 +262,21 @@
 <li>如何: </li>
 </ul>
 <p>1.创建组件:</p>
-<pre class="line-numbers language-js">Vue.component(<span class="string"><code class="language-js">Vue.component(<span class="string">"组件名"</span>,{ 
-  <span class="comment">//代替了new Vue中的el:  </span>
+<pre class="line-numbers language-js"><span class="comment"><code class="language-js"><span class="comment">//</span>
+Vue.component(<span class="string">"组件名"</span>,{ 
+  <span class="comment">// 代替了new Vue中的el:  </span>
   template: <span class="string">"选择器"</span>, 
-  <span class="comment">//代替new Vue中的data:{ 模型变量 } </span>
+  <span class="comment">// 代替new Vue中的data:{ 模型变量 } </span>
   data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{     
-    <span class="comment">//每次都要调用函数，为本次组件创建专属的数据模型</span>
+    <span class="comment">// 每次都要调用函数，为本次组件创建专属的数据模型</span>
     <span class="keyword">return</span> {
-      <span class="comment">//创建新对象的意思</span>
+      <span class="comment">// 创建新对象的意思</span>
       <span class="string">'模型变量'</span>: <span class="string">'值'</span>,
          <span class="string">'...'</span> : <span class="string">'...'</span>
     }
   },
   <span class="comment">// 其余都一样！</span>
-})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>组件专属的HTML放在 <code>&lt;template&gt;HTML片段&lt;/template&gt;</code></strong><br>template是专门保存一段隐藏HTML片段的元素</p>
 <ul>
 <li>何时: 专门用于为组件保存HTML片段</li>
@@ -689,11 +690,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">arithmetic</a>
+                <a href="javascript:void(0)" class="js-tag color5">core</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">core</a>
+                <a href="javascript:void(0)" class="js-tag color1">arithmetic</a>
               </li>
             
             <div class="clearfix"></div>
