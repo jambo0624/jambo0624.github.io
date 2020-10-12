@@ -75,6 +75,35 @@
   </entry>
   
   <entry>
+    <title>数组API和字符串API区分对比</title>
+    <link href="https://jambo0624.github.io/2019-05-02-arrayApi-vs-stringApi.html"/>
+    <id>https://jambo0624.github.io/2019-05-02-arrayApi-vs-stringApi.html</id>
+    <published>2019-05-02T10:22:23.000Z</published>
+    <updated>2020-10-12T08:09:31.157Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前的文章对于数组的 API 进行了整理，发现对于数组和字符串的 API 有了混淆<br>现在将两者都记录，并做一些比较。防止在使用中出现 bug </p><a id="more"></a><h3 id="对比数组API和字符串API"><a href="#对比数组API和字符串API" class="headerlink" title="对比数组API和字符串API"></a>对比数组API和字符串API</h3><p><strong>数组：</strong>    </p><blockquote><p><code>slice(start,end)</code>  截取数组元素, start表示开始，end表示结束(不包含end本身)  start ~ end-1;如果end为空，表示截取到最后[包左不包右]<br><code>splice(start,count,value...)</code> 删除数组元素，start表示开始，count表示删除的数量，value表示删除后替换的元素；如果count为空，表示删除到最后[返回的是被删除的元素][替换、添加、删除]</p></blockquote><p><strong>字符串：</strong>    </p><blockquote><p><code>slice(start, end)</code> 截取字符串，start开始的下标，end是结束的下标；范围start~end-1。如果end为空，从start到结尾；负数表示倒数第几个。<br><code>substring(start, end)</code> 和slice作用几乎一致，区别在于不支持负数写法，如果参数为负数，自动转成0。<br><code>split(参数)</code> 将字符串按照指定的字符转换为数组——切割字符串，参数指定的字符    </p></blockquote><p><strong>字符串API</strong><br>◆<code>charAt</code>：根据字符串位置的索引返回指定字符<br>◆<code>charCodeAt</code>：根据字符串位置的索引返回指定字符的十进制的unicode编码的数值。<br>◆<code>indexOf</code>：根据字符串的字符返回索引值， 从前往后搜索。<br>◆<code>lastIndexOf</code>：根据字符串的字符返回索引值，从后往前搜索<br>◆<code>encodeURIComponent</code>：对url地址进行uri编码，他是window对象的方法，方法参数是字符串。<br>◆<code>decodeURICompoent</code>：对uri编码后的url进行解码，他是window对象的方法，方法参数是字符串。<br>◆<code>concat</code>：连接两个字符串，+的底层用的就是这个方法<br>◆<code>slice</code>：截取划分，和数组的silce方法类似，也是指定起始索引和结束索引，来截取原字符串返回新字符串，也是截取时包括左边的索引不包括右边的索引，索引为负数则为字符串的长度加上这个负数索引，如果起始索引大于结束索引则会返回空字符串，如果只有一个起始索引则会截取到最后。<br>◆<code>substr</code>：截取，和数组的splice方法类似，只不过这个方法只有截取没有替换，指定起始索引和要截取的长度来截取字符串，长度过大就直接等于字符串的长度，长度为负数则为0，索引为负数则字符串的长度加上这个负数索引。<br>◆<code>substring</code>：截取划分，和字符串的slice方法类似，只不过不同的地方是，索引为负数，那么直接返回全部字符串，如果起始索引大于结束索引，就会智能替换，把小的索引作为起始索引，大的索引作为结束索引。<br>◆<code>trim</code>：去掉字符串开头部分与结束部分的空格(IE678不支持，但是可以自己封装)。<br>◆<code>replace</code>：替换原字符串返回新字符串，第一个参数是原字符串中的某一段字符串，第二个参数是替换掉原字符串中的某一段字符串的字符串，使用str.replace(/\s/gi,””)可以替换掉所有的空格，这种方式叫做正则表达式。<br>◆<code>join</code>与<code>split</code>方法，数组通过join方法变成字符串，字符串通过split方法变成数组<br>◆<code>str.toLowerCase()</code>;//将str变量中的字母无论大小写都变成小写的字母，这个方法会返回新的字符串。<br>◆<code>str.toUpperCase()</code>;//将str变量中的字母无论大小写都变成大写的字母，这个方法会返回新的字符串。<br>◆<code>anchor()</code>方法:    <code>&quot;我是一个锚点&quot;.anchor(&quot;mao&quot;)</code>等于<code>&lt;a name=&quot;mao&quot;&gt;我是一个锚点&lt;/a&gt;</code><br>◆<code>link()</code>方法:   <code>&quot;我是一个超链接&quot;.link(&quot;http://www.baidu.com&quot;)</code>等于<code>&lt;a href=&quot;http://www.baidu.com&quot;&gt;我是一个超链接&lt;/a&gt;</code>（记住这个） </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前的文章对于数组的 API 进行了整理，发现对于数组和字符串的 API 有了混淆&lt;br&gt;现在将两者都记录，并做一些比较。防止在使用中出现 bug &lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="js" scheme="https://jambo0624.github.io/categories/js/"/>
+    
+    
+      <category term="js" scheme="https://jambo0624.github.io/tags/js/"/>
+    
+      <category term="array" scheme="https://jambo0624.github.io/tags/array/"/>
+    
+      <category term="api" scheme="https://jambo0624.github.io/tags/api/"/>
+    
+      <category term="string" scheme="https://jambo0624.github.io/tags/string/"/>
+    
+  </entry>
+  
+  <entry>
     <title>数组常用的API整理</title>
     <link href="https://jambo0624.github.io/2019-04-21-array-api.html"/>
     <id>https://jambo0624.github.io/2019-04-21-array-api.html</id>
@@ -509,41 +538,6 @@
       &lt;h3 id=&quot;组件化开发&quot;&gt;&lt;a href=&quot;#组件化开发&quot; class=&quot;headerlink&quot; title=&quot;组件化开发:&quot;&gt;&lt;/a&gt;组件化开发:&lt;/h3&gt;&lt;p&gt;组件化开发，就是将大的网页划分为若干组件区域，每个组件区域都有专门的HTML，CSS和数据。&lt;br&gt;自定义组件，分为3种: &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;根组件: &lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Vue(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  el:&lt;span class=&quot;string&quot;&gt;&quot;父元素选择器&quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  data:&amp;#123; 模型变量 &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="Vue" scheme="https://jambo0624.github.io/categories/Vue/"/>
-    
-    
-      <category term="Vue" scheme="https://jambo0624.github.io/tags/Vue/"/>
-    
-      <category term="note" scheme="https://jambo0624.github.io/tags/note/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue.js 学习笔记(二)</title>
-    <link href="https://jambo0624.github.io/2018-08-19-vue-note-2.html"/>
-    <id>https://jambo0624.github.io/2018-08-19-vue-note-2.html</id>
-    <published>2018-08-19T05:40:27.000Z</published>
-    <updated>2020-09-24T09:10:07.376Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="过滤器-filter"><a href="#过滤器-filter" class="headerlink" title="过滤器(filter)"></a>过滤器(filter)</h3><ul><li><p>什么是: 接收原始数据后，执行再加工，才显示</p></li><li><p>何时: 原始数据不能直接使用时，都要用过滤器</p></li><li><p>比如: </p><ul><li>性别(1,0-&gt;男，女)  </li><li>钱(345.5-&gt; ¥345.50)</li><li>时间(ms-&gt;字符串格式)</li><li>状态(10,20,30,40-&gt;未付款，已付款，已发货，已签收)    <a id="more"></a></li></ul></li><li><p>如何: Vue官方没有提供任何预定义的过滤器，都要自己定义</p>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Vue.filter(<span class="string">"过滤器名"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">value,形参<span class="number">1</span>,形参<span class="number">2</span>,...</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//value接收的是原始值</span></span><br><span class="line">  <span class="keyword">return</span> 加工后的新值！</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>  只要绑定数据，都可用过滤器：</p><pre class="line-numbers language-html"><span class="tag">&lt;<span class="name">ANY</span> 模型变量|过滤器名|<span class="attr"><code class="language-html"><span class="tag">&lt;<span class="name">ANY</span> 模型变量|过滤器名|<span class="attr">......</span>></span><span class="tag"><<span class="name">ANY</span> 模型变量|过滤器名(值<span class="attr">1</span>,值<span class="attr">2</span>)|<span class="attr">......</span>></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li><p>强调: </p><ul><li><strong>1.后一个过滤器获得的原始值，是前一个过滤器加工后的</strong></li><li><strong>2.v-text不能使用过滤器</strong> </li></ul></li></ul><h3 id="Vue实例-组件的生命周期："><a href="#Vue实例-组件的生命周期：" class="headerlink" title="Vue实例/组件的生命周期："></a>Vue实例/组件的生命周期：</h3><p><strong>笔试题目: Vue实例/组件的声明周期共几个阶段，每个阶段做什么:</strong> </p><ul><li><p>4个阶段: </p><ul><li>1.创建（create）阶段：创建组件对象，和模型数据对象</li><li>2.挂载（mount）阶段：扫描真实 DOM 树，创建虚拟 DOM 树，并绑定模型中的数据到视图中</li><li>3.更新（update）阶段：只要模型数据发生变化，就更新组件的内容和 DOM 树</li><li>4.销毁（destroy）阶段：主动调用了<code>$destory()</code>函数，销毁组件时</li></ul></li><li><p>声明周期钩子函数：</p><ul><li>什么是在组件的每个阶段都会自动执行的函数</li><li>何时: 如果希望在组件的不同阶段执行一项任务时</li></ul></li></ul><p>包括: </p><blockquote><p>beforeCreate()   <code>$el:undefined   data:undefined</code><br>created()        <code>$el: undefined   data: { ... }</code><br>beforeMount()    <code>$el: 空DOM对象 data: { ... }</code><br>mounted()        <code>$el: 完整DOM树  data: { ... }</code><br>beforeUpdate()<br>updated()<br>beforeDestroy()<br>destroyed()</p></blockquote><p><strong>请求数据<code>axios.get()</code>可放在created或mounted中均可</strong><br><strong>但是，如果有DOM操作，就必须放在mounted中</strong></p><h3 id="组件Component"><a href="#组件Component" class="headerlink" title="组件Component:"></a>组件Component:</h3><ul><li>什么是: 拥有专属的HTML，CSS和数据的，可重用的页面独立区域</li><li>为什么: 重用！分工协作！松藕合！</li><li>何时: 只要发现独立的区域，都要封装为组件。</li><li>如何: </li></ul><p>1.创建组件:</p><pre class="line-numbers language-js"><span class="comment"><code class="language-js"><span class="comment">//</span>Vue.component(<span class="string">"组件名"</span>,{   <span class="comment">// 代替了new Vue中的el:  </span>  template: <span class="string">"选择器"</span>,   <span class="comment">// 代替new Vue中的data:{ 模型变量 } </span>  data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{         <span class="comment">// 每次都要调用函数，为本次组件创建专属的数据模型</span>    <span class="keyword">return</span> {      <span class="comment">// 创建新对象的意思</span>      <span class="string">'模型变量'</span>: <span class="string">'值'</span>,         <span class="string">'...'</span> : <span class="string">'...'</span>    }  },  <span class="comment">// 其余都一样！</span>})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><strong>组件专属的HTML放在 <code>&lt;template&gt;HTML片段&lt;/template&gt;</code></strong><br>template是专门保存一段隐藏HTML片段的元素</p><ul><li>何时: 专门用于为组件保存HTML片段</li><li>规定: template中只能且必须有唯一的一个父元素包裹组件的片段。</li><li>如何:<br>  1.定义<code>&lt;template&gt;</code>元素包裹组件的 HTML 片段，还需要添加一个唯一的父元素<br>  2.<code>Vue.component(&quot;....&quot;,{template:&quot;选择器&quot;})</code>，通过选择器找到对应的template元素</li></ul><ol start="2"><li>在视图中使用组件:<br> 一个组件其实就是一个可重用的自定义HTML标签<br> <code>&lt;组件名&gt;&lt;/组件名&gt;</code><br> 执行时，会用组件的template代替<code>&lt;组件名&gt;&lt;/组件名&gt;</code></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;过滤器-filter&quot;&gt;&lt;a href=&quot;#过滤器-filter&quot; class=&quot;headerlink&quot; title=&quot;过滤器(filter)&quot;&gt;&lt;/a&gt;过滤器(filter)&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;什么是: 接收原始数据后，执行再加工，才显示&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;何时: 原始数据不能直接使用时，都要用过滤器&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;比如: &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;性别(1,0-&amp;gt;男，女)  &lt;/li&gt;
-&lt;li&gt;钱(345.5-&amp;gt; ¥345.50)&lt;/li&gt;
-&lt;li&gt;时间(ms-&amp;gt;字符串格式)&lt;/li&gt;
-&lt;li&gt;状态(10,20,30,40-&amp;gt;未付款，已付款，已发货，已签收)
     
     </summary>
     
