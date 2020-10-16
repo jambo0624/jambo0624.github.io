@@ -6,20 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jambo0624.github.io">
-  <title>Category: js | You should know</title>
+  <title>读《你不知道的js (中卷)--程序性能》 | You should know</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="You should know">
-<meta property="og:url" content="https://jambo0624.github.io/categories/js/page/3/index.html">
+  <meta name="description" content="对于中卷的部分，之前已经分了两篇文章进行了介绍。分别是中卷一和中卷二但是真的由于内容很多，很精华，每一章节单拿出来都可以写成几篇文章。就算仅仅记录表面意思，仍然足以撑满篇幅。今天我们开始记录性能部分内容，真的是中卷的最后一篇文章啦。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《你不知道的js (中卷)--程序性能》">
+<meta property="og:url" content="https://jambo0624.github.io/2019-12-22-dont-know-js-second3.html">
 <meta property="og:site_name" content="You should know">
-<meta property="og:description" content="个人技术博客">
+<meta property="og:description" content="对于中卷的部分，之前已经分了两篇文章进行了介绍。分别是中卷一和中卷二但是真的由于内容很多，很精华，每一章节单拿出来都可以写成几篇文章。就算仅仅记录表面意思，仍然足以撑满篇幅。今天我们开始记录性能部分内容，真的是中卷的最后一篇文章啦。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-22T06:13:49.000Z">
+<meta property="article:modified_time" content="2020-10-16T07:27:47.512Z">
 <meta property="article:author" content="Jambo">
-<meta property="article:tag" content="前端博客，javascript">
-<meta property="article:tag" content="vue.js">
-<meta property="article:tag" content="jQuery">
-<meta property="article:tag" content="html5，css">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="core">
+<meta property="article:tag" content="reading-notes">
 <meta name="twitter:card" content="summary">
   
   
@@ -163,146 +164,160 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-dont-know-js-second3" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      读《你不知道的js (中卷)--程序性能》
+    </h1>
+  
+
+        
+        <a href="/2019-12-22-dont-know-js-second3.html" class="archive-article-date">
+  	<time datetime="2019-12-22T06:13:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-22</time>
+</a>
+        
+        <!-- 开始添加字数统计-->
+        
+        
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-keyboard-o"></i>
+      <span class="post-meta-item-text"> 字数统计: </span>
+      <span class="post-count">4k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="fa fa-hourglass-half"></i>
+      <span class="post-meta-item-text"> 阅读时长: </span>
+      <span class="post-count">14分</span>
+    </span>
+  </span>
+</div>
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于中卷的部分，之前已经分了两篇文章进行了介绍。<br>分别是<a href="https://jambo0624.github.io/2019-03-19-dont-know-js-second.html">中卷一</a>和<a href="https://jambo0624.github.io/2019-07-07-dont-know-js-second2.html">中卷二</a><br>但是真的由于内容很多，很精华，每一章节单拿出来都可以写成几篇文章。<br>就算仅仅记录表面意思，仍然足以撑满篇幅。<br>今天我们开始记录性能部分内容，真的是中卷的最后一篇文章啦。</p>
+<a id="more"></a>
+
+
+<h2 id="程序性能"><a href="#程序性能" class="headerlink" title="程序性能"></a>程序性能</h2><h3 id="Web-Worker"><a href="#Web-Worker" class="headerlink" title="Web Worker"></a>Web Worker</h3><p>如果你有一些处理密集型的任务要执行，但不希望它们都在主线程运行（这可能会减慢浏览器/UI），可能你就会希望JavaScript能够以多线程的方式运行。</p>
+<p>像浏览器这样的环境，很容易提供多个JavaScript引擎实例，各自运行在自己的线程上，这样你可以在每个线程上运行不同的程序。<br>程序中每一个这样的独立的多线程部分被称为一个（Web）Worker。<br>这种类型的并行化被称为任务并行，因为其重点在于把程序划分为多个块来并发运行。</p>
+<p>从JavaScript主程序（或另一个Worker）中，可以这样实例化一个Worker：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> w1 = <span class="keyword">new</span> Worker(<span class="string">'http://some.url.1/mycoolworker.js'</span>)</span><br></pre></td></tr></table></figure>
+<p>这个URL应该指向一个JavaScript文件的位置（而不是一个HTML页面！），这个文件将被加载到一个Worker中。<br>然后浏览器启动一个独立的线程，让这个文件在这个线程中作为独立的程序运行。</p>
+<p>Worker之间以及它们和主程序之间，<strong>不会共享任何作用域或资源</strong>，那会把所有多线程编程的噩梦带到前端领域，而是<strong>通过一个基本的事件消息机制</strong>相互联系。<br>Worker w1对象是一个事件侦听者和触发者，可以通过订阅它来获得这个Worker发出的事件以及发送事件给这个Worker。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 'mycoolworker.js'</span></span><br><span class="line"></span><br><span class="line">addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// evt.data</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">postMessage(<span class="string">'a really cool reply'</span>)</span><br></pre></td></tr></table></figure>
+<p>注意，专用Worker和创建它的程序之间是一对一的关系。<br>也就是说，”message”事件没有任何歧义需要消除，因为我们确定它只能来自这个一对一的关系：<strong>它要么来自这个Worker，要么来自主页面。</strong></p>
+<p><strong>Worker环境</strong><br>在Worker内部是无法访问主程序的任何资源的。<br>这意味着你不能访问它的任何全局变量，也不能访问页面的DOM或者其他资源。<br>记住，这是一个完全独立的线程。</p>
+<p>但是，你可以执行网络操作（Ajax、WebSockets）以及设定定时器。<br>还有，Worker可以访问几个重要的全局变量和功能的本地复本，包括navigator、location、JSON和applicationCache。</p>
+<p>你还可以通过importScripts(..)向Worker加载额外的JavaScript脚本：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker 内部</span></span><br><span class="line">importScripts(<span class="string">'foo.js'</span>, <span class="string">'bar.js'</span>)</span><br></pre></td></tr></table></figure>
+<p>这些脚本加载是同步的。<br>也就是说，<code>importScripts(..)</code>调用会阻塞余下Worker的执行，直到文件加载和执行完成。</p>
+<p><strong>数据传递</strong><br>如果要传递一个对象，可以使用<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/API/DOM/The_structured_clone_algorithm" target="_blank" rel="noopener">结构化克隆算法</a>(structured clone algorithm)把这个对象复制到另一边。<br>这个算法非常高级，甚至可以处理要复制的对象有循环引用的情况。<br>这样就不用付出to-string和from-string的性能损失了，但是这种方案还是要使用双倍的内存。IE10及更高版本以及所有其他主流浏览器都支持这种方案。<br>这里有一篇文章关于<a href="https://zhuanlan.zhihu.com/p/33489557" target="_blank" rel="noopener">结构化克隆算法</a>的<strong>应用</strong>。</p>
+<p>还有一个更好的选择，特别是对于大数据集而言，就是使用<a href="http://updates.html5rocks.com/2011/12/Transferable-Objects-Lightning-Fast" target="_blank" rel="noopener">Transferable对象</a>。<br>这时发生的是对象所有权的转移，数据本身并没有移动。<br>一旦你把对象传递到一个Worker中，在原来的位置上，它就变为空的或者是不可访问的，这样就消除了多线程编程作用域共享带来的混乱。<br>当然，所有权传递是可以双向进行的。</p>
+<p>如果选择Transferable对象的话，其实不需要做什么。<br>任何实现了<a href="http://developer.mozilla.org/en-US/docs/Web/API/Transferable" target="_blank" rel="noopener">Transferable接口</a>的数据结构就自动按照这种方式传输（Firefox和Chrome都支持）</p>
+<p>下面是如何使用postMessage(..)发送一个Transferable对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比如 Unit8Array</span></span><br><span class="line">postMessage( foo.buffer, [foo.buffer] )</span><br></pre></td></tr></table></figure>
+<p>第一个参数是一个原始缓冲区，第二个是一个要传输的内容的列表。<br>不支持Transferable对象的浏览器就降级到结构化克隆，这会带来性能下降而不是彻底的功能失效。```</p>
+<p><strong>共享Worker</strong><br>共享Worker可以与站点的多个程序实例或多个页面连接，所以这个Worker需要通过某种方式来得知消息来自于哪个程序。<br>这个唯一标识符称为端口（port），可以类比网络socket的端口。因此，调用程序必须使用Worker的port对象用于通信：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">w1.port.addEventListener(<span class="string">'message'</span>,handleMessage)</span><br><span class="line">w1.port.postMessage(<span class="string">'something cool'</span>)</span><br></pre></td></tr></table></figure>
+<p>还有，端口连接必须要初始化，形式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w1.port.start()</span><br></pre></td></tr></table></figure>
+<p>在共享Worker内部，必须要处理额外的一个事件：”connect”。<br>这个事件为这个特定的连接提供了端口对象。<br>保持多个连接独立的最简单办法就是使用port上的闭包，就像下面的代码一样，把这个链接上的事件侦听和传递定义在”connect”事件的处理函数内部：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker 内部</span></span><br><span class="line">addEventListener(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> port = evt.ports[<span class="number">0</span>]</span><br><span class="line">  port.addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    port.postMessage()</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;)</span><br><span class="line">  port.start()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="SMID"><a href="#SMID" class="headerlink" title="SMID"></a>SMID</h3><p>单指令多数据（SIMD）是一种数据并行（data parallelism）方式，与WebWorker的任务并行（task parallelism）相对，因为这里的重点实际上不再是把程序逻辑分成并行的块，而是并行处理数据的多个位。</p>
+<p>通过SIMD，线程不再提供并行。<br>取而代之的是，现代CPU通过数字“向量”（特定类型的数组），以及可以在所有这些数字上并行操作的指令，来提供SIMD功能。<br>这是利用低级指令级并行的底层运算。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> v1 = SMID.float32x4(<span class="number">3.14159</span>, <span class="number">21.0</span>, <span class="number">32.3</span>, <span class="number">55.55</span>)</span><br><span class="line"><span class="keyword">var</span> v2 = SMID.float32x4(<span class="number">2.1</span>, <span class="number">3.2</span>, <span class="number">4.3</span>, <span class="number">5.4</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v3 = SMID.int32x4(<span class="number">10</span>, <span class="number">101</span>, <span class="number">1001</span>, <span class="number">10001</span>)</span><br><span class="line"><span class="keyword">var</span> v4 = SMID.int32x4(<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>)</span><br><span class="line"></span><br><span class="line">SMID.float32x4.mul(v1, v2) <span class="comment">// [6.597339, 67.2, 138.89, 299.97]</span></span><br><span class="line">SMID.int32x4.mul(v3, v4) <span class="comment">// [20, 121, 1031, 10041]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="asm-js"><a href="#asm-js" class="headerlink" title="asm.js"></a>asm.js</h3><p><a href="http://asmjs.org" target="_blank" rel="noopener">asm.js</a>这个标签是指JavaScript语言中可以高度优化的一个子集。<br>通过小心避免某些难以优化的机制和模式（垃圾收集、类型强制转换，等等）, asm.js风格的代码可以被JavaScript引擎识别并进行特别激进的底层优化。</p>
+<h2 id="性能测试与调优"><a href="#性能测试与调优" class="headerlink" title="性能测试与调优"></a>性能测试与调优</h2><h3 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start = (<span class="keyword">new</span> <span class="built_in">Date</span>()).getTime()</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">var</span> end = (<span class="keyword">new</span> <span class="built_in">Date</span>()).getTime()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Duration:'</span>,(end-start))</span><br></pre></td></tr></table></figure>
+<p>使用这个方法测试某个运算的速度（执行时间）<strong>有很多错误</strong>。</p>
+<p><strong>重复</strong><br>如果想要用重复来测试，要确保把异常因素排除，你需要大量的样本来平均化。<br>你还会想要知道最差样本有多慢，最好的样本有多快，以及最好和最差情况之间的偏离度有多大，等等。<br>司仪重复也不是正确的方法。</p>
+<p><strong>Benchmark.js</strong><br>任何有意义且可靠的性能测试都应该基于统计学上合理的实践。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 要测试的运算</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bench= <span class="keyword">new</span> Benchmark(      </span><br><span class="line"> <span class="string">'foo test'</span>,  <span class="comment">// 测试名称</span></span><br><span class="line">  foo,  <span class="comment">// 要测试的函数</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 可选的额外选项</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">bench.hz <span class="comment">// 每秒运算数</span></span><br><span class="line">bench.stats.moe <span class="comment">// 出错边界</span></span><br><span class="line">bench.stats.variance <span class="comment">// 样本方差</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="环境为王"><a href="#环境为王" class="headerlink" title="环境为王"></a>环境为王</h3><p>对特定的性能测试来说，不要忘了检查测试环境，特别是比较任务Ⅹ和Y这样的比对测试。<br>仅仅因为你的测试显示Ⅹ比Y快，并不能说明结论Ⅹ比Y快就有实际的意义。</p>
+<p><strong>引擎优化</strong><br>我们设想的所有优化可能性在受限的测试中都有可能发生，而且在更复杂的程序中（出于各种各样的原因），引擎可能不会进行这样的优化。<br>也可能恰恰相反，引擎可能不会优化这样无关紧要的代码，但是在系统已经在运行更复杂的程序时可能会倾向于激进的优化。</p>
+<p>这是不是意味着无法真正进行任何有用的测试呢？绝对不是！<br>测试不真实的代码只能得出不真实的结论。<br>如果有实际可能的话，你应该测试实际的而非无关紧要的代码，测试条件与你期望的真实情况越接近越好。<br>只有这样得出的结果才有可能接近事实。<br>像++x对比x++这样的微观性能测试结果为虚假的可能性相当高，可能我们最好就假定它们是假的。</p>
+<h3 id="jsPerf-com"><a href="#jsPerf-com" class="headerlink" title="jsPerf.com"></a>jsPerf.com</h3><p>如果想要在不止一个环境下得出像“Ⅹ比Y快”这样的有意义的结论成立，那你需要在尽可能多的真实环境下进行实际测试。仅仅因为在Chrome上某个Ⅹ运算比Y快并不意味着这在所有的浏览器中都成立。<br>当然你可能还想要交叉引用多个浏览器上的测试运行结果，并有用户的图形展示。</p>
+<p>有一个很棒的网站正是因这样的需求而诞生的，名为<a href="http://jsperf.com" target="_blank" rel="noopener">jsPerf</a></p>
+<h3 id="写好测试"><a href="#写好测试" class="headerlink" title="写好测试"></a>写好测试</h3><p>要写好测试，需要认真分析和思考两个测试用例之间有什么区别，以及这些区别是有意还是无意的。</p>
+<p>编写更好更清晰的测试。<br>但还有，花一些时间来编写文档（使用jsPerf.com上的Description字段和/或代码注释）精确表达你的测试目的，甚至对于那些微小的细节也要如此。<br>找出那些有意的区别，这会帮助别人和未来的你更好地识别出那些可能扭曲测试结果的无意区别。</p>
+<p>不要试图窄化到真实代码的微小片段，以及脱离上下文而只测量这一小部分的性能，因为包含更大（仍然有意义的）上下文时功能测试和性能测试才会更好。<br>这些测试可能也会运行得慢一点，这意味着环境中发现的任何差异都更有意义。</p>
+<h3 id="微性能"><a href="#微性能" class="headerlink" title="微性能"></a>微性能</h3><p>在考虑对代码进行性能测试时，你应该习惯的第一件事情就是你所写的代码并不总是引擎真正运行的代码。</p>
+<p>来考虑下面这段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="number">41</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">baz</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> baz = foo + baz</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;)(<span class="number">1</span>)</span><br><span class="line">  &#125;)()</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>可能你会认为最内层函数中的引用foo需要进行三层作用域查找。<br>事实上，编译器通常会缓存这样的查找结果，使得从不同的作用域引用foo实际上并没有任何额外的花费。<br>但是，还有一些更深入的问题需要思考。<br>如果编译器意识到这个foo只在一个位置被引用而别处没有任何引用，并且注意到这个值只是41而从来不会变成其他值呢？</p>
+<p>JavaScript可能决定完全去掉foo变量，将其值在线化，这不是很可能发生也可以接受的吗？就像下面这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">baz</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> baz = <span class="number">41</span> + baz</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;)(<span class="number">1</span>)</span><br><span class="line">  &#125;)()</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>当你把JavaScript代码看作对引擎要做什么的提示和建议，而不是逐字逐句的要求时，你就会意识到，对于具体语法细节的很多执着迷恋已经烟消云散了。</p>
+<p>这里是另一个常见的愚蠢的执迷于微观性能的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = [...]</span><br><span class="line"><span class="comment">// 选择1</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;x.length;i++)&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 选择2</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,len=x.length;i&lt;len;i++)&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>理论上说，这里应该在变量len中缓存x数组的长度，因为表面上它不会改变，来避免在每个循环迭代中计算x.length的代价。<br>如果运行性能测试来比较使用x.length和将其缓存到len变量中的方案，你会发现尽管理论听起来没错，但实际的可测差别在统计上是<strong>完全无关紧要</strong>的。</p>
+<p>实际上，在某些像v8这样的引擎中，可以<a href="http://mrale.ph/blog/2014/12/24/array-length-caching.html" target="_blank" rel="noopener">看到</a>，预先缓存长度而不是让引擎为你做这件事情，会使性能稍微下降一点。<br>不要试图和JavaScript引擎比谁聪明。对性能优化来说，你很可能会输。</p>
+<p><strong>不是所有的引擎都类似</strong><br>引擎可以自由决定一个运算是否需要优化，可能进行权衡，替换掉运算次要性能。<br>对一个运算来说，很难找到一种方法使其在所有浏览器中都运行得较快</p>
+<p>在一些JavaScript开发社区有一场运动，特别是在那些使用Node.js工作的开发者中间。<br>这场运动是要分析v8 JavaScript引擎的特定内部实现细节，决定编写裁剪过的JavaScript代码来最大程度地利用v8的工作模式。<br>通过这样的努力，你可能会获得令人吃惊的高度性能优化。因此，这种努力的回报可能会很高。</p>
+<p><strong>大局</strong><br>怎么知道什么是大局呢？<br>首先要了解你的代码是否运行在关键路径上。<br>如果不在关键路径上，你的优化就很可能得不到很大的收益。</p>
+<p>有没有听过“这是过早优化”这样的警告？<br>这来自于高德纳著名的一句话：<strong>“过早优化是万恶之源。”</strong><br>很多开发者都会引用这句话来说明多数优化都是“过早的”，因此是白费力气。和通常情况一样，事实要更加微妙一些。</p>
+<p>尽管程序关键路径上的性能非常重要，但这并不是唯一要考虑的因素。<br>在性能方面大体相似的几个选择中，<strong>可读性</strong>应该是另外一个重要的考量因素。</p>
+<h3 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h3><p>尾调用优化（Tail Call Optimization, TCO）<br>尾调用就是一个出现在另一个函数“结尾”处的函数调用。<br>这个调用结束后就没有其余事情要做了（除了可能要返回结果值）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> foo(y+<span class="number">1</span>) <span class="comment">// 尾调用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span> + bar(<span class="number">40</span>) <span class="comment">// 非尾调用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">baz() <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
+<p>调用一个新的函数需要额外的一块预留内存来管理调用栈，称为<strong>栈帧</strong>。<br>所以前面的代码一般会同时需要为每个baz()、bar(..)和foo(..)保留一个栈帧。</p>
+<p>然而，如果支持TCO的引擎能够意识到foo(y+1)调用位于尾部，这意味着bar(..)基本上已经完成了，那么在调用foo(..)时，它就不需要创建一个新的栈帧，而是可以重用已有的bar(..)的栈帧。<br>这样不仅速度更快，也更节省内存。</p>
+<p>在简单的代码片段中，这类优化算不了什么，但是在处理递归时，这就解决了大问题，特别是如果递归可能会导致成百上千个栈帧的时候。<br>有了TCO，引擎可以用同一个栈帧执行所有这类调用！</p>
+<p>递归是JavaScript中一个纷繁复杂的主题。<br>因为如果没有TCO的话，引擎需要实现一个随意（还彼此不同！）的限制来界定递归栈的深度，达到了就得停止，以防止内存耗尽。<br>有了TCO，尾调用的递归函数本质上就可以任意运行，因为再也不需要使用额外的内存！</p>
+<p>ES6之所以要求引擎实现TCO而不是将其留给引擎自由决定，一个原因是缺乏TCO会导致一些JavaScript算法因为害怕调用栈限制而降低了通过递归实现的概率。</p>
+
+      
+
+      <!-- 开始添加版权声明-->
+      
+      
+      <div class="declare">
+        <ul>
+          <li><strong>本文作者：</strong>
             
-  
-  
+            Jambo
+            
+	    </li></ul>
+    <ul><li><strong>本文链接：</strong>
+	 <a href="https://jambo0624.github.io/2019-12-22-dont-know-js-second3.html" target="_blank" rel="noopener">https://jambo0624.github.io/2019-12-22-dont-know-js-second3.html</a>
+          </li>
+        </ul>
+        <ul>
+          <li><strong>版权声明：</strong>
+            本作品采用
+            <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+            进行许可。转载请注明出处！
+            
+      </div>
+      
+      <!-- 添加完成 -->
+
+      
+    </div>
+    <!-- 添加本文结束标记-->
     
+    <div style="text-align:center;color: #00BFFF;font-size:14px;margin-top: 20px;">
+      -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+    </div>
     
+    <!-- 添加完成 -->
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019-04-21-array-api.html" class="archive-article-date">
-  	<time datetime="2019-04-21T06:04:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019-04-21-array-api.html">数组常用的API整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">array</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">api</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/js//" class="article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019-04-13-regExp-example.html" class="archive-article-date">
-  	<time datetime="2019-04-13T02:50:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019-04-13-regExp-example.html">一些常用正则表达式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">regExp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/js//" class="article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019-03-19-dont-know-js-second.html" class="archive-article-date">
-  	<time datetime="2019-03-19T13:04:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019-03-19-dont-know-js-second.html">读《你不知道的js (中卷)》</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -322,7 +337,14 @@
 		</ul>
 	</div>
 
-          
+      <!-- 开始添加阅读量-->
+      
+      <span id="busuanzi_container_page_pv">
+        | 阅读量<span id="busuanzi_value_page_pv"></span>次
+      </span>
+      
+      <!-- 添加完成 -->
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -335,145 +357,176 @@
 	</div>
 
 
+      
+
+<!--      -->
+<!--        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://jambo0624.github.io/2019-12-22-dont-know-js-second3.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>-->
+<!--      -->
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019-02-20-cross-domain.html" class="archive-article-date">
-  	<time datetime="2019-02-20T04:04:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-20</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020-07-19-code-standard.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          CodeStandard
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019-12-09-vim-command.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vim命令</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019-02-20-cross-domain.html">跨域问题的处理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">jsonp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CORS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/js//" class="article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#程序性能"><span class="toc-number">1.</span> <span class="toc-text">程序性能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Worker"><span class="toc-number">1.1.</span> <span class="toc-text">Web Worker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMID"><span class="toc-number">1.2.</span> <span class="toc-text">SMID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#asm-js"><span class="toc-number">1.3.</span> <span class="toc-text">asm.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能测试与调优"><span class="toc-number">2.</span> <span class="toc-text">性能测试与调优</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#性能测试"><span class="toc-number">2.1.</span> <span class="toc-text">性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境为王"><span class="toc-number">2.2.</span> <span class="toc-text">环境为王</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jsPerf-com"><span class="toc-number">2.3.</span> <span class="toc-text">jsPerf.com</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写好测试"><span class="toc-number">2.4.</span> <span class="toc-text">写好测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#微性能"><span class="toc-number">2.5.</span> <span class="toc-text">微性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#尾调用优化"><span class="toc-number">2.6.</span> <span class="toc-text">尾调用优化</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018-11-18-dont-know-js-first2.html" class="archive-article-date">
-  	<time datetime="2018-11-18T02:33:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018-11-18-dont-know-js-first2.html">读《你不知道的js (上卷)--对象原型》</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">core</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">reading-notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/js//" class="article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
+
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/categories/js/page/2/">Prev</a><a class="page-number" href="/categories/js/">1</a><a class="page-number" href="/categories/js/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/categories/js/page/4/">4</a><a class="extend next" rel="next" href="/categories/js/page/4/">Next</a>
-    </nav>
   
+
+  
+
+  
+
+  
+
+
+
+<section id="comments" class="comments">
+  <style>
+    .comments {
+      margin: 30px;
+      padding: 10px;
+      background: #fff
+    }
+
+    @media screen and (max-width:800px) {
+      .comments {
+        margin: auto;
+        padding: 10px;
+        background: #fff
+      }
+    }
+  </style>
+  <div id="vcomment" class="comment"></div>
+<script src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+<script src='//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    verify: verify,
+    app_id: "dzO9AHXCV1aNw8NcNYp5jTFM-gzGzoHsz",
+    app_key: "lMyhLpA1RmqwMMOQLYXPnhdO",
+    placeholder: "Just go go",
+    avatar: "mm",
+    avatar_cdn: "",
+    pageSize: ""
+  });
+  if (window.location.hash) {
+    var checkExist = setInterval(function () {
+      if ($(window.location.hash).length) {
+        $('html, body').animate({
+          scrollTop: $(window.location.hash).offset().top - 90
+        }, 1000);
+        clearInterval(checkExist);
+      }
+    }, 100);
+  }
+</script>
+</section>
 
 
           </div>
@@ -508,10 +561,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
