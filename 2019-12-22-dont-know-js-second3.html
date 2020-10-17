@@ -16,7 +16,7 @@
 <meta property="og:description" content="对于中卷的部分，之前已经分了两篇文章进行了介绍。分别是中卷一和中卷二但是真的由于内容很多，很精华，每一章节单拿出来都可以写成几篇文章。就算仅仅记录表面意思，仍然足以撑满篇幅。今天我们开始记录性能部分内容，真的是中卷的最后一篇文章啦。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-22T06:13:49.000Z">
-<meta property="article:modified_time" content="2020-10-16T07:27:47.512Z">
+<meta property="article:modified_time" content="2020-10-16T07:35:33.228Z">
 <meta property="article:author" content="Jambo">
 <meta property="article:tag" content="js">
 <meta property="article:tag" content="core">
@@ -279,6 +279,7 @@
 <p>在简单的代码片段中，这类优化算不了什么，但是在处理递归时，这就解决了大问题，特别是如果递归可能会导致成百上千个栈帧的时候。<br>有了TCO，引擎可以用同一个栈帧执行所有这类调用！</p>
 <p>递归是JavaScript中一个纷繁复杂的主题。<br>因为如果没有TCO的话，引擎需要实现一个随意（还彼此不同！）的限制来界定递归栈的深度，达到了就得停止，以防止内存耗尽。<br>有了TCO，尾调用的递归函数本质上就可以任意运行，因为再也不需要使用额外的内存！</p>
 <p>ES6之所以要求引擎实现TCO而不是将其留给引擎自由决定，一个原因是缺乏TCO会导致一些JavaScript算法因为害怕调用栈限制而降低了通过递归实现的概率。</p>
+<p>最后今天冬至了，愿大家都能吃上一碗热乎的饺子🥟！</p>
 
       
 
@@ -419,11 +420,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020-07-19-code-standard.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020-01-04-axios.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          CodeStandard
+          axios 知识梳理
         
       </div>
     </a>
@@ -780,6 +781,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">tutor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">axios</a>
               </li>
             
             <div class="clearfix"></div>
