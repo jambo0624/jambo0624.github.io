@@ -6,21 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jambo0624.github.io">
-  <title>css 可能会被问到的问题 | You should know</title>
+  <title>css questions | You should know</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前期针对面试的一些沉淀，全都来自于各题目的汇总。">
+  <meta name="description" content="前两篇文章总结了 html 部分针对面试的一些沉淀今天主要是 css 部分内容，下面开始。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css 可能会被问到的问题">
+<meta property="og:title" content="css questions">
 <meta property="og:url" content="https://jambo0624.github.io/2020-05-03-css-question.html">
 <meta property="og:site_name" content="You should know">
-<meta property="og:description" content="前期针对面试的一些沉淀，全都来自于各题目的汇总。">
+<meta property="og:description" content="前两篇文章总结了 html 部分针对面试的一些沉淀今天主要是 css 部分内容，下面开始。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.w3.org/html/ig/zh/css-flex-1/rel-vs-abs-flex.svg">
 <meta property="article:published_time" content="2020-05-03T04:13:14.000Z">
-<meta property="article:modified_time" content="2020-10-19T05:12:20.065Z">
+<meta property="article:modified_time" content="2020-10-19T05:37:26.445Z">
 <meta property="article:author" content="Jambo">
 <meta property="article:tag" content="css">
 <meta property="article:tag" content="question">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.w3.org/html/ig/zh/css-flex-1/rel-vs-abs-flex.svg">
   
   
     <link rel="icon" href="img/favicon.ico">
@@ -170,7 +172,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      css 可能会被问到的问题
+      css questions
     </h1>
   
 
@@ -187,7 +189,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text"> 字数统计: </span>
-      <span class="post-count">22字</span>
+      <span class="post-count">3.3k字</span>
     </span>
   </span>
 
@@ -196,7 +198,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text"> 阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">12分</span>
     </span>
   </span>
 </div>
@@ -206,10 +208,329 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前期针对面试的一些沉淀，全都来自于各题目的汇总。 </p>
+        <p>前两篇文章总结了 html 部分针对面试的一些沉淀<br>今天主要是 css 部分内容，下面开始。 </p>
 <a id="more"></a>
 
+<ul>
+<li><p>两种盒模型分别说一下<br>box-sizing：content-box（外加）<br>box-sizing：border-box（内减）        </p>
+</li>
+<li><p>水平居中<br>行内元素：text-align:center<br>块级元素：margin: 0 auto<br>绝对定位和移动：position:absolute; transform:translate()<br>绝对定位和负边距：position:absolute; margin:<br>flex布局：display:flex; justify-content:center;        </p>
+</li>
+<li><p>如何垂直居中        </p>
+</li>
+</ul>
+<ol>
+<li>不定高度,<code>padding:10px</code>        </li>
+<li>定高度        <blockquote>
+<p>1.table<br>2.伪装display:table<br>3.加上100%的before和after，并且display:inline-block<br>4.子绝父相，top和left为0，margin:auto<br>5.子绝父相，top和left为50%，margin调整<br>6.子绝父相，top和left为50%，translate调整<br>7.flex          </p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li><p>BFC 是什么<br>块格式化上下文（Block Formatting Context，BFC）是块盒子的布局过程发生的区域，也是浮动元素与其他元素交互的区域<br>浮动元素、绝对定位元素、行内块元素、弹性元素、overflow 值不为 visible 的块元素会触发BFC        </p>
+<blockquote>
+<p>其中上外边距塌陷，解决方法如下        </p>
+</blockquote>
+<pre class="line-numbers language-css"><span class="selector-class">.selector</span><span class="selector-pseudo"><code class="language-css"><span class="selector-class">.selector</span><span class="selector-pseudo">::before</span>{        
+  <span class="attribute">content</span>: <span class="string">""</span>;        
+  <span class="attribute">display</span>:table;        
+}        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>CSS 选择器优先级<br>越具体优先级越高<br>同样优先级写在后面的覆盖写在前面的<br>!important 优先级最高，但是要少用        </p>
+</li>
+</ul>
+<ul>
+<li><p>如何清除浮动        </p>
+<pre class="line-numbers language-css"><span class="selector-class">.clearfix</span><span class="selector-pseudo"><code class="language-css"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> {        
+  <span class="attribute">content</span>: <span class="string">''</span>;        
+  <span class="attribute">display</span>: block; <span class="comment">/*或者 table*/</span>        
+  <span class="attribute">clear</span>: both;        
+}        
+<span class="selector-class">.clearfix</span> {        
+  <span class="attribute">zoom</span>: <span class="number">1</span>; <span class="comment">/* IE 兼容*/</span>        
+}        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>CSS 加载方式有几种<br>行内，内联，外链，import        </p>
+</li>
+<li><p>简述 src 和 href 的区别<br>href 时指向网络资源所在位置，建立和当前元素（锚点）或当前文档（链接）之间的链接，用于超链接。<br>src 时指向外部的资源位置，指向的内容将会嵌入到文档中当前标签所在位置        </p>
+</li>
+<li><p>css选择器(e代表元素) <a href="http://www.alloyteam.com/2016/05/summary-of-pseudo-classes-and-pseudo-elements/" target="_blank" rel="noopener">相关文章</a></p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>阐述</th>
+<th>写法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>通用</td>
+<td>*</td>
+</tr>
+<tr>
+<td>元素</td>
+<td>e</td>
+</tr>
+<tr>
+<td>类</td>
+<td>.class</td>
+</tr>
+<tr>
+<td>id</td>
+<td>#id</td>
+</tr>
+<tr>
+<td>群组</td>
+<td>e1,e2</td>
+</tr>
+<tr>
+<td>后代</td>
+<td>e1 e2</td>
+</tr>
+<tr>
+<td>子代</td>
+<td>e1&gt;e2</td>
+</tr>
+<tr>
+<td>相邻兄弟</td>
+<td>e1+e2</td>
+</tr>
+<tr>
+<td>通用兄弟</td>
+<td>e1~e2</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>[attr] elem[attr] [attr1][attr2] [attr=value]</td>
+</tr>
+<tr>
+<td>属性相关</td>
+<td>[attr^=value] [attr$=value] [attr*=value] [attr~=value]</td>
+</tr>
+<tr>
+<td>伪类– 链接伪类</td>
+<td>:link  :visited</td>
+</tr>
+<tr>
+<td>伪类– 动态伪类</td>
+<td>:hover  :active  :focus</td>
+</tr>
+<tr>
+<td>伪类– 结构伪类</td>
+<td>:first-child :last-child :nth-child(n) :empty :only-child</td>
+</tr>
+<tr>
+<td>伪类– 目标伪类</td>
+<td>:target</td>
+</tr>
+<tr>
+<td>伪类– 否定伪类</td>
+<td>:not</td>
+</tr>
+<tr>
+<td>伪元素</td>
+<td>:first-letter :first-line ::selection</td>
+</tr>
+<tr>
+<td>伪元素–内容生成</td>
+<td>:before或::before :after或::after 必须要有content属性</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><a href="https://www.jianshu.com/p/d5cc4e169dfa" target="_blank" rel="noopener">CSS 继承，哪些属性能继承，哪些不能</a>        </p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/82f02af17e78" target="_blank" rel="noopener">px、em、rem、%、vw、vh、vm这些单位的区别</a>        </p>
+</li>
+<li><p>line-height: 2和line-height: 200%的区别<br>两个属性设置给具体的某一个元素时是没有区别的<br>区别就是他们设置两种不同的属性后其子元素表现样式上的区别！2是子元素自身，200%是父元素，也就是固定值        </p>
+</li>
+<li><p>行内元素的“框属性”是 line-height 控制<br>对于行内元素来说，上下的 margin padding 不生效，只有左右的 margin padding 生效！        </p>
+</li>
+</ul>
+<ul>
+<li>inline-block 在实际工作中有什么作用<br>如果看到页面上有一排并列的按钮，如果不用浮动，就可以用 inline-block        </li>
+</ul>
+<ul>
+<li><p>让一个元素“看不见”的几种方式        </p>
+<blockquote>
+<p>将元素设置为display:none后，元素在页面上将彻底消失，元素本来占有的空间就会被其他元素占有，也就是说它会导致浏览器的重排和重绘。<br>visibility:hidden适用于那些元素隐藏后不希望页面布局会发生变化的场景.<br>opacity:0<br>设置height，width等盒模型属性为0<br>设置元素的position与left，top，bottom，right等，将元素移出至屏幕外<br>设置元素的position与z-index，将z-index设置成尽量小的负数<br>——能不能点击<br>display,visibility不能，opacity可以，height看情况<br>——能不能动画<br>display立即消失，没有动画<br>visibility按时消失，没有动画<br>opacity和height正常        </p>
+</blockquote>
+</li>
+<li><p>css实现文本溢出显示省略号<br>单行文本        </p>
+<pre class="line-numbers language-css"><span class="selector-tag"><code class="language-css"><span class="selector-tag">p</span> {        
+  <span class="attribute">width</span>: <span class="number">300px</span>;        
+  <span class="attribute">overflow</span>: hidden;        
+  <span class="comment">/*文本不会换行*/</span>        
+  <span class="attribute">white-space</span>: nowrap;        
+  <span class="comment">/*当文本溢出包含元素时，以省略号表示超出的文本*/</span>        
+  <span class="attribute">text-overflow</span>: ellipsis;        
+}        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>多行文本看链接<a href="https://www.jianshu.com/p/50bbd21c0c0f" target="_blank" rel="noopener">css多行文本溢出显示省略号</a>        </p>
+</li>
+</ul>
+<ul>
+<li>三栏布局        <blockquote>
+<p>1.flex布局:容器flex，两边固定px，中间flex1<br>2.绝对定位布局：容器相对，两边绝对，中间margin固定<br>3.圣杯模式： 中间100%，fll，然后左边fll+负向ml再定位调整，右边同理<br>关键在于理解负边距的作用，left的margin-left:-100%使它上移一行        </p>
+</blockquote>
+<pre class="line-numbers language-css"><span class="selector-class"><code class="language-css"><span class="selector-class">.wrapper</span> {        
+  <span class="attribute">overflow</span>: hidden;        
+  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">100px</span>;        
+    }        
+    <span class="selector-class">.middle</span> {        
+  <span class="attribute">position</span>:relative;                    
+  <span class="attribute">width</span>: <span class="number">100%</span>;        
+  <span class="attribute">float</span>: left;        
+  <span class="attribute">height</span>: <span class="number">80px</span>;        
+  <span class="attribute">background</span>: green;        
+    }        
+<span class="selector-class">.left</span> {        
+  <span class="attribute">position</span>: relative;        
+  <span class="attribute">float</span>: left;        
+  <span class="attribute">width</span>: <span class="number">100px</span>;        
+  <span class="attribute">background</span>: yellow;        
+  <span class="attribute">height</span>: <span class="number">80px</span>;        
+  <span class="attribute">left</span>: -<span class="number">100px</span>;        
+  <span class="attribute">margin-left</span>: -<span class="number">100%</span>;        
+}        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<blockquote>
+<p>4.双飞翼布局： 中间容器wrapper浮动，width100%，main的ml和mr固定，左右浮动和ml、mr<br>跟圣杯布局没多大区别，就是middle的实现不一样，圣杯布局是middle+padding，双飞翼采用子元素+margin，最主要的还是负边距的使用        </p>
+</blockquote>
+<ul>
+<li>列举你了解的 HTML5、CSS3 新特性<br><a href="https://juejin.im/post/5cbffe386fb9a0322564c0e5" target="_blank" rel="noopener">CSS3 和 HTML5 新特性一览</a><br>CSS3:<br>选择器，边框，背景，渐变，转换，过渡，动画，盒模型，flex，媒体查询<br>HTML5:<br>语义标签，增强型表单，音频视频，canvas， svg，地理位置，webWorker，webStorage，webSocket（全双工通讯）        </li>
+</ul>
+<ul>
+<li>flex：1代表什么意思<br><code>flex: flex-grow flex-shrink flex-basis</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>取值</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>默认</td>
+<td><code>0 1 auto</code></td>
+</tr>
+<tr>
+<td>none</td>
+<td><code>0 0 auto</code></td>
+</tr>
+<tr>
+<td>auto</td>
+<td><code>1 1 auto</code></td>
+</tr>
+<tr>
+<td>非负数</td>
+<td><code>非负数 1 0%</code></td>
+</tr>
+<tr>
+<td>长度或百分比</td>
+<td><code>1 1 长度或百分比</code></td>
+</tr>
+<tr>
+<td>非负数 非负数</td>
+<td><code>非负数 非负数 0%</code></td>
+</tr>
+<tr>
+<td>非负数 长度或百分比</td>
+<td><code>非负数 1 长度或百分比</code></td>
+</tr>
+</tbody></table>
+<p>flex-basis 规定的是子元素的基准值。所以是否溢出的计算与此属性息息相关。flex-basis 规定的范围取决于 box-sizing。这里主要讨论以下 flex-basis 的取值情况：<br>auto：首先检索该子元素的主尺寸，如果主尺寸不为 auto，则使用值采取主尺寸之值；如果也是 auto，则使用值为 content。<br>content：指根据该子元素的内容自动布局。有的用户代理没有实现取 content 值，等效的替代方案是 flex-basis 和主尺寸都取 auto。<br>百分比：根据其包含块（即伸缩父容器）的主尺寸计算。如果包含块的主尺寸未定义（即父容器的主尺寸取决于子元素），则计算结果和设为 auto 一样。        </p>
+<p><img src="https://www.w3.org/html/ig/zh/css-flex-1/rel-vs-abs-flex.svg" alt="flex:0 和 flex:auto的区别"><br>👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆一个显示「绝对」伸缩（以零为基准值开始）与「相对」伸缩（以项目的内容大小为基准值开始）差异的图解。这三个项目的伸缩比例分别是「1」、「1」、「2」。        </p>
+<ul>
+<li>Canvas 和 SVG 有什么区别<br>SVG 矢量图优点：不失真，放大缩小图像都很清晰学习成本低，也是一种 DOM 结构使用方便，设计软件可以直接导出<br>Canvas 像素图优点（在元素特别多的情况 1000+）：性能高，可以自己控制绘制过程，还能使用 WebGL可控性高，像素级控制内存占用恒定，就是像素点个数<br>SVG 的应用范围更广一些。        </li>
+</ul>
+<ul>
+<li>渐进增强和优雅降级分别是什么意思<br>渐进增强（progressive enhancement）：针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。<br>优雅降级（graceful degradation）：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。        </li>
+</ul>
+<ul>
+<li>css reset 是什么？css 预编译器是什么？ 后编译器(post css)是什么？<br>css reset 即重置浏览器标签的样式表        <blockquote>
+<p>现在所使用的主流浏览器对一些标签的默认属性上并没有做到统一，所以我们偶尔会发现，某个页面在chrome浏览器上很正常，到了firefox上面却有意想不到的偏差。当然编程人员不喜欢这样的兼容性问题的，而reset.css就是解决默认样式不兼容问题的办法之一。</p>
+</blockquote>
+</li>
+</ul>
+<p>预编译器        </p>
+<blockquote>
+<p>CSS 预处理器定义了一种新的语言，其基本思想是，用一种专门的编程语言，为 CSS 增加了一些编程的特性，将 CSS 作为目标生成文件，然后开发者就只要使用这种语言进行编码工作。<br>CSS 预处理器为 CSS 增加一些编程的特性，无需考虑浏览器的兼容性问题，例如你可以在 CSS 中使用变量、简单的逻辑程序、函数等等在编程语言中的一些基本特性，可以让你的 CSS 更加简洁、适应性更强、可读性更佳，更易于代码的维护等诸多好处。</p>
+</blockquote>
+<p>后编译器(post css)        </p>
+<blockquote>
+<p>PostCSS是一个使用JavaScript插件来转换CSS的工具。它将CSS转换成抽象语法树(AST)，也就是JavaScript可以操作的一种数据形式。基于JavaScript的PostCSS插件可以执行不同的代码操作。PostCSS本身并没有改变你的CSS，它请允许插件执行和转换你的代码。<br>实际上，对于CSS的操作，PostCSS插件并没有任何限制。只要你有想得到的，你都可以写一个PostCSS插件来实现。        </p>
+</blockquote>
+<ul>
+<li>浅谈css预处理器，Sass、Less和Stylus<br>下面从特性上比较三者异同：        </li>
+</ul>
+<ol>
+<li><p>变量：        </p>
+<blockquote>
+<p>Sass声明变量必须是『$』开头，后面紧跟变量名和变量值，而且变量名和变量值需要使用冒号：分隔开。<br>Less 声明变量用『@』开头，其余等同 Sass。<br>Stylus 中声明变量没有任何限定，结尾的分号可有可无，但变量名和变量值之间必须要有『等号』。但需要注意的是，如果用“@”符号来声明变量，Stylus会进行编译，但不会赋值给变量。就是说，Stylus 不要使用『@』声明变量。Stylus 调用变量的方法和Less、Sass完全相同。        </p>
+</blockquote>
+</li>
+<li><p>作用域：<br>css 预编译器把变量赋予作用域，也就是存在生命周期。就像 js 一样，它会先从局部作用域查找变量，依次向上级作用域查找。        </p>
+<blockquote>
+<p>Sass：三者最差，不存在全局变量的概念。也就是说在 Sass 中定义了相同名字的变量时你就要小心蛋疼了。<br>Less：我认为跟 JS 一样，逐级查找，向上冒泡。<br>Stylus：完全等同 Less。Stylus 和 Sass 则更倾向于指令式。        </p>
+</blockquote>
+</li>
+<li><p>嵌套：<br>十分真诚的说，三种 css 预编译器的「选择器嵌套」在使用上来说没有任何区别（也可能是我没发现）。Sass 除了常规的采用『&amp;』替代父级选择器之外，还提供了「奇葩的属性嵌套」：        </p>
+</li>
+</ol>
+<pre class="line-numbers language-scss"><span class="selector-class"><code class="language-scss"><span class="selector-class">.footer</span> {        
+  <span class="attribute">font</span>: {        
+    family:  微软雅黑;        
+    size: <span class="number">5rem</span>;        
+    weight: bolder;        
+  }        
+}        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>除了少打几个字，感觉没啥用啊。<br>4. 继承：<br>css 属性的继承是一个非常重要的特性，好消息是三种预编译器都对此做出了改善。        </p>
+<blockquote>
+<p>Sass和Stylus的继承非常像，能把一个选择器的所有样式继承到另一个选择器上。使用『@extend』开始，后面接被继承的选择器。        </p>
+</blockquote>
+<pre class="line-numbers language-scss"><span class="selector-class"><code class="language-scss"><span class="selector-class">.shit</span> {        
+  <span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">5px</span>;        
+  <span class="attribute">padding</span>: <span class="number">2px</span>;        
+}        
 
+<span class="selector-tag">p</span> {        
+  <span class="keyword">@extend</span> .shit;<span class="comment">/*继承.block*/</span>        
+  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#aaa</span>;        
+}         
+
+<span class="selector-tag">ul</span>,<span class="selector-tag">li</span> {        
+  <span class="keyword">@extend</span> .shit; <span class="comment">/*继承.block*/</span>        
+  <span class="attribute">color</span>: <span class="number">#aaa</span>;        
+}        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>将被编译成标准 css：        </p>
+<pre class="line-numbers language-scss"><span class="selector-class">.shit</span>,<span class="selector-tag">p</span>,<span class="selector-tag">ul</span>,<span class="selector-tag"><code class="language-scss"><span class="selector-class">.shit</span>,<span class="selector-tag">p</span>,<span class="selector-tag">ul</span>,<span class="selector-tag">ol</span> {        
+  <span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">5px</span>;        
+  <span class="attribute">padding</span>:<span class="number">2px</span>;        
+}          
+
+<span class="selector-tag">p</span> {        
+  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#aaa</span>        
+}           
+
+ul,li {        
+  color:<span class="number">#aaa</span>;        
+}        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>Less 继承：与前两者继承方式有所区别，它不是在选择器上继承，而是将Mixins中的样式嵌套到每个选择器里面。然而这样会带来一个明显的缺点：每个选择器中会出现重复的样式。        </p>
+</blockquote>
+<ol start="5">
+<li>导入@Import：<br>CSS中，不建议用@import导入css，因为会增加http请求。但 CSS 预处理器中的导入和CSS的有很大区别，它是将不同 css 是在语义上导入，最终编译结果会生成一个CSS文件。        </li>
+</ol>
+<p>值得注意的是，如果不同文件相互引入的时候，出现相同变量名时可能会引起错误。所以我的建议是单独有一个 var.sass/less/styl 文件来记录所有你定义的变量。        </p>
+<p>Less 为@Import 扩展了语法，而 Sass 和 Stylus 并没有。具体扩展的 import 语法请见：Less 的 Import 扩展        </p>
+<p>总结        </p>
+<blockquote>
+<p>Sass和Less语法严谨、Stylus相对自由。因为Less长得更像 css，所以它可能学习起来更容易。<br>Sass 和 Compass、Stylus 和 Nib 都是好基友。<br>Sass 和 Stylus 都具有类语言的逻辑方式处理：条件、循环等，而 Less 需要通过When等关键词模拟这些功能，这方面 Less 比不上 Sass 和 Stylus。<br>Less 在丰富性以及特色上都不及 Sass 和 Stylus，若不是因为 Bootstrap 引入了 Less，可能它不会像现在这样被广泛应用        </p>
+</blockquote>
+<ul>
+<li>CSS中 link 和@import 的区别<br>link属于HTML标签，而@import是CSS提供的页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载<br>import只在IE5以上才能识别，而link是HTML标签，无兼容问题<br>link方式的样式的权重 高于@import的权重        </li>
+</ul>
 
       
 
@@ -346,18 +667,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020-07-19-code-standard.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020-05-05-css-question2.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          CodeStandard
+          css questions (part 2)
         
       </div>
     </a>
   
   
     <a href="/2020-04-12-html-question2.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">html 可能会被问到的问题(二)</div>
+      <div class="article-nav-title">html questions (part2)</div>
       <i class="icon-circle-right"></i>
     </a>
   
