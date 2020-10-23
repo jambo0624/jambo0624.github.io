@@ -16,7 +16,7 @@
 <meta property="og:description" content="这篇文章是前期针对面试的一些沉淀，全都来自于各题目的汇总。首先是html部分内容，下面我们开始。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-10T13:26:34.000Z">
-<meta property="article:modified_time" content="2020-10-19T08:55:56.106Z">
+<meta property="article:modified_time" content="2020-10-23T05:18:59.679Z">
 <meta property="article:author" content="Jambo">
 <meta property="article:tag" content="html">
 <meta property="article:tag" content="question">
@@ -508,7 +508,7 @@
 <p>也就是说，如果你想首屏渲染的越快，就越不应该在首屏就加载 JS 文件，这也是都建议将 script 标签放在 body 标签底部的原因。当然在当下，并不是说 script 标签必须放在底部，因为你可以给 script 标签添加 defer 或者 async 属性。</p>
 </blockquote>
 <ul>
-<li><p>async 和 defer 的作用是什么？有什么区别？（浏览器解析过程）</p>
+<li><p>async 和 defer 的作用是什么？有什么区别？（浏览器解析过程）<br><a href="https://juejin.im/post/6844903745730396174" target="_blank" rel="noopener">浏览器是如何解析html的</a>这篇文章，能更好地理解这个过程。</p>
 <blockquote>
 <p>（1）脚本没有 defer 或 async，浏览器会立即加载并执行指定的脚本，也就是说不等待后续载入的文档元素，读到就加载并执行。</p>
 <p>（2）defer 属性表示延迟执行引入的 JavaScript，即这段 JavaScript 加载时 HTML 并未停止解析，这两个过程是并行的。当整个 document 解析完毕后再执行脚本文件，在 DOMContentLoaded 事件触发之前完成。多个脚本按顺序执行。</p>
