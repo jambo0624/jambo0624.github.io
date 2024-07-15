@@ -5,53 +5,49 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>escher</title>
-  <script src="./js/escher.min.js"></script>
+  <title>Escher Example</title>
+  <script src="./js/escher.js"></script>
 </head>
 <body>
-<canvas id="root"></canvas>
-</body>
+<div id="root"></div>
 <script>
-  let map = {}
-  let model = {}
-  let reaction_data = []
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof escher !== 'undefined' && typeof escher.Builder !== 'undefined') {
+      let map = {};
+      let model = {};
+      let reaction_data = [];
 
-  // Load the map
-  fetch('./escher/map.json')
-    .then(response => response.json())
-    .then(data => {
-      map = data
-    })
-    .catch(error => console.error('Error fetching map JSON:', error));
+      const loadJSON = (url) => fetch(url).then(response => response.json());
 
-  // Load the model
-  fetch('./escher/model.json')
-    .then(response => response.json())
-    .then(data => {
-      model = data
-    })
-    .catch(error => console.error('Error fetching model JSON:', error));
+      Promise.all([
+        loadJSON('./escher/map.json'),
+        loadJSON('./escher/model.json'),
+        loadJSON('./escher/data.json')
+      ])
+        .then(([mapData, modelData, reactionData]) => {
+          map = mapData;
+          model = modelData;
+          reaction_data = reactionData;
 
-  // Load the reaction data
-  fetch('./escher/data.json')
-    .then(response => response.json())
-    .then(data => {
-      reaction_data = data
-    })
-    .catch(error => console.error('Error fetching reaction data JSON:', error));
-
-  window.builder = new Builder( // eslint-disable-line no-new
-    map,
-    model,
-    null,
-    libs.d3_select('#root'),
-    {
-      fill_screen: true,
-      never_ask_before_quit: true,
-      scroll_behavior: 'zoom',
-      reaction_data,
-      show_reaction_data_animation: true,
+          new escher.Builder(
+            map,
+            model,
+            null,
+            escher.libs.d3_select('#root'),
+            {
+              fill_screen: true,
+              never_ask_before_quit: true,
+              scroll_behavior: 'zoom',
+              reaction_data,
+              show_reaction_data_animation: true,
+            }
+          );
+        })
+        .catch(error => console.error('Error loading JSON files:', error));
+    } else {
+      console.error('Escher or Builder is not defined');
     }
-  )
+  });
 </script>
+</body>
 </html>
