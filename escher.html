@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>escher</title>
+</head>
+<body>
+<canvas id="root"></canvas>
+</body>
+<script>
+  let map = {}
+  let model = {}
+  let reaction_data = []
+
+  // Load the map
+  fetch('./escher/map.json')
+    .then(response => response.json())
+    .then(data => {
+      map = data
+    })
+    .catch(error => console.error('Error fetching map JSON:', error));
+
+  // Load the model
+  fetch('./escher/model.json')
+    .then(response => response.json())
+    .then(data => {
+      model = data
+    })
+    .catch(error => console.error('Error fetching model JSON:', error));
+
+  // Load the reaction data
+  fetch('./escher/data.json')
+    .then(response => response.json())
+    .then(data => {
+      reaction_data = data
+    })
+    .catch(error => console.error('Error fetching reaction data JSON:', error));
+
+  window.builder = new Builder( // eslint-disable-line no-new
+    map,
+    model,
+    null,
+    libs.d3_select('#root'),
+    {
+      fill_screen: true,
+      never_ask_before_quit: true,
+      scroll_behavior: 'zoom',
+      reaction_data,
+      show_reaction_data_animation: true,
+    }
+  )
+</script>
+</html>
