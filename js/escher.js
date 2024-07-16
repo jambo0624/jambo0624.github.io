@@ -26472,18 +26472,6 @@ var SettingsMenu = function (_Component) {
             ),
             (0, _preact.h)(
               'label',
-              { title: 'If checked, then show the animation when reaction data is loaded.' },
-              (0, _preact.h)('input', {
-                type: 'checkbox',
-                onClick: function onClick() {
-                  settings.set('show_reaction_data_animation', !settings.get('show_reaction_data_animation'));
-                },
-                checked: settings.get('show_reaction_data_animation')
-              }),
-              'Show reaction data animation'
-            ),
-            (0, _preact.h)(
-              'label',
               { title: 'If checked, then only the primary metabolites will be displayed.' },
               (0, _preact.h)('input', {
                 type: 'checkbox',
