@@ -7,7 +7,7 @@
 		exports["escher"] = factory((function webpackLoadOptionalExternalModule() { try { return require("@jupyter-widgets/base"); } catch(e) {} }()));
 	else
 		root["escher"] = factory(root["@jupyter-widgets/base"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE__111__) {
+})(window, function(__WEBPACK_EXTERNAL_MODULE__128__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 57);
+/******/ 	return __webpack_require__(__webpack_require__.s = 73);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -163,551 +163,10 @@ var nonEnumerableProps = ['valueOf', 'isPrototypeOf', 'toString',
 // The largest integer that can be represented exactly.
 var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(41)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(53)))
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* reexport */ color; });
-__webpack_require__.d(__webpack_exports__, "f", function() { return /* reexport */ rgb; });
-__webpack_require__.d(__webpack_exports__, "d", function() { return /* reexport */ hsl; });
-__webpack_require__.d(__webpack_exports__, "e", function() { return /* reexport */ lab; });
-__webpack_require__.d(__webpack_exports__, "c", function() { return /* reexport */ hcl; });
-__webpack_require__.d(__webpack_exports__, "b", function() { return /* reexport */ cubehelix; });
-
-// CONCATENATED MODULE: ./node_modules/d3-color/src/define.js
-/* harmony default export */ var define = (function(constructor, factory, prototype) {
-  constructor.prototype = factory.prototype = prototype;
-  prototype.constructor = constructor;
-});
-
-function extend(parent, definition) {
-  var prototype = Object.create(parent.prototype);
-  for (var key in definition) prototype[key] = definition[key];
-  return prototype;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-color/src/color.js
-
-
-function Color() {}
-
-var darker = 0.7;
-var brighter = 1 / darker;
-
-var reI = "\\s*([+-]?\\d+)\\s*",
-    reN = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*",
-    reP = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*",
-    reHex3 = /^#([0-9a-f]{3})$/,
-    reHex6 = /^#([0-9a-f]{6})$/,
-    reRgbInteger = new RegExp("^rgb\\(" + [reI, reI, reI] + "\\)$"),
-    reRgbPercent = new RegExp("^rgb\\(" + [reP, reP, reP] + "\\)$"),
-    reRgbaInteger = new RegExp("^rgba\\(" + [reI, reI, reI, reN] + "\\)$"),
-    reRgbaPercent = new RegExp("^rgba\\(" + [reP, reP, reP, reN] + "\\)$"),
-    reHslPercent = new RegExp("^hsl\\(" + [reN, reP, reP] + "\\)$"),
-    reHslaPercent = new RegExp("^hsla\\(" + [reN, reP, reP, reN] + "\\)$");
-
-var named = {
-  aliceblue: 0xf0f8ff,
-  antiquewhite: 0xfaebd7,
-  aqua: 0x00ffff,
-  aquamarine: 0x7fffd4,
-  azure: 0xf0ffff,
-  beige: 0xf5f5dc,
-  bisque: 0xffe4c4,
-  black: 0x000000,
-  blanchedalmond: 0xffebcd,
-  blue: 0x0000ff,
-  blueviolet: 0x8a2be2,
-  brown: 0xa52a2a,
-  burlywood: 0xdeb887,
-  cadetblue: 0x5f9ea0,
-  chartreuse: 0x7fff00,
-  chocolate: 0xd2691e,
-  coral: 0xff7f50,
-  cornflowerblue: 0x6495ed,
-  cornsilk: 0xfff8dc,
-  crimson: 0xdc143c,
-  cyan: 0x00ffff,
-  darkblue: 0x00008b,
-  darkcyan: 0x008b8b,
-  darkgoldenrod: 0xb8860b,
-  darkgray: 0xa9a9a9,
-  darkgreen: 0x006400,
-  darkgrey: 0xa9a9a9,
-  darkkhaki: 0xbdb76b,
-  darkmagenta: 0x8b008b,
-  darkolivegreen: 0x556b2f,
-  darkorange: 0xff8c00,
-  darkorchid: 0x9932cc,
-  darkred: 0x8b0000,
-  darksalmon: 0xe9967a,
-  darkseagreen: 0x8fbc8f,
-  darkslateblue: 0x483d8b,
-  darkslategray: 0x2f4f4f,
-  darkslategrey: 0x2f4f4f,
-  darkturquoise: 0x00ced1,
-  darkviolet: 0x9400d3,
-  deeppink: 0xff1493,
-  deepskyblue: 0x00bfff,
-  dimgray: 0x696969,
-  dimgrey: 0x696969,
-  dodgerblue: 0x1e90ff,
-  firebrick: 0xb22222,
-  floralwhite: 0xfffaf0,
-  forestgreen: 0x228b22,
-  fuchsia: 0xff00ff,
-  gainsboro: 0xdcdcdc,
-  ghostwhite: 0xf8f8ff,
-  gold: 0xffd700,
-  goldenrod: 0xdaa520,
-  gray: 0x808080,
-  green: 0x008000,
-  greenyellow: 0xadff2f,
-  grey: 0x808080,
-  honeydew: 0xf0fff0,
-  hotpink: 0xff69b4,
-  indianred: 0xcd5c5c,
-  indigo: 0x4b0082,
-  ivory: 0xfffff0,
-  khaki: 0xf0e68c,
-  lavender: 0xe6e6fa,
-  lavenderblush: 0xfff0f5,
-  lawngreen: 0x7cfc00,
-  lemonchiffon: 0xfffacd,
-  lightblue: 0xadd8e6,
-  lightcoral: 0xf08080,
-  lightcyan: 0xe0ffff,
-  lightgoldenrodyellow: 0xfafad2,
-  lightgray: 0xd3d3d3,
-  lightgreen: 0x90ee90,
-  lightgrey: 0xd3d3d3,
-  lightpink: 0xffb6c1,
-  lightsalmon: 0xffa07a,
-  lightseagreen: 0x20b2aa,
-  lightskyblue: 0x87cefa,
-  lightslategray: 0x778899,
-  lightslategrey: 0x778899,
-  lightsteelblue: 0xb0c4de,
-  lightyellow: 0xffffe0,
-  lime: 0x00ff00,
-  limegreen: 0x32cd32,
-  linen: 0xfaf0e6,
-  magenta: 0xff00ff,
-  maroon: 0x800000,
-  mediumaquamarine: 0x66cdaa,
-  mediumblue: 0x0000cd,
-  mediumorchid: 0xba55d3,
-  mediumpurple: 0x9370db,
-  mediumseagreen: 0x3cb371,
-  mediumslateblue: 0x7b68ee,
-  mediumspringgreen: 0x00fa9a,
-  mediumturquoise: 0x48d1cc,
-  mediumvioletred: 0xc71585,
-  midnightblue: 0x191970,
-  mintcream: 0xf5fffa,
-  mistyrose: 0xffe4e1,
-  moccasin: 0xffe4b5,
-  navajowhite: 0xffdead,
-  navy: 0x000080,
-  oldlace: 0xfdf5e6,
-  olive: 0x808000,
-  olivedrab: 0x6b8e23,
-  orange: 0xffa500,
-  orangered: 0xff4500,
-  orchid: 0xda70d6,
-  palegoldenrod: 0xeee8aa,
-  palegreen: 0x98fb98,
-  paleturquoise: 0xafeeee,
-  palevioletred: 0xdb7093,
-  papayawhip: 0xffefd5,
-  peachpuff: 0xffdab9,
-  peru: 0xcd853f,
-  pink: 0xffc0cb,
-  plum: 0xdda0dd,
-  powderblue: 0xb0e0e6,
-  purple: 0x800080,
-  rebeccapurple: 0x663399,
-  red: 0xff0000,
-  rosybrown: 0xbc8f8f,
-  royalblue: 0x4169e1,
-  saddlebrown: 0x8b4513,
-  salmon: 0xfa8072,
-  sandybrown: 0xf4a460,
-  seagreen: 0x2e8b57,
-  seashell: 0xfff5ee,
-  sienna: 0xa0522d,
-  silver: 0xc0c0c0,
-  skyblue: 0x87ceeb,
-  slateblue: 0x6a5acd,
-  slategray: 0x708090,
-  slategrey: 0x708090,
-  snow: 0xfffafa,
-  springgreen: 0x00ff7f,
-  steelblue: 0x4682b4,
-  tan: 0xd2b48c,
-  teal: 0x008080,
-  thistle: 0xd8bfd8,
-  tomato: 0xff6347,
-  turquoise: 0x40e0d0,
-  violet: 0xee82ee,
-  wheat: 0xf5deb3,
-  white: 0xffffff,
-  whitesmoke: 0xf5f5f5,
-  yellow: 0xffff00,
-  yellowgreen: 0x9acd32
-};
-
-define(Color, color, {
-  displayable: function() {
-    return this.rgb().displayable();
-  },
-  toString: function() {
-    return this.rgb() + "";
-  }
-});
-
-function color(format) {
-  var m;
-  format = (format + "").trim().toLowerCase();
-  return (m = reHex3.exec(format)) ? (m = parseInt(m[1], 16), new Rgb((m >> 8 & 0xf) | (m >> 4 & 0x0f0), (m >> 4 & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1)) // #f00
-      : (m = reHex6.exec(format)) ? rgbn(parseInt(m[1], 16)) // #ff0000
-      : (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) // rgb(255, 0, 0)
-      : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
-      : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
-      : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
-      : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
-      : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
-      : named.hasOwnProperty(format) ? rgbn(named[format])
-      : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
-      : null;
-}
-
-function rgbn(n) {
-  return new Rgb(n >> 16 & 0xff, n >> 8 & 0xff, n & 0xff, 1);
-}
-
-function rgba(r, g, b, a) {
-  if (a <= 0) r = g = b = NaN;
-  return new Rgb(r, g, b, a);
-}
-
-function rgbConvert(o) {
-  if (!(o instanceof Color)) o = color(o);
-  if (!o) return new Rgb;
-  o = o.rgb();
-  return new Rgb(o.r, o.g, o.b, o.opacity);
-}
-
-function rgb(r, g, b, opacity) {
-  return arguments.length === 1 ? rgbConvert(r) : new Rgb(r, g, b, opacity == null ? 1 : opacity);
-}
-
-function Rgb(r, g, b, opacity) {
-  this.r = +r;
-  this.g = +g;
-  this.b = +b;
-  this.opacity = +opacity;
-}
-
-define(Rgb, rgb, extend(Color, {
-  brighter: function(k) {
-    k = k == null ? brighter : Math.pow(brighter, k);
-    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
-  },
-  darker: function(k) {
-    k = k == null ? darker : Math.pow(darker, k);
-    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
-  },
-  rgb: function() {
-    return this;
-  },
-  displayable: function() {
-    return (0 <= this.r && this.r <= 255)
-        && (0 <= this.g && this.g <= 255)
-        && (0 <= this.b && this.b <= 255)
-        && (0 <= this.opacity && this.opacity <= 1);
-  },
-  toString: function() {
-    var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
-    return (a === 1 ? "rgb(" : "rgba(")
-        + Math.max(0, Math.min(255, Math.round(this.r) || 0)) + ", "
-        + Math.max(0, Math.min(255, Math.round(this.g) || 0)) + ", "
-        + Math.max(0, Math.min(255, Math.round(this.b) || 0))
-        + (a === 1 ? ")" : ", " + a + ")");
-  }
-}));
-
-function hsla(h, s, l, a) {
-  if (a <= 0) h = s = l = NaN;
-  else if (l <= 0 || l >= 1) h = s = NaN;
-  else if (s <= 0) h = NaN;
-  return new Hsl(h, s, l, a);
-}
-
-function hslConvert(o) {
-  if (o instanceof Hsl) return new Hsl(o.h, o.s, o.l, o.opacity);
-  if (!(o instanceof Color)) o = color(o);
-  if (!o) return new Hsl;
-  if (o instanceof Hsl) return o;
-  o = o.rgb();
-  var r = o.r / 255,
-      g = o.g / 255,
-      b = o.b / 255,
-      min = Math.min(r, g, b),
-      max = Math.max(r, g, b),
-      h = NaN,
-      s = max - min,
-      l = (max + min) / 2;
-  if (s) {
-    if (r === max) h = (g - b) / s + (g < b) * 6;
-    else if (g === max) h = (b - r) / s + 2;
-    else h = (r - g) / s + 4;
-    s /= l < 0.5 ? max + min : 2 - max - min;
-    h *= 60;
-  } else {
-    s = l > 0 && l < 1 ? 0 : h;
-  }
-  return new Hsl(h, s, l, o.opacity);
-}
-
-function hsl(h, s, l, opacity) {
-  return arguments.length === 1 ? hslConvert(h) : new Hsl(h, s, l, opacity == null ? 1 : opacity);
-}
-
-function Hsl(h, s, l, opacity) {
-  this.h = +h;
-  this.s = +s;
-  this.l = +l;
-  this.opacity = +opacity;
-}
-
-define(Hsl, hsl, extend(Color, {
-  brighter: function(k) {
-    k = k == null ? brighter : Math.pow(brighter, k);
-    return new Hsl(this.h, this.s, this.l * k, this.opacity);
-  },
-  darker: function(k) {
-    k = k == null ? darker : Math.pow(darker, k);
-    return new Hsl(this.h, this.s, this.l * k, this.opacity);
-  },
-  rgb: function() {
-    var h = this.h % 360 + (this.h < 0) * 360,
-        s = isNaN(h) || isNaN(this.s) ? 0 : this.s,
-        l = this.l,
-        m2 = l + (l < 0.5 ? l : 1 - l) * s,
-        m1 = 2 * l - m2;
-    return new Rgb(
-      hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
-      hsl2rgb(h, m1, m2),
-      hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
-      this.opacity
-    );
-  },
-  displayable: function() {
-    return (0 <= this.s && this.s <= 1 || isNaN(this.s))
-        && (0 <= this.l && this.l <= 1)
-        && (0 <= this.opacity && this.opacity <= 1);
-  }
-}));
-
-/* From FvD 13.37, CSS Color Module Level 3 */
-function hsl2rgb(h, m1, m2) {
-  return (h < 60 ? m1 + (m2 - m1) * h / 60
-      : h < 180 ? m2
-      : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60
-      : m1) * 255;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-color/src/math.js
-var deg2rad = Math.PI / 180;
-var rad2deg = 180 / Math.PI;
-
-// CONCATENATED MODULE: ./node_modules/d3-color/src/lab.js
-
-
-
-
-var Kn = 18,
-    Xn = 0.950470, // D65 standard referent
-    Yn = 1,
-    Zn = 1.088830,
-    t0 = 4 / 29,
-    t1 = 6 / 29,
-    t2 = 3 * t1 * t1,
-    t3 = t1 * t1 * t1;
-
-function labConvert(o) {
-  if (o instanceof Lab) return new Lab(o.l, o.a, o.b, o.opacity);
-  if (o instanceof Hcl) {
-    var h = o.h * deg2rad;
-    return new Lab(o.l, Math.cos(h) * o.c, Math.sin(h) * o.c, o.opacity);
-  }
-  if (!(o instanceof Rgb)) o = rgbConvert(o);
-  var b = rgb2xyz(o.r),
-      a = rgb2xyz(o.g),
-      l = rgb2xyz(o.b),
-      x = xyz2lab((0.4124564 * b + 0.3575761 * a + 0.1804375 * l) / Xn),
-      y = xyz2lab((0.2126729 * b + 0.7151522 * a + 0.0721750 * l) / Yn),
-      z = xyz2lab((0.0193339 * b + 0.1191920 * a + 0.9503041 * l) / Zn);
-  return new Lab(116 * y - 16, 500 * (x - y), 200 * (y - z), o.opacity);
-}
-
-function lab(l, a, b, opacity) {
-  return arguments.length === 1 ? labConvert(l) : new Lab(l, a, b, opacity == null ? 1 : opacity);
-}
-
-function Lab(l, a, b, opacity) {
-  this.l = +l;
-  this.a = +a;
-  this.b = +b;
-  this.opacity = +opacity;
-}
-
-define(Lab, lab, extend(Color, {
-  brighter: function(k) {
-    return new Lab(this.l + Kn * (k == null ? 1 : k), this.a, this.b, this.opacity);
-  },
-  darker: function(k) {
-    return new Lab(this.l - Kn * (k == null ? 1 : k), this.a, this.b, this.opacity);
-  },
-  rgb: function() {
-    var y = (this.l + 16) / 116,
-        x = isNaN(this.a) ? y : y + this.a / 500,
-        z = isNaN(this.b) ? y : y - this.b / 200;
-    y = Yn * lab2xyz(y);
-    x = Xn * lab2xyz(x);
-    z = Zn * lab2xyz(z);
-    return new Rgb(
-      xyz2rgb( 3.2404542 * x - 1.5371385 * y - 0.4985314 * z), // D65 -> sRGB
-      xyz2rgb(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z),
-      xyz2rgb( 0.0556434 * x - 0.2040259 * y + 1.0572252 * z),
-      this.opacity
-    );
-  }
-}));
-
-function xyz2lab(t) {
-  return t > t3 ? Math.pow(t, 1 / 3) : t / t2 + t0;
-}
-
-function lab2xyz(t) {
-  return t > t1 ? t * t * t : t2 * (t - t0);
-}
-
-function xyz2rgb(x) {
-  return 255 * (x <= 0.0031308 ? 12.92 * x : 1.055 * Math.pow(x, 1 / 2.4) - 0.055);
-}
-
-function rgb2xyz(x) {
-  return (x /= 255) <= 0.04045 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
-}
-
-function hclConvert(o) {
-  if (o instanceof Hcl) return new Hcl(o.h, o.c, o.l, o.opacity);
-  if (!(o instanceof Lab)) o = labConvert(o);
-  var h = Math.atan2(o.b, o.a) * rad2deg;
-  return new Hcl(h < 0 ? h + 360 : h, Math.sqrt(o.a * o.a + o.b * o.b), o.l, o.opacity);
-}
-
-function hcl(h, c, l, opacity) {
-  return arguments.length === 1 ? hclConvert(h) : new Hcl(h, c, l, opacity == null ? 1 : opacity);
-}
-
-function Hcl(h, c, l, opacity) {
-  this.h = +h;
-  this.c = +c;
-  this.l = +l;
-  this.opacity = +opacity;
-}
-
-define(Hcl, hcl, extend(Color, {
-  brighter: function(k) {
-    return new Hcl(this.h, this.c, this.l + Kn * (k == null ? 1 : k), this.opacity);
-  },
-  darker: function(k) {
-    return new Hcl(this.h, this.c, this.l - Kn * (k == null ? 1 : k), this.opacity);
-  },
-  rgb: function() {
-    return labConvert(this).rgb();
-  }
-}));
-
-// CONCATENATED MODULE: ./node_modules/d3-color/src/cubehelix.js
-
-
-
-
-var A = -0.14861,
-    B = +1.78277,
-    C = -0.29227,
-    D = -0.90649,
-    E = +1.97294,
-    ED = E * D,
-    EB = E * B,
-    BC_DA = B * C - D * A;
-
-function cubehelixConvert(o) {
-  if (o instanceof Cubehelix) return new Cubehelix(o.h, o.s, o.l, o.opacity);
-  if (!(o instanceof Rgb)) o = rgbConvert(o);
-  var r = o.r / 255,
-      g = o.g / 255,
-      b = o.b / 255,
-      l = (BC_DA * b + ED * r - EB * g) / (BC_DA + ED - EB),
-      bl = b - l,
-      k = (E * (g - l) - C * bl) / D,
-      s = Math.sqrt(k * k + bl * bl) / (E * l * (1 - l)), // NaN if l=0 or l=1
-      h = s ? Math.atan2(k, bl) * rad2deg - 120 : NaN;
-  return new Cubehelix(h < 0 ? h + 360 : h, s, l, o.opacity);
-}
-
-function cubehelix(h, s, l, opacity) {
-  return arguments.length === 1 ? cubehelixConvert(h) : new Cubehelix(h, s, l, opacity == null ? 1 : opacity);
-}
-
-function Cubehelix(h, s, l, opacity) {
-  this.h = +h;
-  this.s = +s;
-  this.l = +l;
-  this.opacity = +opacity;
-}
-
-define(Cubehelix, cubehelix, extend(Color, {
-  brighter: function(k) {
-    k = k == null ? brighter : Math.pow(brighter, k);
-    return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
-  },
-  darker: function(k) {
-    k = k == null ? darker : Math.pow(darker, k);
-    return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
-  },
-  rgb: function() {
-    var h = isNaN(this.h) ? 0 : (this.h + 120) * deg2rad,
-        l = +this.l,
-        a = isNaN(this.s) ? 0 : this.s * l * (1 - l),
-        cosh = Math.cos(h),
-        sinh = Math.sin(h);
-    return new Rgb(
-      255 * (l + a * (A * cosh + B * sinh)),
-      255 * (l + a * (C * cosh + D * sinh)),
-      255 * (l + a * (E * cosh)),
-      this.opacity
-    );
-  }
-}));
-
-// CONCATENATED MODULE: ./node_modules/d3-color/index.js
-
-
-
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -736,10 +195,10 @@ __webpack_require__.d(__webpack_exports__, "event", function() { return /* reexp
 __webpack_require__.d(__webpack_exports__, "customEvent", function() { return /* reexport */ on["a" /* customEvent */]; });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/creator.js
-var creator = __webpack_require__(16);
+var creator = __webpack_require__(19);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/select.js
-var src_select = __webpack_require__(28);
+var src_select = __webpack_require__(32);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/create.js
 
@@ -779,22 +238,22 @@ Local.prototype = local.prototype = {
 };
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/matcher.js
-var matcher = __webpack_require__(33);
+var matcher = __webpack_require__(42);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/mouse.js
-var mouse = __webpack_require__(42);
+var mouse = __webpack_require__(54);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/namespace.js
-var namespace = __webpack_require__(25);
+var namespace = __webpack_require__(28);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/namespaces.js
-var namespaces = __webpack_require__(18);
+var namespaces = __webpack_require__(21);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/point.js
-var point = __webpack_require__(17);
+var point = __webpack_require__(20);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/index.js + 31 modules
-var selection = __webpack_require__(11);
+var selection = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/selectAll.js
 
@@ -806,19 +265,19 @@ var selection = __webpack_require__(11);
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selector.js
-var src_selector = __webpack_require__(24);
+var src_selector = __webpack_require__(27);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selectorAll.js
-var selectorAll = __webpack_require__(32);
+var selectorAll = __webpack_require__(41);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/style.js
-var style = __webpack_require__(34);
+var style = __webpack_require__(43);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/touch.js
-var touch = __webpack_require__(43);
+var touch = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/sourceEvent.js
-var sourceEvent = __webpack_require__(29);
+var sourceEvent = __webpack_require__(33);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/touches.js
 
@@ -835,10 +294,10 @@ var sourceEvent = __webpack_require__(29);
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/window.js
-var src_window = __webpack_require__(26);
+var src_window = __webpack_require__(29);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/on.js
-var on = __webpack_require__(9);
+var on = __webpack_require__(7);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/index.js
 
@@ -862,638 +321,25 @@ var on = __webpack_require__(9);
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* reexport */ src_value; });
-__webpack_require__.d(__webpack_exports__, "c", function() { return /* reexport */ number; });
-__webpack_require__.d(__webpack_exports__, "e", function() { return /* reexport */ round; });
-__webpack_require__.d(__webpack_exports__, "f", function() { return /* reexport */ string; });
-__webpack_require__.d(__webpack_exports__, "g", function() { return /* reexport */ interpolateTransformCss; });
-__webpack_require__.d(__webpack_exports__, "h", function() { return /* reexport */ interpolateTransformSvg; });
-__webpack_require__.d(__webpack_exports__, "i", function() { return /* reexport */ zoom; });
-__webpack_require__.d(__webpack_exports__, "d", function() { return /* reexport */ src_rgb; });
-__webpack_require__.d(__webpack_exports__, "b", function() { return /* reexport */ cubehelixLong; });
-
-// UNUSED EXPORTS: interpolateArray, interpolateBasis, interpolateBasisClosed, interpolateDate, interpolateObject, interpolateRgbBasis, interpolateRgbBasisClosed, interpolateHsl, interpolateHslLong, interpolateLab, interpolateHcl, interpolateHclLong, interpolateCubehelix, quantize
-
-// EXTERNAL MODULE: ./node_modules/d3-color/index.js + 5 modules
-var d3_color = __webpack_require__(1);
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/basis.js
-function basis(t1, v0, v1, v2, v3) {
-  var t2 = t1 * t1, t3 = t2 * t1;
-  return ((1 - 3 * t1 + 3 * t2 - t3) * v0
-      + (4 - 6 * t2 + 3 * t3) * v1
-      + (1 + 3 * t1 + 3 * t2 - 3 * t3) * v2
-      + t3 * v3) / 6;
-}
-
-/* harmony default export */ var src_basis = (function(values) {
-  var n = values.length - 1;
-  return function(t) {
-    var i = t <= 0 ? (t = 0) : t >= 1 ? (t = 1, n - 1) : Math.floor(t * n),
-        v1 = values[i],
-        v2 = values[i + 1],
-        v0 = i > 0 ? values[i - 1] : 2 * v1 - v2,
-        v3 = i < n - 1 ? values[i + 2] : 2 * v2 - v1;
-    return basis((t - i / n) * n, v0, v1, v2, v3);
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/basisClosed.js
-
-
-/* harmony default export */ var basisClosed = (function(values) {
-  var n = values.length;
-  return function(t) {
-    var i = Math.floor(((t %= 1) < 0 ? ++t : t) * n),
-        v0 = values[(i + n - 1) % n],
-        v1 = values[i % n],
-        v2 = values[(i + 1) % n],
-        v3 = values[(i + 2) % n];
-    return basis((t - i / n) * n, v0, v1, v2, v3);
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/constant.js
-/* harmony default export */ var constant = (function(x) {
-  return function() {
-    return x;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/color.js
-
-
-function linear(a, d) {
-  return function(t) {
-    return a + t * d;
-  };
-}
-
-function exponential(a, b, y) {
-  return a = Math.pow(a, y), b = Math.pow(b, y) - a, y = 1 / y, function(t) {
-    return Math.pow(a + t * b, y);
-  };
-}
-
-function color_hue(a, b) {
-  var d = b - a;
-  return d ? linear(a, d > 180 || d < -180 ? d - 360 * Math.round(d / 360) : d) : constant(isNaN(a) ? b : a);
-}
-
-function gamma(y) {
-  return (y = +y) === 1 ? nogamma : function(a, b) {
-    return b - a ? exponential(a, b, y) : constant(isNaN(a) ? b : a);
-  };
-}
-
-function nogamma(a, b) {
-  var d = b - a;
-  return d ? linear(a, d) : constant(isNaN(a) ? b : a);
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/rgb.js
-
-
-
-
-
-/* harmony default export */ var src_rgb = ((function rgbGamma(y) {
-  var color = gamma(y);
-
-  function rgb(start, end) {
-    var r = color((start = Object(d3_color["f" /* rgb */])(start)).r, (end = Object(d3_color["f" /* rgb */])(end)).r),
-        g = color(start.g, end.g),
-        b = color(start.b, end.b),
-        opacity = nogamma(start.opacity, end.opacity);
-    return function(t) {
-      start.r = r(t);
-      start.g = g(t);
-      start.b = b(t);
-      start.opacity = opacity(t);
-      return start + "";
-    };
-  }
-
-  rgb.gamma = rgbGamma;
-
-  return rgb;
-})(1));
-
-function rgbSpline(spline) {
-  return function(colors) {
-    var n = colors.length,
-        r = new Array(n),
-        g = new Array(n),
-        b = new Array(n),
-        i, color;
-    for (i = 0; i < n; ++i) {
-      color = Object(d3_color["f" /* rgb */])(colors[i]);
-      r[i] = color.r || 0;
-      g[i] = color.g || 0;
-      b[i] = color.b || 0;
-    }
-    r = spline(r);
-    g = spline(g);
-    b = spline(b);
-    color.opacity = 1;
-    return function(t) {
-      color.r = r(t);
-      color.g = g(t);
-      color.b = b(t);
-      return color + "";
-    };
-  };
-}
-
-var rgbBasis = rgbSpline(src_basis);
-var rgbBasisClosed = rgbSpline(basisClosed);
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/array.js
-
-
-/* harmony default export */ var array = (function(a, b) {
-  var nb = b ? b.length : 0,
-      na = a ? Math.min(nb, a.length) : 0,
-      x = new Array(na),
-      c = new Array(nb),
-      i;
-
-  for (i = 0; i < na; ++i) x[i] = src_value(a[i], b[i]);
-  for (; i < nb; ++i) c[i] = b[i];
-
-  return function(t) {
-    for (i = 0; i < na; ++i) c[i] = x[i](t);
-    return c;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/date.js
-/* harmony default export */ var date = (function(a, b) {
-  var d = new Date;
-  return a = +a, b -= a, function(t) {
-    return d.setTime(a + b * t), d;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/number.js
-/* harmony default export */ var number = (function(a, b) {
-  return a = +a, b -= a, function(t) {
-    return a + b * t;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/object.js
-
-
-/* harmony default export */ var object = (function(a, b) {
-  var i = {},
-      c = {},
-      k;
-
-  if (a === null || typeof a !== "object") a = {};
-  if (b === null || typeof b !== "object") b = {};
-
-  for (k in b) {
-    if (k in a) {
-      i[k] = src_value(a[k], b[k]);
-    } else {
-      c[k] = b[k];
-    }
-  }
-
-  return function(t) {
-    for (k in i) c[k] = i[k](t);
-    return c;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/string.js
-
-
-var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g,
-    reB = new RegExp(reA.source, "g");
-
-function zero(b) {
-  return function() {
-    return b;
-  };
-}
-
-function one(b) {
-  return function(t) {
-    return b(t) + "";
-  };
-}
-
-/* harmony default export */ var string = (function(a, b) {
-  var bi = reA.lastIndex = reB.lastIndex = 0, // scan index for next number in b
-      am, // current match in a
-      bm, // current match in b
-      bs, // string preceding current number in b, if any
-      i = -1, // index in s
-      s = [], // string constants and placeholders
-      q = []; // number interpolators
-
-  // Coerce inputs to strings.
-  a = a + "", b = b + "";
-
-  // Interpolate pairs of numbers in a & b.
-  while ((am = reA.exec(a))
-      && (bm = reB.exec(b))) {
-    if ((bs = bm.index) > bi) { // a string precedes the next number in b
-      bs = b.slice(bi, bs);
-      if (s[i]) s[i] += bs; // coalesce with previous string
-      else s[++i] = bs;
-    }
-    if ((am = am[0]) === (bm = bm[0])) { // numbers in a & b match
-      if (s[i]) s[i] += bm; // coalesce with previous string
-      else s[++i] = bm;
-    } else { // interpolate non-matching numbers
-      s[++i] = null;
-      q.push({i: i, x: number(am, bm)});
-    }
-    bi = reB.lastIndex;
-  }
-
-  // Add remains of b.
-  if (bi < b.length) {
-    bs = b.slice(bi);
-    if (s[i]) s[i] += bs; // coalesce with previous string
-    else s[++i] = bs;
-  }
-
-  // Special optimization for only a single match.
-  // Otherwise, interpolate each of the numbers and rejoin the string.
-  return s.length < 2 ? (q[0]
-      ? one(q[0].x)
-      : zero(b))
-      : (b = q.length, function(t) {
-          for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
-          return s.join("");
-        });
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/value.js
-
-
-
-
-
-
-
-
-
-/* harmony default export */ var src_value = (function(a, b) {
-  var t = typeof b, c;
-  return b == null || t === "boolean" ? constant(b)
-      : (t === "number" ? number
-      : t === "string" ? ((c = Object(d3_color["a" /* color */])(b)) ? (b = c, src_rgb) : string)
-      : b instanceof d3_color["a" /* color */] ? src_rgb
-      : b instanceof Date ? date
-      : Array.isArray(b) ? array
-      : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object
-      : number)(a, b);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/round.js
-/* harmony default export */ var round = (function(a, b) {
-  return a = +a, b -= a, function(t) {
-    return Math.round(a + b * t);
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/decompose.js
-var degrees = 180 / Math.PI;
-
-var identity = {
-  translateX: 0,
-  translateY: 0,
-  rotate: 0,
-  skewX: 0,
-  scaleX: 1,
-  scaleY: 1
-};
-
-/* harmony default export */ var decompose = (function(a, b, c, d, e, f) {
-  var scaleX, scaleY, skewX;
-  if (scaleX = Math.sqrt(a * a + b * b)) a /= scaleX, b /= scaleX;
-  if (skewX = a * c + b * d) c -= a * skewX, d -= b * skewX;
-  if (scaleY = Math.sqrt(c * c + d * d)) c /= scaleY, d /= scaleY, skewX /= scaleY;
-  if (a * d < b * c) a = -a, b = -b, skewX = -skewX, scaleX = -scaleX;
-  return {
-    translateX: e,
-    translateY: f,
-    rotate: Math.atan2(b, a) * degrees,
-    skewX: Math.atan(skewX) * degrees,
-    scaleX: scaleX,
-    scaleY: scaleY
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/parse.js
-
-
-var cssNode,
-    cssRoot,
-    cssView,
-    svgNode;
-
-function parseCss(value) {
-  if (value === "none") return identity;
-  if (!cssNode) cssNode = document.createElement("DIV"), cssRoot = document.documentElement, cssView = document.defaultView;
-  cssNode.style.transform = value;
-  value = cssView.getComputedStyle(cssRoot.appendChild(cssNode), null).getPropertyValue("transform");
-  cssRoot.removeChild(cssNode);
-  value = value.slice(7, -1).split(",");
-  return decompose(+value[0], +value[1], +value[2], +value[3], +value[4], +value[5]);
-}
-
-function parseSvg(value) {
-  if (value == null) return identity;
-  if (!svgNode) svgNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  svgNode.setAttribute("transform", value);
-  if (!(value = svgNode.transform.baseVal.consolidate())) return identity;
-  value = value.matrix;
-  return decompose(value.a, value.b, value.c, value.d, value.e, value.f);
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/index.js
-
-
-
-function interpolateTransform(parse, pxComma, pxParen, degParen) {
-
-  function pop(s) {
-    return s.length ? s.pop() + " " : "";
-  }
-
-  function translate(xa, ya, xb, yb, s, q) {
-    if (xa !== xb || ya !== yb) {
-      var i = s.push("translate(", null, pxComma, null, pxParen);
-      q.push({i: i - 4, x: number(xa, xb)}, {i: i - 2, x: number(ya, yb)});
-    } else if (xb || yb) {
-      s.push("translate(" + xb + pxComma + yb + pxParen);
-    }
-  }
-
-  function rotate(a, b, s, q) {
-    if (a !== b) {
-      if (a - b > 180) b += 360; else if (b - a > 180) a += 360; // shortest path
-      q.push({i: s.push(pop(s) + "rotate(", null, degParen) - 2, x: number(a, b)});
-    } else if (b) {
-      s.push(pop(s) + "rotate(" + b + degParen);
-    }
-  }
-
-  function skewX(a, b, s, q) {
-    if (a !== b) {
-      q.push({i: s.push(pop(s) + "skewX(", null, degParen) - 2, x: number(a, b)});
-    } else if (b) {
-      s.push(pop(s) + "skewX(" + b + degParen);
-    }
-  }
-
-  function scale(xa, ya, xb, yb, s, q) {
-    if (xa !== xb || ya !== yb) {
-      var i = s.push(pop(s) + "scale(", null, ",", null, ")");
-      q.push({i: i - 4, x: number(xa, xb)}, {i: i - 2, x: number(ya, yb)});
-    } else if (xb !== 1 || yb !== 1) {
-      s.push(pop(s) + "scale(" + xb + "," + yb + ")");
-    }
-  }
-
-  return function(a, b) {
-    var s = [], // string constants and placeholders
-        q = []; // number interpolators
-    a = parse(a), b = parse(b);
-    translate(a.translateX, a.translateY, b.translateX, b.translateY, s, q);
-    rotate(a.rotate, b.rotate, s, q);
-    skewX(a.skewX, b.skewX, s, q);
-    scale(a.scaleX, a.scaleY, b.scaleX, b.scaleY, s, q);
-    a = b = null; // gc
-    return function(t) {
-      var i = -1, n = q.length, o;
-      while (++i < n) s[(o = q[i]).i] = o.x(t);
-      return s.join("");
-    };
-  };
-}
-
-var interpolateTransformCss = interpolateTransform(parseCss, "px, ", "px)", "deg)");
-var interpolateTransformSvg = interpolateTransform(parseSvg, ", ", ")", ")");
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/zoom.js
-var rho = Math.SQRT2,
-    rho2 = 2,
-    rho4 = 4,
-    epsilon2 = 1e-12;
-
-function cosh(x) {
-  return ((x = Math.exp(x)) + 1 / x) / 2;
-}
-
-function sinh(x) {
-  return ((x = Math.exp(x)) - 1 / x) / 2;
-}
-
-function tanh(x) {
-  return ((x = Math.exp(2 * x)) - 1) / (x + 1);
-}
-
-// p0 = [ux0, uy0, w0]
-// p1 = [ux1, uy1, w1]
-/* harmony default export */ var zoom = (function(p0, p1) {
-  var ux0 = p0[0], uy0 = p0[1], w0 = p0[2],
-      ux1 = p1[0], uy1 = p1[1], w1 = p1[2],
-      dx = ux1 - ux0,
-      dy = uy1 - uy0,
-      d2 = dx * dx + dy * dy,
-      i,
-      S;
-
-  // Special case for u0 ≅ u1.
-  if (d2 < epsilon2) {
-    S = Math.log(w1 / w0) / rho;
-    i = function(t) {
-      return [
-        ux0 + t * dx,
-        uy0 + t * dy,
-        w0 * Math.exp(rho * t * S)
-      ];
-    }
-  }
-
-  // General case.
-  else {
-    var d1 = Math.sqrt(d2),
-        b0 = (w1 * w1 - w0 * w0 + rho4 * d2) / (2 * w0 * rho2 * d1),
-        b1 = (w1 * w1 - w0 * w0 - rho4 * d2) / (2 * w1 * rho2 * d1),
-        r0 = Math.log(Math.sqrt(b0 * b0 + 1) - b0),
-        r1 = Math.log(Math.sqrt(b1 * b1 + 1) - b1);
-    S = (r1 - r0) / rho;
-    i = function(t) {
-      var s = t * S,
-          coshr0 = cosh(r0),
-          u = w0 / (rho2 * d1) * (coshr0 * tanh(rho * s + r0) - sinh(r0));
-      return [
-        ux0 + u * dx,
-        uy0 + u * dy,
-        w0 * coshr0 / cosh(rho * s + r0)
-      ];
-    }
-  }
-
-  i.duration = S * 1000;
-
-  return i;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/hsl.js
-
-
-
-function hsl(hue) {
-  return function(start, end) {
-    var h = hue((start = Object(d3_color["d" /* hsl */])(start)).h, (end = Object(d3_color["d" /* hsl */])(end)).h),
-        s = nogamma(start.s, end.s),
-        l = nogamma(start.l, end.l),
-        opacity = nogamma(start.opacity, end.opacity);
-    return function(t) {
-      start.h = h(t);
-      start.s = s(t);
-      start.l = l(t);
-      start.opacity = opacity(t);
-      return start + "";
-    };
-  }
-}
-
-/* harmony default export */ var src_hsl = (hsl(color_hue));
-var hslLong = hsl(nogamma);
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/lab.js
-
-
-
-function lab(start, end) {
-  var l = nogamma((start = Object(d3_color["e" /* lab */])(start)).l, (end = Object(d3_color["e" /* lab */])(end)).l),
-      a = nogamma(start.a, end.a),
-      b = nogamma(start.b, end.b),
-      opacity = nogamma(start.opacity, end.opacity);
-  return function(t) {
-    start.l = l(t);
-    start.a = a(t);
-    start.b = b(t);
-    start.opacity = opacity(t);
-    return start + "";
-  };
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/hcl.js
-
-
-
-function hcl(hue) {
-  return function(start, end) {
-    var h = hue((start = Object(d3_color["c" /* hcl */])(start)).h, (end = Object(d3_color["c" /* hcl */])(end)).h),
-        c = nogamma(start.c, end.c),
-        l = nogamma(start.l, end.l),
-        opacity = nogamma(start.opacity, end.opacity);
-    return function(t) {
-      start.h = h(t);
-      start.c = c(t);
-      start.l = l(t);
-      start.opacity = opacity(t);
-      return start + "";
-    };
-  }
-}
-
-/* harmony default export */ var src_hcl = (hcl(color_hue));
-var hclLong = hcl(nogamma);
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/cubehelix.js
-
-
-
-function cubehelix_cubehelix(hue) {
-  return (function cubehelixGamma(y) {
-    y = +y;
-
-    function cubehelix(start, end) {
-      var h = hue((start = Object(d3_color["b" /* cubehelix */])(start)).h, (end = Object(d3_color["b" /* cubehelix */])(end)).h),
-          s = nogamma(start.s, end.s),
-          l = nogamma(start.l, end.l),
-          opacity = nogamma(start.opacity, end.opacity);
-      return function(t) {
-        start.h = h(t);
-        start.s = s(t);
-        start.l = l(Math.pow(t, y));
-        start.opacity = opacity(t);
-        return start + "";
-      };
-    }
-
-    cubehelix.gamma = cubehelixGamma;
-
-    return cubehelix;
-  })(1);
-}
-
-/* harmony default export */ var src_cubehelix = (cubehelix_cubehelix(color_hue));
-var cubehelixLong = cubehelix_cubehelix(nogamma);
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/quantize.js
-/* harmony default export */ var quantize = (function(interpolator, n) {
-  var samples = new Array(n);
-  for (var i = 0; i < n; ++i) samples[i] = interpolator(i / (n - 1));
-  return samples;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-/* 4 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 /* global Blob, XMLSerializer, Image, btoa */
 
-var vkbeautify = __webpack_require__(40);
-var _ = __webpack_require__(5);
-var d3_json = __webpack_require__(31).json;
-var d3_text = __webpack_require__(31).text;
-var d3_csvParseRows = __webpack_require__(38).csvParseRows;
-var d3_selection = __webpack_require__(2).selection;
+var vkbeautify = __webpack_require__(52);
+var _ = __webpack_require__(3);
+var d3_json = __webpack_require__(40).json;
+var d3_text = __webpack_require__(40).text;
+var d3_csvParseRows = __webpack_require__(48).csvParseRows;
+var d3_selection = __webpack_require__(1).selection;
 
 try {
-  var saveAs = __webpack_require__(59).saveAs;
+  var saveAs = __webpack_require__(76).saveAs;
 } catch (e) {
   console.warn('Not a browser, so FileSaver.js not available.');
 }
@@ -1549,7 +395,8 @@ module.exports = {
   name_to_url: name_to_url,
   get_document: get_document,
   get_window: get_window,
-  d3_transform_catch: d3_transform_catch
+  d3_transform_catch: d3_transform_catch,
+  process_reaction_data: process_reaction_data
   // check_browser: check_browser
 
 
@@ -2456,6 +1303,29 @@ function get_window(node) {
   return get_document(node).defaultView;
 }
 
+// filter the data which is less than threshold
+function process_reaction_data(arr) {
+  var obj = arr[0];
+  var threshold = Math.pow(10, -6); // define threshold
+
+  // call the function for each key in the object
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      var value = obj[key];
+
+      // check if value is an object, if it is, call the function again
+      if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && value !== null) {
+        processObject(value);
+      } else if (typeof value === 'number' && value < threshold) {
+        // if value is a number and less than threshold, set it to 0
+        obj[key] = 0;
+      }
+    }
+  }
+
+  return [obj];
+}
+
 /**
  * Get translation and rotation values for a transform string. This used to be
  * in d3, but since v4, I just adapted a solution from SO:
@@ -2561,7 +1431,7 @@ function d3_transform_catch(transform_attr) {
 // }
 
 /***/ }),
-/* 5 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5523,7 +4393,7 @@ index_default_._ = index_default_;
 
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6263,396 +5133,24 @@ var preact = {
 
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "formatDefaultLocale", function() { return /* reexport */ defaultLocale; });
-__webpack_require__.d(__webpack_exports__, "format", function() { return /* reexport */ defaultLocale_format; });
-__webpack_require__.d(__webpack_exports__, "formatPrefix", function() { return /* reexport */ defaultLocale_formatPrefix; });
-__webpack_require__.d(__webpack_exports__, "formatLocale", function() { return /* reexport */ src_locale; });
-__webpack_require__.d(__webpack_exports__, "formatSpecifier", function() { return /* reexport */ formatSpecifier; });
-__webpack_require__.d(__webpack_exports__, "precisionFixed", function() { return /* reexport */ precisionFixed; });
-__webpack_require__.d(__webpack_exports__, "precisionPrefix", function() { return /* reexport */ precisionPrefix; });
-__webpack_require__.d(__webpack_exports__, "precisionRound", function() { return /* reexport */ precisionRound; });
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/formatDecimal.js
-// Computes the decimal coefficient and exponent of the specified number x with
-// significant digits p, where x is positive and p is in [1, 21] or undefined.
-// For example, formatDecimal(1.23) returns ["123", 0].
-/* harmony default export */ var formatDecimal = (function(x, p) {
-  if ((i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e")) < 0) return null; // NaN, ±Infinity
-  var i, coefficient = x.slice(0, i);
-
-  // The string returned by toExponential either has the form \d\.\d+e[-+]\d+
-  // (e.g., 1.2e+3) or the form \de[-+]\d+ (e.g., 1e+3).
-  return [
-    coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient,
-    +x.slice(i + 1)
-  ];
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/exponent.js
-
-
-/* harmony default export */ var src_exponent = (function(x) {
-  return x = formatDecimal(Math.abs(x)), x ? x[1] : NaN;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/formatGroup.js
-/* harmony default export */ var formatGroup = (function(grouping, thousands) {
-  return function(value, width) {
-    var i = value.length,
-        t = [],
-        j = 0,
-        g = grouping[0],
-        length = 0;
-
-    while (i > 0 && g > 0) {
-      if (length + g + 1 > width) g = Math.max(1, width - length);
-      t.push(value.substring(i -= g, i + g));
-      if ((length += g + 1) > width) break;
-      g = grouping[j = (j + 1) % grouping.length];
-    }
-
-    return t.reverse().join(thousands);
+/* harmony default export */ __webpack_exports__["a"] = (function(a, b) {
+  return a = +a, b = +b, function(t) {
+    return a * (1 - t) + b * t;
   };
 });
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/formatNumerals.js
-/* harmony default export */ var formatNumerals = (function(numerals) {
-  return function(value) {
-    return value.replace(/[0-9]/g, function(i) {
-      return numerals[+i];
-    });
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/formatDefault.js
-/* harmony default export */ var formatDefault = (function(x, p) {
-  x = x.toPrecision(p);
-
-  out: for (var n = x.length, i = 1, i0 = -1, i1; i < n; ++i) {
-    switch (x[i]) {
-      case ".": i0 = i1 = i; break;
-      case "0": if (i0 === 0) i0 = i; i1 = i; break;
-      case "e": break out;
-      default: if (i0 > 0) i0 = 0; break;
-    }
-  }
-
-  return i0 > 0 ? x.slice(0, i0) + x.slice(i1 + 1) : x;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/formatPrefixAuto.js
-
-
-var prefixExponent;
-
-/* harmony default export */ var formatPrefixAuto = (function(x, p) {
-  var d = formatDecimal(x, p);
-  if (!d) return x + "";
-  var coefficient = d[0],
-      exponent = d[1],
-      i = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1,
-      n = coefficient.length;
-  return i === n ? coefficient
-      : i > n ? coefficient + new Array(i - n + 1).join("0")
-      : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i)
-      : "0." + new Array(1 - i).join("0") + formatDecimal(x, Math.max(0, p + i - 1))[0]; // less than 1y!
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/formatRounded.js
-
-
-/* harmony default export */ var formatRounded = (function(x, p) {
-  var d = formatDecimal(x, p);
-  if (!d) return x + "";
-  var coefficient = d[0],
-      exponent = d[1];
-  return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient
-      : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1)
-      : coefficient + new Array(exponent - coefficient.length + 2).join("0");
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/formatTypes.js
-
-
-
-
-/* harmony default export */ var formatTypes = ({
-  "": formatDefault,
-  "%": function(x, p) { return (x * 100).toFixed(p); },
-  "b": function(x) { return Math.round(x).toString(2); },
-  "c": function(x) { return x + ""; },
-  "d": function(x) { return Math.round(x).toString(10); },
-  "e": function(x, p) { return x.toExponential(p); },
-  "f": function(x, p) { return x.toFixed(p); },
-  "g": function(x, p) { return x.toPrecision(p); },
-  "o": function(x) { return Math.round(x).toString(8); },
-  "p": function(x, p) { return formatRounded(x * 100, p); },
-  "r": formatRounded,
-  "s": formatPrefixAuto,
-  "X": function(x) { return Math.round(x).toString(16).toUpperCase(); },
-  "x": function(x) { return Math.round(x).toString(16); }
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/formatSpecifier.js
-
-
-// [[fill]align][sign][symbol][0][width][,][.precision][type]
-var re = /^(?:(.)?([<>=^]))?([+\-\( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?([a-z%])?$/i;
-
-function formatSpecifier(specifier) {
-  return new FormatSpecifier(specifier);
-}
-
-formatSpecifier.prototype = FormatSpecifier.prototype; // instanceof
-
-function FormatSpecifier(specifier) {
-  if (!(match = re.exec(specifier))) throw new Error("invalid format: " + specifier);
-
-  var match,
-      fill = match[1] || " ",
-      align = match[2] || ">",
-      sign = match[3] || "-",
-      symbol = match[4] || "",
-      zero = !!match[5],
-      width = match[6] && +match[6],
-      comma = !!match[7],
-      precision = match[8] && +match[8].slice(1),
-      type = match[9] || "";
-
-  // The "n" type is an alias for ",g".
-  if (type === "n") comma = true, type = "g";
-
-  // Map invalid types to the default format.
-  else if (!formatTypes[type]) type = "";
-
-  // If zero fill is specified, padding goes after sign and before digits.
-  if (zero || (fill === "0" && align === "=")) zero = true, fill = "0", align = "=";
-
-  this.fill = fill;
-  this.align = align;
-  this.sign = sign;
-  this.symbol = symbol;
-  this.zero = zero;
-  this.width = width;
-  this.comma = comma;
-  this.precision = precision;
-  this.type = type;
-}
-
-FormatSpecifier.prototype.toString = function() {
-  return this.fill
-      + this.align
-      + this.sign
-      + this.symbol
-      + (this.zero ? "0" : "")
-      + (this.width == null ? "" : Math.max(1, this.width | 0))
-      + (this.comma ? "," : "")
-      + (this.precision == null ? "" : "." + Math.max(0, this.precision | 0))
-      + this.type;
-};
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/identity.js
-/* harmony default export */ var identity = (function(x) {
-  return x;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/locale.js
-
-
-
-
-
-
-
-
-var prefixes = ["y","z","a","f","p","n","µ","m","","k","M","G","T","P","E","Z","Y"];
-
-/* harmony default export */ var src_locale = (function(locale) {
-  var group = locale.grouping && locale.thousands ? formatGroup(locale.grouping, locale.thousands) : identity,
-      currency = locale.currency,
-      decimal = locale.decimal,
-      numerals = locale.numerals ? formatNumerals(locale.numerals) : identity,
-      percent = locale.percent || "%";
-
-  function newFormat(specifier) {
-    specifier = formatSpecifier(specifier);
-
-    var fill = specifier.fill,
-        align = specifier.align,
-        sign = specifier.sign,
-        symbol = specifier.symbol,
-        zero = specifier.zero,
-        width = specifier.width,
-        comma = specifier.comma,
-        precision = specifier.precision,
-        type = specifier.type;
-
-    // Compute the prefix and suffix.
-    // For SI-prefix, the suffix is lazily computed.
-    var prefix = symbol === "$" ? currency[0] : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "",
-        suffix = symbol === "$" ? currency[1] : /[%p]/.test(type) ? percent : "";
-
-    // What format function should we use?
-    // Is this an integer type?
-    // Can this type generate exponential notation?
-    var formatType = formatTypes[type],
-        maybeSuffix = !type || /[defgprs%]/.test(type);
-
-    // Set the default precision if not specified,
-    // or clamp the specified precision to the supported range.
-    // For significant precision, it must be in [1, 21].
-    // For fixed precision, it must be in [0, 20].
-    precision = precision == null ? (type ? 6 : 12)
-        : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision))
-        : Math.max(0, Math.min(20, precision));
-
-    function format(value) {
-      var valuePrefix = prefix,
-          valueSuffix = suffix,
-          i, n, c;
-
-      if (type === "c") {
-        valueSuffix = formatType(value) + valueSuffix;
-        value = "";
-      } else {
-        value = +value;
-
-        // Perform the initial formatting.
-        var valueNegative = value < 0;
-        value = formatType(Math.abs(value), precision);
-
-        // If a negative value rounds to zero during formatting, treat as positive.
-        if (valueNegative && +value === 0) valueNegative = false;
-
-        // Compute the prefix and suffix.
-        valuePrefix = (valueNegative ? (sign === "(" ? sign : "-") : sign === "-" || sign === "(" ? "" : sign) + valuePrefix;
-        valueSuffix = (type === "s" ? prefixes[8 + prefixExponent / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : "");
-
-        // Break the formatted value into the integer “value” part that can be
-        // grouped, and fractional or exponential “suffix” part that is not.
-        if (maybeSuffix) {
-          i = -1, n = value.length;
-          while (++i < n) {
-            if (c = value.charCodeAt(i), 48 > c || c > 57) {
-              valueSuffix = (c === 46 ? decimal + value.slice(i + 1) : value.slice(i)) + valueSuffix;
-              value = value.slice(0, i);
-              break;
-            }
-          }
-        }
-      }
-
-      // If the fill character is not "0", grouping is applied before padding.
-      if (comma && !zero) value = group(value, Infinity);
-
-      // Compute the padding.
-      var length = valuePrefix.length + value.length + valueSuffix.length,
-          padding = length < width ? new Array(width - length + 1).join(fill) : "";
-
-      // If the fill character is "0", grouping is applied after padding.
-      if (comma && zero) value = group(padding + value, padding.length ? width - valueSuffix.length : Infinity), padding = "";
-
-      // Reconstruct the final output based on the desired alignment.
-      switch (align) {
-        case "<": value = valuePrefix + value + valueSuffix + padding; break;
-        case "=": value = valuePrefix + padding + value + valueSuffix; break;
-        case "^": value = padding.slice(0, length = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length); break;
-        default: value = padding + valuePrefix + value + valueSuffix; break;
-      }
-
-      return numerals(value);
-    }
-
-    format.toString = function() {
-      return specifier + "";
-    };
-
-    return format;
-  }
-
-  function formatPrefix(specifier, value) {
-    var f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier)),
-        e = Math.max(-8, Math.min(8, Math.floor(src_exponent(value) / 3))) * 3,
-        k = Math.pow(10, -e),
-        prefix = prefixes[8 + e / 3];
-    return function(value) {
-      return f(k * value) + prefix;
-    };
-  }
-
-  return {
-    format: newFormat,
-    formatPrefix: formatPrefix
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/defaultLocale.js
-
-
-var defaultLocale_locale;
-var defaultLocale_format;
-var defaultLocale_formatPrefix;
-
-defaultLocale({
-  decimal: ".",
-  thousands: ",",
-  grouping: [3],
-  currency: ["$", ""]
-});
-
-function defaultLocale(definition) {
-  defaultLocale_locale = src_locale(definition);
-  defaultLocale_format = defaultLocale_locale.format;
-  defaultLocale_formatPrefix = defaultLocale_locale.formatPrefix;
-  return defaultLocale_locale;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/precisionFixed.js
-
-
-/* harmony default export */ var precisionFixed = (function(step) {
-  return Math.max(0, -src_exponent(Math.abs(step)));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/precisionPrefix.js
-
-
-/* harmony default export */ var precisionPrefix = (function(step, value) {
-  return Math.max(0, Math.max(-8, Math.min(8, Math.floor(src_exponent(value) / 3))) * 3 - src_exponent(Math.abs(step)));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/src/precisionRound.js
-
-
-/* harmony default export */ var precisionRound = (function(step, max) {
-  step = Math.abs(step), max = Math.abs(max) - step;
-  return Math.max(0, src_exponent(max) - src_exponent(step)) + 1;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-format/index.js
-
-
-
-
-
-
 
 
 /***/ }),
-/* 8 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return nopropagation; });
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
 
 
 function nopropagation() {
@@ -6666,7 +5164,7 @@ function nopropagation() {
 
 
 /***/ }),
-/* 9 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6782,106 +5280,20 @@ function customEvent(event1, listener, that, args) {
 
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var _formatDecimal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
 
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* reexport */ src_dispatch; });
 
-// CONCATENATED MODULE: ./node_modules/d3-dispatch/src/dispatch.js
-var noop = {value: function() {}};
-
-function dispatch() {
-  for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
-    if (!(t = arguments[i] + "") || (t in _)) throw new Error("illegal type: " + t);
-    _[t] = [];
-  }
-  return new Dispatch(_);
-}
-
-function Dispatch(_) {
-  this._ = _;
-}
-
-function parseTypenames(typenames, types) {
-  return typenames.trim().split(/^|\s+/).map(function(t) {
-    var name = "", i = t.indexOf(".");
-    if (i >= 0) name = t.slice(i + 1), t = t.slice(0, i);
-    if (t && !types.hasOwnProperty(t)) throw new Error("unknown type: " + t);
-    return {type: t, name: name};
-  });
-}
-
-Dispatch.prototype = dispatch.prototype = {
-  constructor: Dispatch,
-  on: function(typename, callback) {
-    var _ = this._,
-        T = parseTypenames(typename + "", _),
-        t,
-        i = -1,
-        n = T.length;
-
-    // If no callback was specified, return the callback of the given type and name.
-    if (arguments.length < 2) {
-      while (++i < n) if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name))) return t;
-      return;
-    }
-
-    // If a type was specified, set the callback for the given type and name.
-    // Otherwise, if a null callback was specified, remove callbacks of the given name.
-    if (callback != null && typeof callback !== "function") throw new Error("invalid callback: " + callback);
-    while (++i < n) {
-      if (t = (typename = T[i]).type) _[t] = set(_[t], typename.name, callback);
-      else if (callback == null) for (t in _) _[t] = set(_[t], typename.name, null);
-    }
-
-    return this;
-  },
-  copy: function() {
-    var copy = {}, _ = this._;
-    for (var t in _) copy[t] = _[t].slice();
-    return new Dispatch(copy);
-  },
-  call: function(type, that) {
-    if ((n = arguments.length - 2) > 0) for (var args = new Array(n), i = 0, n, t; i < n; ++i) args[i] = arguments[i + 2];
-    if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
-    for (t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
-  },
-  apply: function(type, that, args) {
-    if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
-    for (var t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
-  }
-};
-
-function get(type, name) {
-  for (var i = 0, n = type.length, c; i < n; ++i) {
-    if ((c = type[i]).name === name) {
-      return c.value;
-    }
-  }
-}
-
-function set(type, name, callback) {
-  for (var i = 0, n = type.length; i < n; ++i) {
-    if (type[i].name === name) {
-      type[i] = noop, type = type.slice(0, i).concat(type.slice(i + 1));
-      break;
-    }
-  }
-  if (callback != null) type.push({name: name, value: callback});
-  return type;
-}
-
-/* harmony default export */ var src_dispatch = (dispatch);
-
-// CONCATENATED MODULE: ./node_modules/d3-dispatch/index.js
-
+/* harmony default export */ __webpack_exports__["a"] = (function(x) {
+  return x = Object(_formatDecimal_js__WEBPACK_IMPORTED_MODULE_0__[/* formatDecimalParts */ "b"])(Math.abs(x)), x ? x[1] : NaN;
+});
 
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6891,7 +5303,7 @@ __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding *
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ Selection; });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selector.js
-var selector = __webpack_require__(24);
+var selector = __webpack_require__(27);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/select.js
 
@@ -6913,7 +5325,7 @@ var selector = __webpack_require__(24);
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selectorAll.js
-var selectorAll = __webpack_require__(32);
+var selectorAll = __webpack_require__(41);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/selectAll.js
 
@@ -6935,7 +5347,7 @@ var selectorAll = __webpack_require__(32);
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/matcher.js
-var matcher = __webpack_require__(33);
+var matcher = __webpack_require__(42);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/filter.js
 
@@ -7242,7 +5654,7 @@ function ascending(a, b) {
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/namespace.js
-var namespace = __webpack_require__(25);
+var namespace = __webpack_require__(28);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/attr.js
 
@@ -7304,7 +5716,7 @@ function attrFunctionNS(fullname, value) {
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/style.js
-var style = __webpack_require__(34);
+var style = __webpack_require__(43);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/property.js
 function propertyRemove(name) {
@@ -7486,7 +5898,7 @@ function lower() {
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/creator.js
-var creator = __webpack_require__(16);
+var creator = __webpack_require__(19);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/append.js
 
@@ -7547,10 +5959,10 @@ function selection_cloneDeep() {
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/on.js
-var on = __webpack_require__(9);
+var on = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/window.js
-var src_window = __webpack_require__(26);
+var src_window = __webpack_require__(29);
 
 // CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/dispatch.js
 
@@ -7671,7 +6083,8 @@ Selection.prototype = selection_selection.prototype = {
 
 
 /***/ }),
-/* 12 */
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7771,7 +6184,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -7840,7 +6253,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(75);
+var	fixUrls = __webpack_require__(92);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -8175,7 +6588,481 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return formatDecimalParts; });
+/* harmony default export */ __webpack_exports__["a"] = (function(x) {
+  return Math.abs(x = Math.round(x)) >= 1e21
+      ? x.toLocaleString("en").replace(/,/g, "")
+      : x.toString(10);
+});
+
+// Computes the decimal coefficient and exponent of the specified number x with
+// significant digits p, where x is positive and p is in [1, 21] or undefined.
+// For example, formatDecimalParts(1.23) returns ["123", 0].
+function formatDecimalParts(x, p) {
+  if ((i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e")) < 0) return null; // NaN, ±Infinity
+  var i, coefficient = x.slice(0, i);
+
+  // The string returned by toExponential either has the form \d\.\d+e[-+]\d+
+  // (e.g., 1.2e+3) or the form \de[-+]\d+ (e.g., 1e+3).
+  return [
+    coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient,
+    +x.slice(i + 1)
+  ];
+}
+
+
+/***/ }),
 /* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return extend; });
+/* harmony default export */ __webpack_exports__["a"] = (function(constructor, factory, prototype) {
+  constructor.prototype = factory.prototype = prototype;
+  prototype.constructor = constructor;
+});
+
+function extend(parent, definition) {
+  var prototype = Object.create(parent.prototype);
+  for (var key in definition) prototype[key] = definition[key];
+  return prototype;
+}
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return gamma; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return nogamma; });
+/* harmony import */ var _constant_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(34);
+
+
+function linear(a, d) {
+  return function(t) {
+    return a + t * d;
+  };
+}
+
+function exponential(a, b, y) {
+  return a = Math.pow(a, y), b = Math.pow(b, y) - a, y = 1 / y, function(t) {
+    return Math.pow(a + t * b, y);
+  };
+}
+
+function hue(a, b) {
+  var d = b - a;
+  return d ? linear(a, d > 180 || d < -180 ? d - 360 * Math.round(d / 360) : d) : Object(_constant_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(isNaN(a) ? b : a);
+}
+
+function gamma(y) {
+  return (y = +y) === 1 ? nogamma : function(a, b) {
+    return b - a ? exponential(a, b, y) : Object(_constant_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(isNaN(a) ? b : a);
+  };
+}
+
+function nogamma(a, b) {
+  var d = b - a;
+  return d ? linear(a, d) : Object(_constant_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(isNaN(a) ? b : a);
+}
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Color; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return darker; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return brighter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return color; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return rgbConvert; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return rgb; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Rgb; });
+/* unused harmony export hslConvert */
+/* unused harmony export hsl */
+/* harmony import */ var _define_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+
+
+function Color() {}
+
+var darker = 0.7;
+var brighter = 1 / darker;
+
+var reI = "\\s*([+-]?\\d+)\\s*",
+    reN = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*",
+    reP = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*",
+    reHex = /^#([0-9a-f]{3,8})$/,
+    reRgbInteger = new RegExp("^rgb\\(" + [reI, reI, reI] + "\\)$"),
+    reRgbPercent = new RegExp("^rgb\\(" + [reP, reP, reP] + "\\)$"),
+    reRgbaInteger = new RegExp("^rgba\\(" + [reI, reI, reI, reN] + "\\)$"),
+    reRgbaPercent = new RegExp("^rgba\\(" + [reP, reP, reP, reN] + "\\)$"),
+    reHslPercent = new RegExp("^hsl\\(" + [reN, reP, reP] + "\\)$"),
+    reHslaPercent = new RegExp("^hsla\\(" + [reN, reP, reP, reN] + "\\)$");
+
+var named = {
+  aliceblue: 0xf0f8ff,
+  antiquewhite: 0xfaebd7,
+  aqua: 0x00ffff,
+  aquamarine: 0x7fffd4,
+  azure: 0xf0ffff,
+  beige: 0xf5f5dc,
+  bisque: 0xffe4c4,
+  black: 0x000000,
+  blanchedalmond: 0xffebcd,
+  blue: 0x0000ff,
+  blueviolet: 0x8a2be2,
+  brown: 0xa52a2a,
+  burlywood: 0xdeb887,
+  cadetblue: 0x5f9ea0,
+  chartreuse: 0x7fff00,
+  chocolate: 0xd2691e,
+  coral: 0xff7f50,
+  cornflowerblue: 0x6495ed,
+  cornsilk: 0xfff8dc,
+  crimson: 0xdc143c,
+  cyan: 0x00ffff,
+  darkblue: 0x00008b,
+  darkcyan: 0x008b8b,
+  darkgoldenrod: 0xb8860b,
+  darkgray: 0xa9a9a9,
+  darkgreen: 0x006400,
+  darkgrey: 0xa9a9a9,
+  darkkhaki: 0xbdb76b,
+  darkmagenta: 0x8b008b,
+  darkolivegreen: 0x556b2f,
+  darkorange: 0xff8c00,
+  darkorchid: 0x9932cc,
+  darkred: 0x8b0000,
+  darksalmon: 0xe9967a,
+  darkseagreen: 0x8fbc8f,
+  darkslateblue: 0x483d8b,
+  darkslategray: 0x2f4f4f,
+  darkslategrey: 0x2f4f4f,
+  darkturquoise: 0x00ced1,
+  darkviolet: 0x9400d3,
+  deeppink: 0xff1493,
+  deepskyblue: 0x00bfff,
+  dimgray: 0x696969,
+  dimgrey: 0x696969,
+  dodgerblue: 0x1e90ff,
+  firebrick: 0xb22222,
+  floralwhite: 0xfffaf0,
+  forestgreen: 0x228b22,
+  fuchsia: 0xff00ff,
+  gainsboro: 0xdcdcdc,
+  ghostwhite: 0xf8f8ff,
+  gold: 0xffd700,
+  goldenrod: 0xdaa520,
+  gray: 0x808080,
+  green: 0x008000,
+  greenyellow: 0xadff2f,
+  grey: 0x808080,
+  honeydew: 0xf0fff0,
+  hotpink: 0xff69b4,
+  indianred: 0xcd5c5c,
+  indigo: 0x4b0082,
+  ivory: 0xfffff0,
+  khaki: 0xf0e68c,
+  lavender: 0xe6e6fa,
+  lavenderblush: 0xfff0f5,
+  lawngreen: 0x7cfc00,
+  lemonchiffon: 0xfffacd,
+  lightblue: 0xadd8e6,
+  lightcoral: 0xf08080,
+  lightcyan: 0xe0ffff,
+  lightgoldenrodyellow: 0xfafad2,
+  lightgray: 0xd3d3d3,
+  lightgreen: 0x90ee90,
+  lightgrey: 0xd3d3d3,
+  lightpink: 0xffb6c1,
+  lightsalmon: 0xffa07a,
+  lightseagreen: 0x20b2aa,
+  lightskyblue: 0x87cefa,
+  lightslategray: 0x778899,
+  lightslategrey: 0x778899,
+  lightsteelblue: 0xb0c4de,
+  lightyellow: 0xffffe0,
+  lime: 0x00ff00,
+  limegreen: 0x32cd32,
+  linen: 0xfaf0e6,
+  magenta: 0xff00ff,
+  maroon: 0x800000,
+  mediumaquamarine: 0x66cdaa,
+  mediumblue: 0x0000cd,
+  mediumorchid: 0xba55d3,
+  mediumpurple: 0x9370db,
+  mediumseagreen: 0x3cb371,
+  mediumslateblue: 0x7b68ee,
+  mediumspringgreen: 0x00fa9a,
+  mediumturquoise: 0x48d1cc,
+  mediumvioletred: 0xc71585,
+  midnightblue: 0x191970,
+  mintcream: 0xf5fffa,
+  mistyrose: 0xffe4e1,
+  moccasin: 0xffe4b5,
+  navajowhite: 0xffdead,
+  navy: 0x000080,
+  oldlace: 0xfdf5e6,
+  olive: 0x808000,
+  olivedrab: 0x6b8e23,
+  orange: 0xffa500,
+  orangered: 0xff4500,
+  orchid: 0xda70d6,
+  palegoldenrod: 0xeee8aa,
+  palegreen: 0x98fb98,
+  paleturquoise: 0xafeeee,
+  palevioletred: 0xdb7093,
+  papayawhip: 0xffefd5,
+  peachpuff: 0xffdab9,
+  peru: 0xcd853f,
+  pink: 0xffc0cb,
+  plum: 0xdda0dd,
+  powderblue: 0xb0e0e6,
+  purple: 0x800080,
+  rebeccapurple: 0x663399,
+  red: 0xff0000,
+  rosybrown: 0xbc8f8f,
+  royalblue: 0x4169e1,
+  saddlebrown: 0x8b4513,
+  salmon: 0xfa8072,
+  sandybrown: 0xf4a460,
+  seagreen: 0x2e8b57,
+  seashell: 0xfff5ee,
+  sienna: 0xa0522d,
+  silver: 0xc0c0c0,
+  skyblue: 0x87ceeb,
+  slateblue: 0x6a5acd,
+  slategray: 0x708090,
+  slategrey: 0x708090,
+  snow: 0xfffafa,
+  springgreen: 0x00ff7f,
+  steelblue: 0x4682b4,
+  tan: 0xd2b48c,
+  teal: 0x008080,
+  thistle: 0xd8bfd8,
+  tomato: 0xff6347,
+  turquoise: 0x40e0d0,
+  violet: 0xee82ee,
+  wheat: 0xf5deb3,
+  white: 0xffffff,
+  whitesmoke: 0xf5f5f5,
+  yellow: 0xffff00,
+  yellowgreen: 0x9acd32
+};
+
+Object(_define_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(Color, color, {
+  copy: function(channels) {
+    return Object.assign(new this.constructor, this, channels);
+  },
+  displayable: function() {
+    return this.rgb().displayable();
+  },
+  hex: color_formatHex, // Deprecated! Use color.formatHex.
+  formatHex: color_formatHex,
+  formatHsl: color_formatHsl,
+  formatRgb: color_formatRgb,
+  toString: color_formatRgb
+});
+
+function color_formatHex() {
+  return this.rgb().formatHex();
+}
+
+function color_formatHsl() {
+  return hslConvert(this).formatHsl();
+}
+
+function color_formatRgb() {
+  return this.rgb().formatRgb();
+}
+
+function color(format) {
+  var m, l;
+  format = (format + "").trim().toLowerCase();
+  return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) // #ff0000
+      : l === 3 ? new Rgb((m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1) // #f00
+      : l === 8 ? rgba(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) // #ff000000
+      : l === 4 ? rgba((m >> 12 & 0xf) | (m >> 8 & 0xf0), (m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), (((m & 0xf) << 4) | (m & 0xf)) / 0xff) // #f000
+      : null) // invalid hex
+      : (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) // rgb(255, 0, 0)
+      : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
+      : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
+      : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
+      : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
+      : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
+      : named.hasOwnProperty(format) ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
+      : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
+      : null;
+}
+
+function rgbn(n) {
+  return new Rgb(n >> 16 & 0xff, n >> 8 & 0xff, n & 0xff, 1);
+}
+
+function rgba(r, g, b, a) {
+  if (a <= 0) r = g = b = NaN;
+  return new Rgb(r, g, b, a);
+}
+
+function rgbConvert(o) {
+  if (!(o instanceof Color)) o = color(o);
+  if (!o) return new Rgb;
+  o = o.rgb();
+  return new Rgb(o.r, o.g, o.b, o.opacity);
+}
+
+function rgb(r, g, b, opacity) {
+  return arguments.length === 1 ? rgbConvert(r) : new Rgb(r, g, b, opacity == null ? 1 : opacity);
+}
+
+function Rgb(r, g, b, opacity) {
+  this.r = +r;
+  this.g = +g;
+  this.b = +b;
+  this.opacity = +opacity;
+}
+
+Object(_define_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(Rgb, rgb, Object(_define_js__WEBPACK_IMPORTED_MODULE_0__[/* extend */ "b"])(Color, {
+  brighter: function(k) {
+    k = k == null ? brighter : Math.pow(brighter, k);
+    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+  },
+  darker: function(k) {
+    k = k == null ? darker : Math.pow(darker, k);
+    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+  },
+  rgb: function() {
+    return this;
+  },
+  displayable: function() {
+    return (-0.5 <= this.r && this.r < 255.5)
+        && (-0.5 <= this.g && this.g < 255.5)
+        && (-0.5 <= this.b && this.b < 255.5)
+        && (0 <= this.opacity && this.opacity <= 1);
+  },
+  hex: rgb_formatHex, // Deprecated! Use color.formatHex.
+  formatHex: rgb_formatHex,
+  formatRgb: rgb_formatRgb,
+  toString: rgb_formatRgb
+}));
+
+function rgb_formatHex() {
+  return "#" + hex(this.r) + hex(this.g) + hex(this.b);
+}
+
+function rgb_formatRgb() {
+  var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+  return (a === 1 ? "rgb(" : "rgba(")
+      + Math.max(0, Math.min(255, Math.round(this.r) || 0)) + ", "
+      + Math.max(0, Math.min(255, Math.round(this.g) || 0)) + ", "
+      + Math.max(0, Math.min(255, Math.round(this.b) || 0))
+      + (a === 1 ? ")" : ", " + a + ")");
+}
+
+function hex(value) {
+  value = Math.max(0, Math.min(255, Math.round(value) || 0));
+  return (value < 16 ? "0" : "") + value.toString(16);
+}
+
+function hsla(h, s, l, a) {
+  if (a <= 0) h = s = l = NaN;
+  else if (l <= 0 || l >= 1) h = s = NaN;
+  else if (s <= 0) h = NaN;
+  return new Hsl(h, s, l, a);
+}
+
+function hslConvert(o) {
+  if (o instanceof Hsl) return new Hsl(o.h, o.s, o.l, o.opacity);
+  if (!(o instanceof Color)) o = color(o);
+  if (!o) return new Hsl;
+  if (o instanceof Hsl) return o;
+  o = o.rgb();
+  var r = o.r / 255,
+      g = o.g / 255,
+      b = o.b / 255,
+      min = Math.min(r, g, b),
+      max = Math.max(r, g, b),
+      h = NaN,
+      s = max - min,
+      l = (max + min) / 2;
+  if (s) {
+    if (r === max) h = (g - b) / s + (g < b) * 6;
+    else if (g === max) h = (b - r) / s + 2;
+    else h = (r - g) / s + 4;
+    s /= l < 0.5 ? max + min : 2 - max - min;
+    h *= 60;
+  } else {
+    s = l > 0 && l < 1 ? 0 : h;
+  }
+  return new Hsl(h, s, l, o.opacity);
+}
+
+function hsl(h, s, l, opacity) {
+  return arguments.length === 1 ? hslConvert(h) : new Hsl(h, s, l, opacity == null ? 1 : opacity);
+}
+
+function Hsl(h, s, l, opacity) {
+  this.h = +h;
+  this.s = +s;
+  this.l = +l;
+  this.opacity = +opacity;
+}
+
+Object(_define_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(Hsl, hsl, Object(_define_js__WEBPACK_IMPORTED_MODULE_0__[/* extend */ "b"])(Color, {
+  brighter: function(k) {
+    k = k == null ? brighter : Math.pow(brighter, k);
+    return new Hsl(this.h, this.s, this.l * k, this.opacity);
+  },
+  darker: function(k) {
+    k = k == null ? darker : Math.pow(darker, k);
+    return new Hsl(this.h, this.s, this.l * k, this.opacity);
+  },
+  rgb: function() {
+    var h = this.h % 360 + (this.h < 0) * 360,
+        s = isNaN(h) || isNaN(this.s) ? 0 : this.s,
+        l = this.l,
+        m2 = l + (l < 0.5 ? l : 1 - l) * s,
+        m1 = 2 * l - m2;
+    return new Rgb(
+      hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
+      hsl2rgb(h, m1, m2),
+      hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
+      this.opacity
+    );
+  },
+  displayable: function() {
+    return (0 <= this.s && this.s <= 1 || isNaN(this.s))
+        && (0 <= this.l && this.l <= 1)
+        && (0 <= this.opacity && this.opacity <= 1);
+  },
+  formatHsl: function() {
+    var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+    return (a === 1 ? "hsl(" : "hsla(")
+        + (this.h || 0) + ", "
+        + (this.s || 0) * 100 + "%, "
+        + (this.l || 0) * 100 + "%"
+        + (a === 1 ? ")" : ", " + a + ")");
+  }
+}));
+
+/* From FvD 13.37, CSS Color Module Level 3 */
+function hsl2rgb(h, m1, m2) {
+  return (h < 60 ? m1 + (m2 - m1) * h / 60
+      : h < 180 ? m2
+      : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60
+      : m1) * 255;
+}
+
+
+/***/ }),
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8186,7 +7073,7 @@ function updateLink (link, options, obj) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return csvFormatRows; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return csvFormatRow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return csvFormatValue; });
-/* harmony import */ var _dsv_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
+/* harmony import */ var _dsv_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(26);
 
 
 var csv = Object(_dsv_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(",");
@@ -8201,7 +7088,7 @@ var csvFormatValue = csv.formatValue;
 
 
 /***/ }),
-/* 15 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8212,7 +7099,7 @@ var csvFormatValue = csv.formatValue;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return tsvFormatRows; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return tsvFormatRow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return tsvFormatValue; });
-/* harmony import */ var _dsv_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
+/* harmony import */ var _dsv_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(26);
 
 
 var tsv = Object(_dsv_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])("\t");
@@ -8227,12 +7114,12 @@ var tsvFormatValue = tsv.formatValue;
 
 
 /***/ }),
-/* 16 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
-/* harmony import */ var _namespaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
+/* harmony import */ var _namespace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28);
+/* harmony import */ var _namespaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21);
 
 
 
@@ -8261,7 +7148,7 @@ function creatorFixed(fullname) {
 
 
 /***/ }),
-/* 17 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8281,7 +7168,7 @@ function creatorFixed(fullname) {
 
 
 /***/ }),
-/* 18 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8298,7 +7185,7 @@ var xhtml = "http://www.w3.org/1999/xhtml";
 
 
 /***/ }),
-/* 19 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8309,10 +7196,10 @@ __webpack_require__.d(__webpack_exports__, "a", function() { return /* reexport 
 // UNUSED EXPORTS: transition, active
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/index.js + 31 modules
-var selection = __webpack_require__(11);
+var selection = __webpack_require__(9);
 
-// EXTERNAL MODULE: ./node_modules/d3-dispatch/index.js + 1 modules
-var d3_dispatch = __webpack_require__(10);
+// EXTERNAL MODULE: ./node_modules/d3-dispatch/src/dispatch.js
+var dispatch = __webpack_require__(134);
 
 // CONCATENATED MODULE: ./node_modules/d3-timer/src/timer.js
 var timer_frame = 0, // is an animation frame pending?
@@ -8443,7 +7330,7 @@ function sleep(time) {
 
 
 
-var emptyOn = Object(d3_dispatch["a" /* dispatch */])("start", "end", "interrupt");
+var emptyOn = Object(dispatch["a" /* default */])("start", "end", "cancel", "interrupt");
 var emptyTween = [];
 
 var CREATED = 0;
@@ -8481,7 +7368,7 @@ function init(node, id) {
 
 function set(node, id) {
   var schedule = get(node, id);
-  if (schedule.state > STARTING) throw new Error("too late; already started");
+  if (schedule.state > STARTED) throw new Error("too late; already running");
   return schedule;
 }
 
@@ -8524,7 +7411,6 @@ function create(node, id, self) {
       if (o.state === STARTED) return src_timeout(start);
 
       // Interrupt the active transition, if any.
-      // Dispatch the interrupt event.
       if (o.state === RUNNING) {
         o.state = ENDED;
         o.timer.stop();
@@ -8532,12 +7418,11 @@ function create(node, id, self) {
         delete schedules[i];
       }
 
-      // Cancel any pre-empted transitions. No interrupt event is dispatched
-      // because the cancelled transitions never started. Note that this also
-      // removes this transition from the pending list!
+      // Cancel any pre-empted transitions.
       else if (+i < id) {
         o.state = ENDED;
         o.timer.stop();
+        o.on.call("cancel", node, node.__data__, o.index, o.group);
         delete schedules[i];
       }
     }
@@ -8577,7 +7462,7 @@ function create(node, id, self) {
         n = tween.length;
 
     while (++i < n) {
-      tween[i].call(null, t);
+      tween[i].call(node, t);
     }
 
     // Dispatch the end event.
@@ -8615,7 +7500,7 @@ function create(node, id, self) {
     active = schedule.state > STARTING && schedule.state < ENDING;
     schedule.state = ENDED;
     schedule.timer.stop();
-    if (active) schedule.on.call("interrupt", node, node.__data__, schedule.index, schedule.group);
+    schedule.on.call(active ? "interrupt" : "cancel", node, node.__data__, schedule.index, schedule.group);
     delete schedules[i];
   }
 
@@ -8631,11 +7516,131 @@ function create(node, id, self) {
   });
 });
 
-// EXTERNAL MODULE: ./node_modules/d3-interpolate/index.js + 21 modules
-var d3_interpolate = __webpack_require__(3);
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/number.js
+var number = __webpack_require__(5);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/decompose.js
+var degrees = 180 / Math.PI;
+
+var identity = {
+  translateX: 0,
+  translateY: 0,
+  rotate: 0,
+  skewX: 0,
+  scaleX: 1,
+  scaleY: 1
+};
+
+/* harmony default export */ var decompose = (function(a, b, c, d, e, f) {
+  var scaleX, scaleY, skewX;
+  if (scaleX = Math.sqrt(a * a + b * b)) a /= scaleX, b /= scaleX;
+  if (skewX = a * c + b * d) c -= a * skewX, d -= b * skewX;
+  if (scaleY = Math.sqrt(c * c + d * d)) c /= scaleY, d /= scaleY, skewX /= scaleY;
+  if (a * d < b * c) a = -a, b = -b, skewX = -skewX, scaleX = -scaleX;
+  return {
+    translateX: e,
+    translateY: f,
+    rotate: Math.atan2(b, a) * degrees,
+    skewX: Math.atan(skewX) * degrees,
+    scaleX: scaleX,
+    scaleY: scaleY
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/parse.js
+
+
+var cssNode,
+    cssRoot,
+    cssView,
+    svgNode;
+
+function parseCss(value) {
+  if (value === "none") return identity;
+  if (!cssNode) cssNode = document.createElement("DIV"), cssRoot = document.documentElement, cssView = document.defaultView;
+  cssNode.style.transform = value;
+  value = cssView.getComputedStyle(cssRoot.appendChild(cssNode), null).getPropertyValue("transform");
+  cssRoot.removeChild(cssNode);
+  value = value.slice(7, -1).split(",");
+  return decompose(+value[0], +value[1], +value[2], +value[3], +value[4], +value[5]);
+}
+
+function parseSvg(value) {
+  if (value == null) return identity;
+  if (!svgNode) svgNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  svgNode.setAttribute("transform", value);
+  if (!(value = svgNode.transform.baseVal.consolidate())) return identity;
+  value = value.matrix;
+  return decompose(value.a, value.b, value.c, value.d, value.e, value.f);
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/index.js
+
+
+
+function interpolateTransform(parse, pxComma, pxParen, degParen) {
+
+  function pop(s) {
+    return s.length ? s.pop() + " " : "";
+  }
+
+  function translate(xa, ya, xb, yb, s, q) {
+    if (xa !== xb || ya !== yb) {
+      var i = s.push("translate(", null, pxComma, null, pxParen);
+      q.push({i: i - 4, x: Object(number["a" /* default */])(xa, xb)}, {i: i - 2, x: Object(number["a" /* default */])(ya, yb)});
+    } else if (xb || yb) {
+      s.push("translate(" + xb + pxComma + yb + pxParen);
+    }
+  }
+
+  function rotate(a, b, s, q) {
+    if (a !== b) {
+      if (a - b > 180) b += 360; else if (b - a > 180) a += 360; // shortest path
+      q.push({i: s.push(pop(s) + "rotate(", null, degParen) - 2, x: Object(number["a" /* default */])(a, b)});
+    } else if (b) {
+      s.push(pop(s) + "rotate(" + b + degParen);
+    }
+  }
+
+  function skewX(a, b, s, q) {
+    if (a !== b) {
+      q.push({i: s.push(pop(s) + "skewX(", null, degParen) - 2, x: Object(number["a" /* default */])(a, b)});
+    } else if (b) {
+      s.push(pop(s) + "skewX(" + b + degParen);
+    }
+  }
+
+  function scale(xa, ya, xb, yb, s, q) {
+    if (xa !== xb || ya !== yb) {
+      var i = s.push(pop(s) + "scale(", null, ",", null, ")");
+      q.push({i: i - 4, x: Object(number["a" /* default */])(xa, xb)}, {i: i - 2, x: Object(number["a" /* default */])(ya, yb)});
+    } else if (xb !== 1 || yb !== 1) {
+      s.push(pop(s) + "scale(" + xb + "," + yb + ")");
+    }
+  }
+
+  return function(a, b) {
+    var s = [], // string constants and placeholders
+        q = []; // number interpolators
+    a = parse(a), b = parse(b);
+    translate(a.translateX, a.translateY, b.translateX, b.translateY, s, q);
+    rotate(a.rotate, b.rotate, s, q);
+    skewX(a.skewX, b.skewX, s, q);
+    scale(a.scaleX, a.scaleY, b.scaleX, b.scaleY, s, q);
+    a = b = null; // gc
+    return function(t) {
+      var i = -1, n = q.length, o;
+      while (++i < n) s[(o = q[i]).i] = o.x(t);
+      return s.join("");
+    };
+  };
+}
+
+var interpolateTransformCss = interpolateTransform(parseCss, "px, ", "px)", "deg)");
+var interpolateTransformSvg = interpolateTransform(parseSvg, ", ", ")", ")");
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/namespace.js
-var namespace = __webpack_require__(25);
+var namespace = __webpack_require__(28);
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/tween.js
 
@@ -8720,8 +7725,14 @@ function tweenValue(transition, name, value) {
   };
 }
 
-// EXTERNAL MODULE: ./node_modules/d3-color/index.js + 5 modules
-var d3_color = __webpack_require__(1);
+// EXTERNAL MODULE: ./node_modules/d3-color/src/color.js
+var color = __webpack_require__(16);
+
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/rgb.js + 2 modules
+var rgb = __webpack_require__(49);
+
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/string.js
+var string = __webpack_require__(72);
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/interpolate.js
 
@@ -8729,10 +7740,10 @@ var d3_color = __webpack_require__(1);
 
 /* harmony default export */ var transition_interpolate = (function(a, b) {
   var c;
-  return (typeof b === "number" ? d3_interpolate["c" /* interpolateNumber */]
-      : b instanceof d3_color["a" /* color */] ? d3_interpolate["d" /* interpolateRgb */]
-      : (c = Object(d3_color["a" /* color */])(b)) ? (b = c, d3_interpolate["d" /* interpolateRgb */])
-      : d3_interpolate["f" /* interpolateString */])(a, b);
+  return (typeof b === "number" ? number["a" /* default */]
+      : b instanceof color["e" /* default */] ? rgb["a" /* default */]
+      : (c = Object(color["e" /* default */])(b)) ? (b = c, rgb["a" /* default */])
+      : string["a" /* default */])(a, b);
 });
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/attr.js
@@ -8754,83 +7765,99 @@ function attrRemoveNS(fullname) {
 }
 
 function attrConstant(name, interpolate, value1) {
-  var value00,
+  var string00,
+      string1 = value1 + "",
       interpolate0;
   return function() {
-    var value0 = this.getAttribute(name);
-    return value0 === value1 ? null
-        : value0 === value00 ? interpolate0
-        : interpolate0 = interpolate(value00 = value0, value1);
+    var string0 = this.getAttribute(name);
+    return string0 === string1 ? null
+        : string0 === string00 ? interpolate0
+        : interpolate0 = interpolate(string00 = string0, value1);
   };
 }
 
 function attrConstantNS(fullname, interpolate, value1) {
-  var value00,
+  var string00,
+      string1 = value1 + "",
       interpolate0;
   return function() {
-    var value0 = this.getAttributeNS(fullname.space, fullname.local);
-    return value0 === value1 ? null
-        : value0 === value00 ? interpolate0
-        : interpolate0 = interpolate(value00 = value0, value1);
+    var string0 = this.getAttributeNS(fullname.space, fullname.local);
+    return string0 === string1 ? null
+        : string0 === string00 ? interpolate0
+        : interpolate0 = interpolate(string00 = string0, value1);
   };
 }
 
 function attrFunction(name, interpolate, value) {
-  var value00,
-      value10,
+  var string00,
+      string10,
       interpolate0;
   return function() {
-    var value0, value1 = value(this);
+    var string0, value1 = value(this), string1;
     if (value1 == null) return void this.removeAttribute(name);
-    value0 = this.getAttribute(name);
-    return value0 === value1 ? null
-        : value0 === value00 && value1 === value10 ? interpolate0
-        : interpolate0 = interpolate(value00 = value0, value10 = value1);
+    string0 = this.getAttribute(name);
+    string1 = value1 + "";
+    return string0 === string1 ? null
+        : string0 === string00 && string1 === string10 ? interpolate0
+        : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
   };
 }
 
 function attrFunctionNS(fullname, interpolate, value) {
-  var value00,
-      value10,
+  var string00,
+      string10,
       interpolate0;
   return function() {
-    var value0, value1 = value(this);
+    var string0, value1 = value(this), string1;
     if (value1 == null) return void this.removeAttributeNS(fullname.space, fullname.local);
-    value0 = this.getAttributeNS(fullname.space, fullname.local);
-    return value0 === value1 ? null
-        : value0 === value00 && value1 === value10 ? interpolate0
-        : interpolate0 = interpolate(value00 = value0, value10 = value1);
+    string0 = this.getAttributeNS(fullname.space, fullname.local);
+    string1 = value1 + "";
+    return string0 === string1 ? null
+        : string0 === string00 && string1 === string10 ? interpolate0
+        : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
   };
 }
 
 /* harmony default export */ var attr = (function(name, value) {
-  var fullname = Object(namespace["a" /* default */])(name), i = fullname === "transform" ? d3_interpolate["h" /* interpolateTransformSvg */] : transition_interpolate;
+  var fullname = Object(namespace["a" /* default */])(name), i = fullname === "transform" ? interpolateTransformSvg : transition_interpolate;
   return this.attrTween(name, typeof value === "function"
       ? (fullname.local ? attrFunctionNS : attrFunction)(fullname, i, tweenValue(this, "attr." + name, value))
       : value == null ? (fullname.local ? attrRemoveNS : attrRemove)(fullname)
-      : (fullname.local ? attrConstantNS : attrConstant)(fullname, i, value + ""));
+      : (fullname.local ? attrConstantNS : attrConstant)(fullname, i, value));
 });
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/attrTween.js
 
 
+function attrInterpolate(name, i) {
+  return function(t) {
+    this.setAttribute(name, i.call(this, t));
+  };
+}
+
+function attrInterpolateNS(fullname, i) {
+  return function(t) {
+    this.setAttributeNS(fullname.space, fullname.local, i.call(this, t));
+  };
+}
+
 function attrTweenNS(fullname, value) {
+  var t0, i0;
   function tween() {
-    var node = this, i = value.apply(node, arguments);
-    return i && function(t) {
-      node.setAttributeNS(fullname.space, fullname.local, i(t));
-    };
+    var i = value.apply(this, arguments);
+    if (i !== i0) t0 = (i0 = i) && attrInterpolateNS(fullname, i);
+    return t0;
   }
   tween._value = value;
   return tween;
 }
 
 function attrTween(name, value) {
+  var t0, i0;
   function tween() {
-    var node = this, i = value.apply(node, arguments);
-    return i && function(t) {
-      node.setAttribute(name, i(t));
-    };
+    var i = value.apply(this, arguments);
+    if (i !== i0) t0 = (i0 = i) && attrInterpolate(name, i);
+    return t0;
   }
   tween._value = value;
   return tween;
@@ -8914,7 +7941,7 @@ function easeConstant(id, value) {
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/matcher.js
-var matcher = __webpack_require__(33);
+var matcher = __webpack_require__(42);
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/filter.js
 
@@ -8981,7 +8008,7 @@ function onFunction(id, name, listener) {
   };
 }
 
-/* harmony default export */ var on = (function(name, listener) {
+/* harmony default export */ var transition_on = (function(name, listener) {
   var id = this._id;
 
   return arguments.length < 2
@@ -8998,12 +8025,12 @@ function removeFunction(id) {
   };
 }
 
-/* harmony default export */ var remove = (function() {
+/* harmony default export */ var transition_remove = (function() {
   return this.on("end.remove", removeFunction(this._id));
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selector.js
-var selector = __webpack_require__(24);
+var selector = __webpack_require__(27);
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/select.js
 
@@ -9030,7 +8057,7 @@ var selector = __webpack_require__(24);
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selectorAll.js
-var selectorAll = __webpack_require__(32);
+var selectorAll = __webpack_require__(41);
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/selectAll.js
 
@@ -9070,7 +8097,7 @@ var Selection = selection["b" /* default */].prototype.constructor;
 });
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/style.js
-var style = __webpack_require__(34);
+var style = __webpack_require__(43);
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/style.js
 
@@ -9078,67 +8105,95 @@ var style = __webpack_require__(34);
 
 
 
-function styleRemove(name, interpolate) {
-  var value00,
-      value10,
+
+function styleNull(name, interpolate) {
+  var string00,
+      string10,
       interpolate0;
   return function() {
-    var value0 = Object(style["b" /* styleValue */])(this, name),
-        value1 = (this.style.removeProperty(name), Object(style["b" /* styleValue */])(this, name));
-    return value0 === value1 ? null
-        : value0 === value00 && value1 === value10 ? interpolate0
-        : interpolate0 = interpolate(value00 = value0, value10 = value1);
+    var string0 = Object(style["b" /* styleValue */])(this, name),
+        string1 = (this.style.removeProperty(name), Object(style["b" /* styleValue */])(this, name));
+    return string0 === string1 ? null
+        : string0 === string00 && string1 === string10 ? interpolate0
+        : interpolate0 = interpolate(string00 = string0, string10 = string1);
   };
 }
 
-function styleRemoveEnd(name) {
+function styleRemove(name) {
   return function() {
     this.style.removeProperty(name);
   };
 }
 
 function styleConstant(name, interpolate, value1) {
-  var value00,
+  var string00,
+      string1 = value1 + "",
       interpolate0;
   return function() {
-    var value0 = Object(style["b" /* styleValue */])(this, name);
-    return value0 === value1 ? null
-        : value0 === value00 ? interpolate0
-        : interpolate0 = interpolate(value00 = value0, value1);
+    var string0 = Object(style["b" /* styleValue */])(this, name);
+    return string0 === string1 ? null
+        : string0 === string00 ? interpolate0
+        : interpolate0 = interpolate(string00 = string0, value1);
   };
 }
 
 function styleFunction(name, interpolate, value) {
-  var value00,
-      value10,
+  var string00,
+      string10,
       interpolate0;
   return function() {
-    var value0 = Object(style["b" /* styleValue */])(this, name),
-        value1 = value(this);
-    if (value1 == null) value1 = (this.style.removeProperty(name), Object(style["b" /* styleValue */])(this, name));
-    return value0 === value1 ? null
-        : value0 === value00 && value1 === value10 ? interpolate0
-        : interpolate0 = interpolate(value00 = value0, value10 = value1);
+    var string0 = Object(style["b" /* styleValue */])(this, name),
+        value1 = value(this),
+        string1 = value1 + "";
+    if (value1 == null) string1 = value1 = (this.style.removeProperty(name), Object(style["b" /* styleValue */])(this, name));
+    return string0 === string1 ? null
+        : string0 === string00 && string1 === string10 ? interpolate0
+        : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+  };
+}
+
+function styleMaybeRemove(id, name) {
+  var on0, on1, listener0, key = "style." + name, event = "end." + key, remove;
+  return function() {
+    var schedule = set(this, id),
+        on = schedule.on,
+        listener = schedule.value[key] == null ? remove || (remove = styleRemove(name)) : undefined;
+
+    // If this node shared a dispatch with the previous node,
+    // just assign the updated shared dispatch and we’re done!
+    // Otherwise, copy-on-write.
+    if (on !== on0 || listener0 !== listener) (on1 = (on0 = on).copy()).on(event, listener0 = listener);
+
+    schedule.on = on1;
   };
 }
 
 /* harmony default export */ var transition_style = (function(name, value, priority) {
-  var i = (name += "") === "transform" ? d3_interpolate["g" /* interpolateTransformCss */] : transition_interpolate;
+  var i = (name += "") === "transform" ? interpolateTransformCss : transition_interpolate;
   return value == null ? this
-          .styleTween(name, styleRemove(name, i))
-          .on("end.style." + name, styleRemoveEnd(name))
-      : this.styleTween(name, typeof value === "function"
-          ? styleFunction(name, i, tweenValue(this, "style." + name, value))
-          : styleConstant(name, i, value + ""), priority);
+      .styleTween(name, styleNull(name, i))
+      .on("end.style." + name, styleRemove(name))
+    : typeof value === "function" ? this
+      .styleTween(name, styleFunction(name, i, tweenValue(this, "style." + name, value)))
+      .each(styleMaybeRemove(this._id, name))
+    : this
+      .styleTween(name, styleConstant(name, i, value), priority)
+      .on("end.style." + name, null);
 });
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/styleTween.js
+function styleInterpolate(name, i, priority) {
+  return function(t) {
+    this.style.setProperty(name, i.call(this, t), priority);
+  };
+}
+
 function styleTween(name, value, priority) {
+  var t, i0;
   function tween() {
-    var node = this, i = value.apply(node, arguments);
-    return i && function(t) {
-      node.style.setProperty(name, i(t), priority);
-    };
+    var i = value.apply(this, arguments);
+    if (i !== i0) t = (i0 = i) && styleInterpolate(name, i, priority);
+    return t;
   }
   tween._value = value;
   return tween;
@@ -9174,6 +8229,32 @@ function textFunction(value) {
       : textConstant(value == null ? "" : value + ""));
 });
 
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/textTween.js
+function textInterpolate(i) {
+  return function(t) {
+    this.textContent = i.call(this, t);
+  };
+}
+
+function textTween(value) {
+  var t0, i0;
+  function tween() {
+    var i = value.apply(this, arguments);
+    if (i !== i0) t0 = (i0 = i) && textInterpolate(i);
+    return t0;
+  }
+  tween._value = value;
+  return tween;
+}
+
+/* harmony default export */ var transition_textTween = (function(value) {
+  var key = "text";
+  if (arguments.length < 1) return (key = this.tween(key)) && key._value;
+  if (value == null) return this.tween(key, null);
+  if (typeof value !== "function") throw new Error;
+  return this.tween(key, textTween(value));
+});
+
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/transition.js
 
 
@@ -9200,7 +8281,37 @@ function textFunction(value) {
   return new Transition(groups, this._parents, name, id1);
 });
 
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/end.js
+
+
+/* harmony default export */ var transition_end = (function() {
+  var on0, on1, that = this, id = that._id, size = that.size();
+  return new Promise(function(resolve, reject) {
+    var cancel = {value: reject},
+        end = {value: function() { if (--size === 0) resolve(); }};
+
+    that.each(function() {
+      var schedule = set(this, id),
+          on = schedule.on;
+
+      // If this node shared a dispatch with the previous node,
+      // just assign the updated shared dispatch and we’re done!
+      // Otherwise, copy-on-write.
+      if (on !== on0) {
+        on1 = (on0 = on).copy();
+        on1._.cancel.push(cancel);
+        on1._.interrupt.push(cancel);
+        on1._.end.push(end);
+      }
+
+      schedule.on = on1;
+    });
+  });
+});
+
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/index.js
+
+
 
 
 
@@ -9253,36 +8364,20 @@ Transition.prototype = src_transition_transition.prototype = {
   size: selection_prototype.size,
   empty: selection_prototype.empty,
   each: selection_prototype.each,
-  on: on,
+  on: transition_on,
   attr: attr,
   attrTween: transition_attrTween,
   style: transition_style,
   styleTween: transition_styleTween,
   text: transition_text,
-  remove: remove,
+  textTween: transition_textTween,
+  remove: transition_remove,
   tween: transition_tween,
   delay: transition_delay,
   duration: duration,
-  ease: ease
+  ease: ease,
+  end: transition_end
 };
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/linear.js
-function linear(t) {
-  return +t;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/quad.js
-function quadIn(t) {
-  return t * t;
-}
-
-function quadOut(t) {
-  return t * (2 - t);
-}
-
-function quadInOut(t) {
-  return ((t *= 2) <= 1 ? t * t : --t * (2 - t) + 1) / 2;
-}
 
 // CONCATENATED MODULE: ./node_modules/d3-ease/src/cubic.js
 function cubicIn(t) {
@@ -9296,217 +8391,6 @@ function cubicOut(t) {
 function cubicInOut(t) {
   return ((t *= 2) <= 1 ? t * t * t : (t -= 2) * t * t + 2) / 2;
 }
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/poly.js
-var exponent = 3;
-
-var polyIn = (function custom(e) {
-  e = +e;
-
-  function polyIn(t) {
-    return Math.pow(t, e);
-  }
-
-  polyIn.exponent = custom;
-
-  return polyIn;
-})(exponent);
-
-var polyOut = (function custom(e) {
-  e = +e;
-
-  function polyOut(t) {
-    return 1 - Math.pow(1 - t, e);
-  }
-
-  polyOut.exponent = custom;
-
-  return polyOut;
-})(exponent);
-
-var polyInOut = (function custom(e) {
-  e = +e;
-
-  function polyInOut(t) {
-    return ((t *= 2) <= 1 ? Math.pow(t, e) : 2 - Math.pow(2 - t, e)) / 2;
-  }
-
-  polyInOut.exponent = custom;
-
-  return polyInOut;
-})(exponent);
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/sin.js
-var pi = Math.PI,
-    halfPi = pi / 2;
-
-function sinIn(t) {
-  return 1 - Math.cos(t * halfPi);
-}
-
-function sinOut(t) {
-  return Math.sin(t * halfPi);
-}
-
-function sinInOut(t) {
-  return (1 - Math.cos(pi * t)) / 2;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/exp.js
-function expIn(t) {
-  return Math.pow(2, 10 * t - 10);
-}
-
-function expOut(t) {
-  return 1 - Math.pow(2, -10 * t);
-}
-
-function expInOut(t) {
-  return ((t *= 2) <= 1 ? Math.pow(2, 10 * t - 10) : 2 - Math.pow(2, 10 - 10 * t)) / 2;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/circle.js
-function circleIn(t) {
-  return 1 - Math.sqrt(1 - t * t);
-}
-
-function circleOut(t) {
-  return Math.sqrt(1 - --t * t);
-}
-
-function circleInOut(t) {
-  return ((t *= 2) <= 1 ? 1 - Math.sqrt(1 - t * t) : Math.sqrt(1 - (t -= 2) * t) + 1) / 2;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/bounce.js
-var b1 = 4 / 11,
-    b2 = 6 / 11,
-    b3 = 8 / 11,
-    b4 = 3 / 4,
-    b5 = 9 / 11,
-    b6 = 10 / 11,
-    b7 = 15 / 16,
-    b8 = 21 / 22,
-    b9 = 63 / 64,
-    b0 = 1 / b1 / b1;
-
-function bounceIn(t) {
-  return 1 - bounceOut(1 - t);
-}
-
-function bounceOut(t) {
-  return (t = +t) < b1 ? b0 * t * t : t < b3 ? b0 * (t -= b2) * t + b4 : t < b6 ? b0 * (t -= b5) * t + b7 : b0 * (t -= b8) * t + b9;
-}
-
-function bounceInOut(t) {
-  return ((t *= 2) <= 1 ? 1 - bounceOut(1 - t) : bounceOut(t - 1) + 1) / 2;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/back.js
-var overshoot = 1.70158;
-
-var backIn = (function custom(s) {
-  s = +s;
-
-  function backIn(t) {
-    return t * t * ((s + 1) * t - s);
-  }
-
-  backIn.overshoot = custom;
-
-  return backIn;
-})(overshoot);
-
-var backOut = (function custom(s) {
-  s = +s;
-
-  function backOut(t) {
-    return --t * t * ((s + 1) * t + s) + 1;
-  }
-
-  backOut.overshoot = custom;
-
-  return backOut;
-})(overshoot);
-
-var backInOut = (function custom(s) {
-  s = +s;
-
-  function backInOut(t) {
-    return ((t *= 2) < 1 ? t * t * ((s + 1) * t - s) : (t -= 2) * t * ((s + 1) * t + s) + 2) / 2;
-  }
-
-  backInOut.overshoot = custom;
-
-  return backInOut;
-})(overshoot);
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/elastic.js
-var tau = 2 * Math.PI,
-    amplitude = 1,
-    period = 0.3;
-
-var elasticIn = (function custom(a, p) {
-  var s = Math.asin(1 / (a = Math.max(1, a))) * (p /= tau);
-
-  function elasticIn(t) {
-    return a * Math.pow(2, 10 * --t) * Math.sin((s - t) / p);
-  }
-
-  elasticIn.amplitude = function(a) { return custom(a, p * tau); };
-  elasticIn.period = function(p) { return custom(a, p); };
-
-  return elasticIn;
-})(amplitude, period);
-
-var elasticOut = (function custom(a, p) {
-  var s = Math.asin(1 / (a = Math.max(1, a))) * (p /= tau);
-
-  function elasticOut(t) {
-    return 1 - a * Math.pow(2, -10 * (t = +t)) * Math.sin((t + s) / p);
-  }
-
-  elasticOut.amplitude = function(a) { return custom(a, p * tau); };
-  elasticOut.period = function(p) { return custom(a, p); };
-
-  return elasticOut;
-})(amplitude, period);
-
-var elasticInOut = (function custom(a, p) {
-  var s = Math.asin(1 / (a = Math.max(1, a))) * (p /= tau);
-
-  function elasticInOut(t) {
-    return ((t = t * 2 - 1) < 0
-        ? a * Math.pow(2, 10 * t) * Math.sin((s - t) / p)
-        : 2 - a * Math.pow(2, -10 * t) * Math.sin((s + t) / p)) / 2;
-  }
-
-  elasticInOut.amplitude = function(a) { return custom(a, p * tau); };
-  elasticInOut.period = function(p) { return custom(a, p); };
-
-  return elasticInOut;
-})(amplitude, period);
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // CONCATENATED MODULE: ./node_modules/d3-transition/src/selection/transition.js
 
@@ -9583,7 +8467,7 @@ var root = [null];
   return null;
 });
 
-// CONCATENATED MODULE: ./node_modules/d3-transition/index.js
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/index.js
 
 
 
@@ -9591,7 +8475,7 @@ var root = [null];
 
 
 /***/ }),
-/* 20 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9611,15 +8495,15 @@ exports.apply_reaction_data_to_reactions = apply_reaction_data_to_reactions;
 exports.apply_metabolite_data_to_nodes = apply_metabolite_data_to_nodes;
 exports.apply_gene_data_to_reactions = apply_gene_data_to_reactions;
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var utils = _interopRequireWildcard(_utils);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-var _d3Format = __webpack_require__(7);
+var _d3Format = __webpack_require__(38);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10212,7 +9096,7 @@ function apply_gene_data_to_reactions(reactions, gene_data_obj, styles, identifi
 }
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10284,7 +9168,7 @@ var CallbackManager = function () {
 exports.default = CallbackManager;
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10296,26 +9180,26 @@ __webpack_require__.d(__webpack_exports__, "drag", function() { return /* reexpo
 __webpack_require__.d(__webpack_exports__, "dragDisable", function() { return /* reexport */ nodrag["a" /* default */]; });
 __webpack_require__.d(__webpack_exports__, "dragEnable", function() { return /* reexport */ nodrag["b" /* yesdrag */]; });
 
-// EXTERNAL MODULE: ./node_modules/d3-dispatch/index.js + 1 modules
-var d3_dispatch = __webpack_require__(10);
+// EXTERNAL MODULE: ./node_modules/d3-dispatch/src/dispatch.js
+var dispatch = __webpack_require__(134);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/on.js
-var on = __webpack_require__(9);
+var on = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/mouse.js
-var mouse = __webpack_require__(42);
+var mouse = __webpack_require__(54);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/select.js
-var src_select = __webpack_require__(28);
+var src_select = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/touch.js
-var touch = __webpack_require__(43);
+var touch = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./node_modules/d3-drag/src/nodrag.js
-var nodrag = __webpack_require__(27);
+var nodrag = __webpack_require__(30);
 
 // EXTERNAL MODULE: ./node_modules/d3-drag/src/noevent.js
-var noevent = __webpack_require__(8);
+var noevent = __webpack_require__(6);
 
 // CONCATENATED MODULE: ./node_modules/d3-drag/src/constant.js
 /* harmony default export */ var constant = (function(x) {
@@ -10374,7 +9258,7 @@ function defaultTouchable() {
       subject = defaultSubject,
       touchable = defaultTouchable,
       gestures = {},
-      listeners = Object(d3_dispatch["a" /* dispatch */])("start", "drag", "end"),
+      listeners = Object(dispatch["a" /* default */])("start", "drag", "end"),
       active = 0,
       mousedownx,
       mousedowny,
@@ -10518,7 +9402,7 @@ function defaultTouchable() {
 
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10689,7 +9573,7 @@ function formatDate(date) {
 
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10703,11 +9587,11 @@ function none() {}
 
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _namespaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+/* harmony import */ var _namespaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
 
 
 /* harmony default export */ __webpack_exports__["a"] = (function(name) {
@@ -10718,7 +9602,7 @@ function none() {}
 
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10730,13 +9614,13 @@ function none() {}
 
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return yesdrag; });
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28);
-/* harmony import */ var _noevent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
+/* harmony import */ var _noevent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
 
 
 
@@ -10768,11 +9652,67 @@ function yesdrag(view, noclick) {
 
 
 /***/ }),
-/* 28 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _selection_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return formatSpecifier; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormatSpecifier; });
+// [[fill]align][sign][symbol][0][width][,][.precision][~][type]
+var re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
+
+function formatSpecifier(specifier) {
+  if (!(match = re.exec(specifier))) throw new Error("invalid format: " + specifier);
+  var match;
+  return new FormatSpecifier({
+    fill: match[1],
+    align: match[2],
+    sign: match[3],
+    symbol: match[4],
+    zero: match[5],
+    width: match[6],
+    comma: match[7],
+    precision: match[8] && match[8].slice(1),
+    trim: match[9],
+    type: match[10]
+  });
+}
+
+formatSpecifier.prototype = FormatSpecifier.prototype; // instanceof
+
+function FormatSpecifier(specifier) {
+  this.fill = specifier.fill === undefined ? " " : specifier.fill + "";
+  this.align = specifier.align === undefined ? ">" : specifier.align + "";
+  this.sign = specifier.sign === undefined ? "-" : specifier.sign + "";
+  this.symbol = specifier.symbol === undefined ? "" : specifier.symbol + "";
+  this.zero = !!specifier.zero;
+  this.width = specifier.width === undefined ? undefined : +specifier.width;
+  this.comma = !!specifier.comma;
+  this.precision = specifier.precision === undefined ? undefined : +specifier.precision;
+  this.trim = !!specifier.trim;
+  this.type = specifier.type === undefined ? "" : specifier.type + "";
+}
+
+FormatSpecifier.prototype.toString = function() {
+  return this.fill
+      + this.align
+      + this.sign
+      + this.symbol
+      + (this.zero ? "0" : "")
+      + (this.width === undefined ? "" : Math.max(1, this.width | 0))
+      + (this.comma ? "," : "")
+      + (this.precision === undefined ? "" : "." + Math.max(0, this.precision | 0))
+      + (this.trim ? "~" : "")
+      + this.type;
+};
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _selection_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
 
 
 /* harmony default export */ __webpack_exports__["a"] = (function(selector) {
@@ -10783,11 +9723,11 @@ function yesdrag(view, noclick) {
 
 
 /***/ }),
-/* 29 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _selection_on__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var _selection_on__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
 
 
 /* harmony default export */ __webpack_exports__["a"] = (function() {
@@ -10798,7 +9738,20 @@ function yesdrag(view, noclick) {
 
 
 /***/ }),
-/* 30 */
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = (function(x) {
+  return function() {
+    return x;
+  };
+});
+
+
+/***/ }),
+/* 35 */,
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11022,7 +9975,7 @@ function set(object, f) {
   return entries;
 });
 
-// CONCATENATED MODULE: ./node_modules/d3-collection/index.js
+// CONCATENATED MODULE: ./node_modules/d3-collection/src/index.js
 
 
 
@@ -11032,7 +9985,77 @@ function set(object, f) {
 
 
 /***/ }),
-/* 31 */
+/* 37 */,
+/* 38 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _defaultLocale_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "formatDefaultLocale", function() { return _defaultLocale_js__WEBPACK_IMPORTED_MODULE_0__["a"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "format", function() { return _defaultLocale_js__WEBPACK_IMPORTED_MODULE_0__["b"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "formatPrefix", function() { return _defaultLocale_js__WEBPACK_IMPORTED_MODULE_0__["c"]; });
+
+/* harmony import */ var _locale_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(44);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "formatLocale", function() { return _locale_js__WEBPACK_IMPORTED_MODULE_1__["a"]; });
+
+/* harmony import */ var _formatSpecifier_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "formatSpecifier", function() { return _formatSpecifier_js__WEBPACK_IMPORTED_MODULE_2__["b"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormatSpecifier", function() { return _formatSpecifier_js__WEBPACK_IMPORTED_MODULE_2__["a"]; });
+
+/* harmony import */ var _precisionFixed_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(58);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "precisionFixed", function() { return _precisionFixed_js__WEBPACK_IMPORTED_MODULE_3__["a"]; });
+
+/* harmony import */ var _precisionPrefix_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(59);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "precisionPrefix", function() { return _precisionPrefix_js__WEBPACK_IMPORTED_MODULE_4__["a"]; });
+
+/* harmony import */ var _precisionRound_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(60);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "precisionRound", function() { return _precisionRound_js__WEBPACK_IMPORTED_MODULE_5__["a"]; });
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return format; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return formatPrefix; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return defaultLocale; });
+/* harmony import */ var _locale_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
+
+
+var locale;
+var format;
+var formatPrefix;
+
+defaultLocale({
+  decimal: ".",
+  thousands: ",",
+  grouping: [3],
+  currency: ["$", ""],
+  minus: "-"
+});
+
+function defaultLocale(definition) {
+  locale = Object(_locale_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(definition);
+  format = locale.format;
+  formatPrefix = locale.formatPrefix;
+  return locale;
+}
+
+
+/***/ }),
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11048,11 +10071,11 @@ __webpack_require__.d(__webpack_exports__, "xml", function() { return /* reexpor
 __webpack_require__.d(__webpack_exports__, "csv", function() { return /* reexport */ src_csv; });
 __webpack_require__.d(__webpack_exports__, "tsv", function() { return /* reexport */ src_tsv; });
 
-// EXTERNAL MODULE: ./node_modules/d3-collection/index.js + 6 modules
-var d3_collection = __webpack_require__(30);
+// EXTERNAL MODULE: ./node_modules/d3-collection/src/index.js + 6 modules
+var src = __webpack_require__(36);
 
-// EXTERNAL MODULE: ./node_modules/d3-dispatch/index.js + 1 modules
-var d3_dispatch = __webpack_require__(10);
+// EXTERNAL MODULE: ./node_modules/d3-dispatch/src/dispatch.js
+var dispatch = __webpack_require__(134);
 
 // CONCATENATED MODULE: ./node_modules/d3-request/src/request.js
 
@@ -11060,9 +10083,9 @@ var d3_dispatch = __webpack_require__(10);
 
 /* harmony default export */ var src_request = (function(url, callback) {
   var request,
-      event = Object(d3_dispatch["a" /* dispatch */])("beforesend", "progress", "load", "error"),
+      event = Object(dispatch["a" /* default */])("beforesend", "progress", "load", "error"),
       mimeType,
-      headers = Object(d3_collection["a" /* map */])(),
+      headers = Object(src["a" /* map */])(),
       xhr = new XMLHttpRequest,
       user = null,
       password = null,
@@ -11252,7 +10275,7 @@ function hasResponse(xhr) {
 }));
 
 // EXTERNAL MODULE: ./node_modules/d3-dsv/src/csv.js
-var csv = __webpack_require__(14);
+var csv = __webpack_require__(17);
 
 // CONCATENATED MODULE: ./node_modules/d3-request/src/dsv.js
 
@@ -11280,7 +10303,7 @@ function responseOf(parse, row) {
 /* harmony default export */ var src_csv = (dsv("text/csv", csv["f" /* csvParse */]));
 
 // EXTERNAL MODULE: ./node_modules/d3-dsv/src/tsv.js
-var tsv = __webpack_require__(15);
+var tsv = __webpack_require__(18);
 
 // CONCATENATED MODULE: ./node_modules/d3-request/src/tsv.js
 
@@ -11299,7 +10322,7 @@ var tsv = __webpack_require__(15);
 
 
 /***/ }),
-/* 32 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11315,7 +10338,7 @@ function empty() {
 
 
 /***/ }),
-/* 33 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11327,12 +10350,12 @@ function empty() {
 
 
 /***/ }),
-/* 34 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return styleValue; });
-/* harmony import */ var _window__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(26);
+/* harmony import */ var _window__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(29);
 
 
 function styleRemove(name) {
@@ -11371,7 +10394,272 @@ function styleValue(node, name) {
 
 
 /***/ }),
-/* 35 */
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/d3-format/src/exponent.js
+var src_exponent = __webpack_require__(8);
+
+// CONCATENATED MODULE: ./node_modules/d3-format/src/formatGroup.js
+/* harmony default export */ var formatGroup = (function(grouping, thousands) {
+  return function(value, width) {
+    var i = value.length,
+        t = [],
+        j = 0,
+        g = grouping[0],
+        length = 0;
+
+    while (i > 0 && g > 0) {
+      if (length + g + 1 > width) g = Math.max(1, width - length);
+      t.push(value.substring(i -= g, i + g));
+      if ((length += g + 1) > width) break;
+      g = grouping[j = (j + 1) % grouping.length];
+    }
+
+    return t.reverse().join(thousands);
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-format/src/formatNumerals.js
+/* harmony default export */ var formatNumerals = (function(numerals) {
+  return function(value) {
+    return value.replace(/[0-9]/g, function(i) {
+      return numerals[+i];
+    });
+  };
+});
+
+// EXTERNAL MODULE: ./node_modules/d3-format/src/formatSpecifier.js
+var formatSpecifier = __webpack_require__(31);
+
+// CONCATENATED MODULE: ./node_modules/d3-format/src/formatTrim.js
+// Trims insignificant zeros, e.g., replaces 1.2000k with 1.2k.
+/* harmony default export */ var formatTrim = (function(s) {
+  out: for (var n = s.length, i = 1, i0 = -1, i1; i < n; ++i) {
+    switch (s[i]) {
+      case ".": i0 = i1 = i; break;
+      case "0": if (i0 === 0) i0 = i; i1 = i; break;
+      default: if (!+s[i]) break out; if (i0 > 0) i0 = 0; break;
+    }
+  }
+  return i0 > 0 ? s.slice(0, i0) + s.slice(i1 + 1) : s;
+});
+
+// EXTERNAL MODULE: ./node_modules/d3-format/src/formatDecimal.js
+var formatDecimal = __webpack_require__(13);
+
+// CONCATENATED MODULE: ./node_modules/d3-format/src/formatPrefixAuto.js
+
+
+var prefixExponent;
+
+/* harmony default export */ var formatPrefixAuto = (function(x, p) {
+  var d = Object(formatDecimal["b" /* formatDecimalParts */])(x, p);
+  if (!d) return x + "";
+  var coefficient = d[0],
+      exponent = d[1],
+      i = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1,
+      n = coefficient.length;
+  return i === n ? coefficient
+      : i > n ? coefficient + new Array(i - n + 1).join("0")
+      : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i)
+      : "0." + new Array(1 - i).join("0") + Object(formatDecimal["b" /* formatDecimalParts */])(x, Math.max(0, p + i - 1))[0]; // less than 1y!
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-format/src/formatRounded.js
+
+
+/* harmony default export */ var formatRounded = (function(x, p) {
+  var d = Object(formatDecimal["b" /* formatDecimalParts */])(x, p);
+  if (!d) return x + "";
+  var coefficient = d[0],
+      exponent = d[1];
+  return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient
+      : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1)
+      : coefficient + new Array(exponent - coefficient.length + 2).join("0");
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-format/src/formatTypes.js
+
+
+
+
+/* harmony default export */ var formatTypes = ({
+  "%": function(x, p) { return (x * 100).toFixed(p); },
+  "b": function(x) { return Math.round(x).toString(2); },
+  "c": function(x) { return x + ""; },
+  "d": formatDecimal["a" /* default */],
+  "e": function(x, p) { return x.toExponential(p); },
+  "f": function(x, p) { return x.toFixed(p); },
+  "g": function(x, p) { return x.toPrecision(p); },
+  "o": function(x) { return Math.round(x).toString(8); },
+  "p": function(x, p) { return formatRounded(x * 100, p); },
+  "r": formatRounded,
+  "s": formatPrefixAuto,
+  "X": function(x) { return Math.round(x).toString(16).toUpperCase(); },
+  "x": function(x) { return Math.round(x).toString(16); }
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-format/src/identity.js
+/* harmony default export */ var identity = (function(x) {
+  return x;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-format/src/locale.js
+
+
+
+
+
+
+
+
+
+var map = Array.prototype.map,
+    prefixes = ["y","z","a","f","p","n","µ","m","","k","M","G","T","P","E","Z","Y"];
+
+/* harmony default export */ var src_locale = __webpack_exports__["a"] = (function(locale) {
+  var group = locale.grouping === undefined || locale.thousands === undefined ? identity : formatGroup(map.call(locale.grouping, Number), locale.thousands + ""),
+      currencyPrefix = locale.currency === undefined ? "" : locale.currency[0] + "",
+      currencySuffix = locale.currency === undefined ? "" : locale.currency[1] + "",
+      decimal = locale.decimal === undefined ? "." : locale.decimal + "",
+      numerals = locale.numerals === undefined ? identity : formatNumerals(map.call(locale.numerals, String)),
+      percent = locale.percent === undefined ? "%" : locale.percent + "",
+      minus = locale.minus === undefined ? "-" : locale.minus + "",
+      nan = locale.nan === undefined ? "NaN" : locale.nan + "";
+
+  function newFormat(specifier) {
+    specifier = Object(formatSpecifier["b" /* default */])(specifier);
+
+    var fill = specifier.fill,
+        align = specifier.align,
+        sign = specifier.sign,
+        symbol = specifier.symbol,
+        zero = specifier.zero,
+        width = specifier.width,
+        comma = specifier.comma,
+        precision = specifier.precision,
+        trim = specifier.trim,
+        type = specifier.type;
+
+    // The "n" type is an alias for ",g".
+    if (type === "n") comma = true, type = "g";
+
+    // The "" type, and any invalid type, is an alias for ".12~g".
+    else if (!formatTypes[type]) precision === undefined && (precision = 12), trim = true, type = "g";
+
+    // If zero fill is specified, padding goes after sign and before digits.
+    if (zero || (fill === "0" && align === "=")) zero = true, fill = "0", align = "=";
+
+    // Compute the prefix and suffix.
+    // For SI-prefix, the suffix is lazily computed.
+    var prefix = symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "",
+        suffix = symbol === "$" ? currencySuffix : /[%p]/.test(type) ? percent : "";
+
+    // What format function should we use?
+    // Is this an integer type?
+    // Can this type generate exponential notation?
+    var formatType = formatTypes[type],
+        maybeSuffix = /[defgprs%]/.test(type);
+
+    // Set the default precision if not specified,
+    // or clamp the specified precision to the supported range.
+    // For significant precision, it must be in [1, 21].
+    // For fixed precision, it must be in [0, 20].
+    precision = precision === undefined ? 6
+        : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision))
+        : Math.max(0, Math.min(20, precision));
+
+    function format(value) {
+      var valuePrefix = prefix,
+          valueSuffix = suffix,
+          i, n, c;
+
+      if (type === "c") {
+        valueSuffix = formatType(value) + valueSuffix;
+        value = "";
+      } else {
+        value = +value;
+
+        // Determine the sign. -0 is not less than 0, but 1 / -0 is!
+        var valueNegative = value < 0 || 1 / value < 0;
+
+        // Perform the initial formatting.
+        value = isNaN(value) ? nan : formatType(Math.abs(value), precision);
+
+        // Trim insignificant zeros.
+        if (trim) value = formatTrim(value);
+
+        // If a negative value rounds to zero after formatting, and no explicit positive sign is requested, hide the sign.
+        if (valueNegative && +value === 0 && sign !== "+") valueNegative = false;
+
+        // Compute the prefix and suffix.
+        valuePrefix = (valueNegative ? (sign === "(" ? sign : minus) : sign === "-" || sign === "(" ? "" : sign) + valuePrefix;
+        valueSuffix = (type === "s" ? prefixes[8 + prefixExponent / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : "");
+
+        // Break the formatted value into the integer “value” part that can be
+        // grouped, and fractional or exponential “suffix” part that is not.
+        if (maybeSuffix) {
+          i = -1, n = value.length;
+          while (++i < n) {
+            if (c = value.charCodeAt(i), 48 > c || c > 57) {
+              valueSuffix = (c === 46 ? decimal + value.slice(i + 1) : value.slice(i)) + valueSuffix;
+              value = value.slice(0, i);
+              break;
+            }
+          }
+        }
+      }
+
+      // If the fill character is not "0", grouping is applied before padding.
+      if (comma && !zero) value = group(value, Infinity);
+
+      // Compute the padding.
+      var length = valuePrefix.length + value.length + valueSuffix.length,
+          padding = length < width ? new Array(width - length + 1).join(fill) : "";
+
+      // If the fill character is "0", grouping is applied after padding.
+      if (comma && zero) value = group(padding + value, padding.length ? width - valueSuffix.length : Infinity), padding = "";
+
+      // Reconstruct the final output based on the desired alignment.
+      switch (align) {
+        case "<": value = valuePrefix + value + valueSuffix + padding; break;
+        case "=": value = valuePrefix + padding + value + valueSuffix; break;
+        case "^": value = padding.slice(0, length = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length); break;
+        default: value = padding + valuePrefix + value + valueSuffix; break;
+      }
+
+      return numerals(value);
+    }
+
+    format.toString = function() {
+      return specifier + "";
+    };
+
+    return format;
+  }
+
+  function formatPrefix(specifier, value) {
+    var f = newFormat((specifier = Object(formatSpecifier["b" /* default */])(specifier), specifier.type = "f", specifier)),
+        e = Math.max(-8, Math.min(8, Math.floor(Object(src_exponent["a" /* default */])(value) / 3))) * 3,
+        k = Math.pow(10, -e),
+        prefix = prefixes[8 + e / 3];
+    return function(value) {
+      return f(k * value) + prefix;
+    };
+  }
+
+  return {
+    format: newFormat,
+    formatPrefix: formatPrefix
+  };
+});
+
+
+/***/ }),
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11382,7 +10670,7 @@ function styleValue(node, name) {
  * SVG element.
  */
 
-var utils = __webpack_require__(4);
+var utils = __webpack_require__(2);
 
 var PlacedDiv = utils.make_class();
 // instance methods
@@ -11451,7 +10739,7 @@ function hide() {
 }
 
 /***/ }),
-/* 36 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11461,8 +10749,8 @@ function hide() {
  * CobraModel
  */
 
-var utils = __webpack_require__(4);
-var dataStyles = __webpack_require__(20);
+var utils = __webpack_require__(2);
+var dataStyles = __webpack_require__(23);
 
 var CobraModel = utils.make_class();
 // class methods
@@ -11613,7 +10901,7 @@ function apply_gene_data(gene_data_obj, styles, identifiers_on_map, compare_styl
 }
 
 /***/ }),
-/* 37 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function() {
@@ -15182,7 +14470,7 @@ Bacon.fromESObservable = function (_observable) {
   });
 };
 
-if ( true && __webpack_require__(44) !== null && __webpack_require__(45) != null) {
+if ( true && __webpack_require__(56) !== null && __webpack_require__(57) != null) {
   !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
     return Bacon;
   }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -15198,10 +14486,10 @@ if ( true && __webpack_require__(44) !== null && __webpack_require__(45) != null
   }
 }).call(this);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(41), __webpack_require__(66)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(53), __webpack_require__(83)(module)))
 
 /***/ }),
-/* 38 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15227,13 +14515,13 @@ __webpack_require__.d(__webpack_exports__, "tsvFormatValue", function() { return
 __webpack_require__.d(__webpack_exports__, "autoType", function() { return /* reexport */ autoType; });
 
 // EXTERNAL MODULE: ./node_modules/d3-dsv/src/dsv.js
-var dsv = __webpack_require__(23);
+var dsv = __webpack_require__(26);
 
 // EXTERNAL MODULE: ./node_modules/d3-dsv/src/csv.js
-var csv = __webpack_require__(14);
+var csv = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./node_modules/d3-dsv/src/tsv.js
-var tsv = __webpack_require__(15);
+var tsv = __webpack_require__(18);
 
 // CONCATENATED MODULE: ./node_modules/d3-dsv/src/autoType.js
 function autoType(object) {
@@ -15264,7 +14552,116 @@ var fixtz = new Date("2019-01-01T00:00").getHours() || new Date("2019-07-01T00:0
 
 
 /***/ }),
-/* 39 */
+/* 49 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// UNUSED EXPORTS: rgbBasis, rgbBasisClosed
+
+// EXTERNAL MODULE: ./node_modules/d3-color/src/color.js
+var src_color = __webpack_require__(16);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/basis.js
+function basis(t1, v0, v1, v2, v3) {
+  var t2 = t1 * t1, t3 = t2 * t1;
+  return ((1 - 3 * t1 + 3 * t2 - t3) * v0
+      + (4 - 6 * t2 + 3 * t3) * v1
+      + (1 + 3 * t1 + 3 * t2 - 3 * t3) * v2
+      + t3 * v3) / 6;
+}
+
+/* harmony default export */ var src_basis = (function(values) {
+  var n = values.length - 1;
+  return function(t) {
+    var i = t <= 0 ? (t = 0) : t >= 1 ? (t = 1, n - 1) : Math.floor(t * n),
+        v1 = values[i],
+        v2 = values[i + 1],
+        v0 = i > 0 ? values[i - 1] : 2 * v1 - v2,
+        v3 = i < n - 1 ? values[i + 2] : 2 * v2 - v1;
+    return basis((t - i / n) * n, v0, v1, v2, v3);
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/basisClosed.js
+
+
+/* harmony default export */ var basisClosed = (function(values) {
+  var n = values.length;
+  return function(t) {
+    var i = Math.floor(((t %= 1) < 0 ? ++t : t) * n),
+        v0 = values[(i + n - 1) % n],
+        v1 = values[i % n],
+        v2 = values[(i + 1) % n],
+        v3 = values[(i + 2) % n];
+    return basis((t - i / n) * n, v0, v1, v2, v3);
+  };
+});
+
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/color.js
+var d3_interpolate_src_color = __webpack_require__(15);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/rgb.js
+
+
+
+
+
+/* harmony default export */ var src_rgb = __webpack_exports__["a"] = ((function rgbGamma(y) {
+  var color = Object(d3_interpolate_src_color["b" /* gamma */])(y);
+
+  function rgb(start, end) {
+    var r = color((start = Object(src_color["f" /* rgb */])(start)).r, (end = Object(src_color["f" /* rgb */])(end)).r),
+        g = color(start.g, end.g),
+        b = color(start.b, end.b),
+        opacity = Object(d3_interpolate_src_color["a" /* default */])(start.opacity, end.opacity);
+    return function(t) {
+      start.r = r(t);
+      start.g = g(t);
+      start.b = b(t);
+      start.opacity = opacity(t);
+      return start + "";
+    };
+  }
+
+  rgb.gamma = rgbGamma;
+
+  return rgb;
+})(1));
+
+function rgbSpline(spline) {
+  return function(colors) {
+    var n = colors.length,
+        r = new Array(n),
+        g = new Array(n),
+        b = new Array(n),
+        i, color;
+    for (i = 0; i < n; ++i) {
+      color = Object(src_color["f" /* rgb */])(colors[i]);
+      r[i] = color.r || 0;
+      g[i] = color.g || 0;
+      b[i] = color.b || 0;
+    }
+    r = spline(r);
+    g = spline(g);
+    b = spline(b);
+    color.opacity = 1;
+    return function(t) {
+      color.r = r(t);
+      color.g = g(t);
+      color.b = b(t);
+      return color + "";
+    };
+  };
+}
+
+var rgbBasis = rgbSpline(src_basis);
+var rgbBasisClosed = rgbSpline(basisClosed);
+
+
+/***/ }),
+/* 50 */,
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15290,85 +14687,85 @@ var _createClass = function () { function defineProperties(target, props) { for 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var utils = _interopRequireWildcard(_utils);
 
-var _BuildInput = __webpack_require__(60);
+var _BuildInput = __webpack_require__(77);
 
 var _BuildInput2 = _interopRequireDefault(_BuildInput);
 
-var _ZoomContainer = __webpack_require__(46);
+var _ZoomContainer = __webpack_require__(61);
 
 var _ZoomContainer2 = _interopRequireDefault(_ZoomContainer);
 
-var _Map = __webpack_require__(47);
+var _Map = __webpack_require__(62);
 
 var _Map2 = _interopRequireDefault(_Map);
 
-var _CobraModel = __webpack_require__(36);
+var _CobraModel = __webpack_require__(46);
 
 var _CobraModel2 = _interopRequireDefault(_CobraModel);
 
-var _Brush = __webpack_require__(67);
+var _Brush = __webpack_require__(84);
 
 var _Brush2 = _interopRequireDefault(_Brush);
 
-var _CallbackManager = __webpack_require__(21);
+var _CallbackManager = __webpack_require__(24);
 
 var _CallbackManager2 = _interopRequireDefault(_CallbackManager);
 
-var _Settings = __webpack_require__(55);
+var _Settings = __webpack_require__(70);
 
 var _Settings2 = _interopRequireDefault(_Settings);
 
-var _TextEditInput = __webpack_require__(68);
+var _TextEditInput = __webpack_require__(85);
 
 var _TextEditInput2 = _interopRequireDefault(_TextEditInput);
 
-var _dataStyles = __webpack_require__(20);
+var _dataStyles = __webpack_require__(23);
 
 var dataStyles = _interopRequireWildcard(_dataStyles);
 
-var _renderWrapper = __webpack_require__(56);
+var _renderWrapper = __webpack_require__(71);
 
 var _renderWrapper2 = _interopRequireDefault(_renderWrapper);
 
-var _SettingsMenu = __webpack_require__(69);
+var _SettingsMenu = __webpack_require__(86);
 
 var _SettingsMenu2 = _interopRequireDefault(_SettingsMenu);
 
-var _MenuBar = __webpack_require__(83);
+var _MenuBar = __webpack_require__(100);
 
 var _MenuBar2 = _interopRequireDefault(_MenuBar);
 
-var _SearchBar = __webpack_require__(88);
+var _SearchBar = __webpack_require__(105);
 
 var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
-var _ButtonPanel = __webpack_require__(91);
+var _ButtonPanel = __webpack_require__(108);
 
 var _ButtonPanel2 = _interopRequireDefault(_ButtonPanel);
 
-var _TooltipContainer = __webpack_require__(94);
+var _TooltipContainer = __webpack_require__(111);
 
 var _TooltipContainer2 = _interopRequireDefault(_TooltipContainer);
 
-var _DefaultTooltip = __webpack_require__(95);
+var _DefaultTooltip = __webpack_require__(112);
 
 var _DefaultTooltip2 = _interopRequireDefault(_DefaultTooltip);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
-__webpack_require__(98);
+__webpack_require__(115);
 
-__webpack_require__(106);
+__webpack_require__(123);
 
-var _BuilderEmbed = __webpack_require__(108);
+var _BuilderEmbed = __webpack_require__(125);
 
 var _BuilderEmbed2 = _interopRequireDefault(_BuilderEmbed);
 
@@ -16269,10 +15666,12 @@ var Builder = function () {
 
   Builder.prototype.set_reaction_data = function set_reaction_data(data) {
     // eslint-disable-line camelcase
-    this.settings.set('reaction_data', data);
+    var filteredData = data ? (0, _utils.process_reaction_data)(data) : data;
+
+    this.settings.set('reaction_data', filteredData);
 
     // clear gene data
-    if (data) {
+    if (filteredData) {
       this.settings._options.gene_data = null;
     }
 
@@ -16286,12 +15685,12 @@ var Builder = function () {
     var buttonName = 'Clear reaction data';
     var geneButtonName = 'Clear gene data';
     var index = disabledButtons.indexOf(buttonName);
-    if (data && index !== -1) {
+    if (filteredData && index !== -1) {
       disabledButtons.splice(index, 1);
       var gInd = disabledButtons.indexOf(geneButtonName);
       if (gInd === -1) disabledButtons.push(geneButtonName);
       this.settings.set('disabled_buttons', disabledButtons);
-    } else if (!data && index === -1) {
+    } else if (!filteredData && index === -1) {
       disabledButtons.push(buttonName);
       this.settings.set('disabled_buttons', disabledButtons);
     }
@@ -16884,7 +16283,7 @@ var Builder = function () {
 exports.default = utils.class_with_optional_new(Builder);
 
 /***/ }),
-/* 40 */
+/* 52 */
 /***/ (function(module, exports) {
 
 /**
@@ -17241,7 +16640,7 @@ module.exports = new vkbeautify();
 
 
 /***/ }),
-/* 41 */
+/* 53 */
 /***/ (function(module, exports) {
 
 var g;
@@ -17267,12 +16666,12 @@ module.exports = g;
 
 
 /***/ }),
-/* 42 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _sourceEvent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(29);
-/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
+/* harmony import */ var _sourceEvent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
+/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
 
 
 
@@ -17284,12 +16683,12 @@ module.exports = g;
 
 
 /***/ }),
-/* 43 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _sourceEvent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(29);
-/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
+/* harmony import */ var _sourceEvent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
+/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
 
 
 
@@ -17307,7 +16706,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 44 */
+/* 56 */
 /***/ (function(module, exports) {
 
 module.exports = function() {
@@ -17316,7 +16715,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 45 */
+/* 57 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -17325,7 +16724,47 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(this, {}))
 
 /***/ }),
-/* 46 */
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _exponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function(step) {
+  return Math.max(0, -Object(_exponent_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(Math.abs(step)));
+});
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _exponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function(step, value) {
+  return Math.max(0, Math.max(-8, Math.min(8, Math.floor(Object(_exponent_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(value) / 3))) * 3 - Object(_exponent_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(Math.abs(step)));
+});
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _exponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function(step, max) {
+  step = Math.abs(step), max = Math.abs(max) - step;
+  return Math.max(0, Object(_exponent_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(max) - Object(_exponent_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(step)) + 1;
+});
+
+
+/***/ }),
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17333,21 +16772,21 @@ module.exports = __webpack_amd_options__;
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _CallbackManager = __webpack_require__(21);
+var _CallbackManager = __webpack_require__(24);
 
 var _CallbackManager2 = _interopRequireDefault(_CallbackManager);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
-var _d3Zoom = __webpack_require__(113);
+var _d3Zoom = __webpack_require__(130);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17800,7 +17239,7 @@ var ZoomContainer = function () {
 exports.default = ZoomContainer;
 
 /***/ }),
-/* 47 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17810,59 +17249,59 @@ exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var utils = _interopRequireWildcard(_utils);
 
-var _Draw = __webpack_require__(63);
+var _Draw = __webpack_require__(80);
 
 var _Draw2 = _interopRequireDefault(_Draw);
 
-var _Behavior = __webpack_require__(48);
+var _Behavior = __webpack_require__(63);
 
 var _Behavior2 = _interopRequireDefault(_Behavior);
 
-var _Scale = __webpack_require__(64);
+var _Scale = __webpack_require__(81);
 
 var _Scale2 = _interopRequireDefault(_Scale);
 
-var _build = __webpack_require__(49);
+var _build = __webpack_require__(64);
 
 var build = _interopRequireWildcard(_build);
 
-var _UndoStack = __webpack_require__(51);
+var _UndoStack = __webpack_require__(66);
 
 var _UndoStack2 = _interopRequireDefault(_UndoStack);
 
-var _CallbackManager = __webpack_require__(21);
+var _CallbackManager = __webpack_require__(24);
 
 var _CallbackManager2 = _interopRequireDefault(_CallbackManager);
 
-var _KeyManager = __webpack_require__(52);
+var _KeyManager = __webpack_require__(67);
 
 var _KeyManager2 = _interopRequireDefault(_KeyManager);
 
-var _Canvas = __webpack_require__(65);
+var _Canvas = __webpack_require__(82);
 
 var _Canvas2 = _interopRequireDefault(_Canvas);
 
-var _dataStyles = __webpack_require__(20);
+var _dataStyles = __webpack_require__(23);
 
 var dataStyles = _interopRequireWildcard(_dataStyles);
 
-var _SearchIndex = __webpack_require__(54);
+var _SearchIndex = __webpack_require__(69);
 
 var _SearchIndex2 = _interopRequireDefault(_SearchIndex);
 
-var _baconjs = __webpack_require__(37);
+var _baconjs = __webpack_require__(47);
 
 var _baconjs2 = _interopRequireDefault(_baconjs);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20233,7 +19672,7 @@ var Map = function () {
 exports.default = Map;
 
 /***/ }),
-/* 48 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20241,17 +19680,17 @@ exports.default = Map;
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _build = __webpack_require__(49);
+var _build = __webpack_require__(64);
 
 var build = _interopRequireWildcard(_build);
 
-var _d3Drag = __webpack_require__(22);
+var _d3Drag = __webpack_require__(25);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
 var d3Selection = _interopRequireWildcard(_d3Selection);
 
@@ -21239,7 +20678,7 @@ var Behavior = function () {
 exports.default = Behavior;
 
 /***/ }),
-/* 49 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21256,11 +20695,11 @@ exports.bezierIdsForReactionIds = bezierIdsForReactionIds;
 exports.newBeziersForSegments = newBeziersForSegments;
 exports.newBeziersForReactions = newBeziersForReactions;
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var utils = _interopRequireWildcard(_utils);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
@@ -21950,7 +21389,7 @@ function newBeziersForReactions(reactions) {
 }
 
 /***/ }),
-/* 50 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21968,7 +21407,7 @@ var scalePresets = {
 exports.default = scalePresets;
 
 /***/ }),
-/* 51 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22062,7 +21501,7 @@ var UndoStack = function () {
 exports.default = UndoStack;
 
 /***/ }),
-/* 52 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22070,11 +21509,11 @@ exports.default = UndoStack;
 
 exports.__esModule = true;
 
-var _mousetrap = __webpack_require__(53);
+var _mousetrap = __webpack_require__(68);
 
 var _mousetrap2 = _interopRequireDefault(_mousetrap);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
@@ -22300,7 +21739,7 @@ var KeyManager = function () {
 exports.default = KeyManager;
 
 /***/ }),
-/* 53 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*global define:false */
@@ -23365,7 +22804,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*global define:false */
 
 
 /***/ }),
-/* 54 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23449,7 +22888,7 @@ var SearchIndex = function () {
 exports.default = SearchIndex;
 
 /***/ }),
-/* 55 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23457,11 +22896,11 @@ exports.default = SearchIndex;
 
 exports.__esModule = true;
 
-var _baconjs = __webpack_require__(37);
+var _baconjs = __webpack_require__(47);
 
 var _baconjs2 = _interopRequireDefault(_baconjs);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
@@ -23710,7 +23149,7 @@ var Settings = function () {
 exports.default = Settings;
 
 /***/ }),
-/* 56 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23720,7 +23159,7 @@ exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -23798,7 +23237,79 @@ function renderWrapper(component, ref, connectSetStateFn, divNode) {
 exports.default = renderWrapper;
 
 /***/ }),
-/* 57 */
+/* 72 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _number_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+
+
+var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g,
+    reB = new RegExp(reA.source, "g");
+
+function zero(b) {
+  return function() {
+    return b;
+  };
+}
+
+function one(b) {
+  return function(t) {
+    return b(t) + "";
+  };
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (function(a, b) {
+  var bi = reA.lastIndex = reB.lastIndex = 0, // scan index for next number in b
+      am, // current match in a
+      bm, // current match in b
+      bs, // string preceding current number in b, if any
+      i = -1, // index in s
+      s = [], // string constants and placeholders
+      q = []; // number interpolators
+
+  // Coerce inputs to strings.
+  a = a + "", b = b + "";
+
+  // Interpolate pairs of numbers in a & b.
+  while ((am = reA.exec(a))
+      && (bm = reB.exec(b))) {
+    if ((bs = bm.index) > bi) { // a string precedes the next number in b
+      bs = b.slice(bi, bs);
+      if (s[i]) s[i] += bs; // coalesce with previous string
+      else s[++i] = bs;
+    }
+    if ((am = am[0]) === (bm = bm[0])) { // numbers in a & b match
+      if (s[i]) s[i] += bm; // coalesce with previous string
+      else s[++i] = bm;
+    } else { // interpolate non-matching numbers
+      s[++i] = null;
+      q.push({i: i, x: Object(_number_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(am, bm)});
+    }
+    bi = reB.lastIndex;
+  }
+
+  // Add remains of b.
+  if (bi < b.length) {
+    bs = b.slice(bi);
+    if (s[i]) s[i] += bs; // coalesce with previous string
+    else s[++i] = bs;
+  }
+
+  // Special optimization for only a single match.
+  // Otherwise, interpolate each of the numbers and rejoin the string.
+  return s.length < 2 ? (q[0]
+      ? one(q[0].x)
+      : zero(b))
+      : (b = q.length, function(t) {
+          for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
+          return s.join("");
+        });
+});
+
+
+/***/ }),
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23807,7 +23318,7 @@ exports.default = renderWrapper;
 exports.__esModule = true;
 exports.libs = exports.EscherMapModel = exports.EscherMapView = exports.ZoomContainer = exports.dataStyles = exports.Settings = exports.SearchIndex = exports.utils = exports.CobraModel = exports.UndoStack = exports.DataMenu = exports.KeyManager = exports.Behavior = exports.Map = exports.default = exports.Builder = exports.version = undefined;
 
-var _Builder = __webpack_require__(39);
+var _Builder = __webpack_require__(51);
 
 Object.defineProperty(exports, 'Builder', {
   enumerable: true,
@@ -23822,7 +23333,7 @@ Object.defineProperty(exports, 'default', {
   }
 });
 
-var _Map = __webpack_require__(47);
+var _Map = __webpack_require__(62);
 
 Object.defineProperty(exports, 'Map', {
   enumerable: true,
@@ -23831,7 +23342,7 @@ Object.defineProperty(exports, 'Map', {
   }
 });
 
-var _Behavior = __webpack_require__(48);
+var _Behavior = __webpack_require__(63);
 
 Object.defineProperty(exports, 'Behavior', {
   enumerable: true,
@@ -23840,7 +23351,7 @@ Object.defineProperty(exports, 'Behavior', {
   }
 });
 
-var _KeyManager = __webpack_require__(52);
+var _KeyManager = __webpack_require__(67);
 
 Object.defineProperty(exports, 'KeyManager', {
   enumerable: true,
@@ -23849,7 +23360,7 @@ Object.defineProperty(exports, 'KeyManager', {
   }
 });
 
-var _DataMenu = __webpack_require__(109);
+var _DataMenu = __webpack_require__(126);
 
 Object.defineProperty(exports, 'DataMenu', {
   enumerable: true,
@@ -23858,7 +23369,7 @@ Object.defineProperty(exports, 'DataMenu', {
   }
 });
 
-var _UndoStack = __webpack_require__(51);
+var _UndoStack = __webpack_require__(66);
 
 Object.defineProperty(exports, 'UndoStack', {
   enumerable: true,
@@ -23867,7 +23378,7 @@ Object.defineProperty(exports, 'UndoStack', {
   }
 });
 
-var _CobraModel = __webpack_require__(36);
+var _CobraModel = __webpack_require__(46);
 
 Object.defineProperty(exports, 'CobraModel', {
   enumerable: true,
@@ -23876,7 +23387,7 @@ Object.defineProperty(exports, 'CobraModel', {
   }
 });
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 Object.defineProperty(exports, 'utils', {
   enumerable: true,
@@ -23885,7 +23396,7 @@ Object.defineProperty(exports, 'utils', {
   }
 });
 
-var _SearchIndex = __webpack_require__(54);
+var _SearchIndex = __webpack_require__(69);
 
 Object.defineProperty(exports, 'SearchIndex', {
   enumerable: true,
@@ -23894,7 +23405,7 @@ Object.defineProperty(exports, 'SearchIndex', {
   }
 });
 
-var _Settings = __webpack_require__(55);
+var _Settings = __webpack_require__(70);
 
 Object.defineProperty(exports, 'Settings', {
   enumerable: true,
@@ -23903,7 +23414,7 @@ Object.defineProperty(exports, 'Settings', {
   }
 });
 
-var _dataStyles = __webpack_require__(20);
+var _dataStyles = __webpack_require__(23);
 
 Object.defineProperty(exports, 'dataStyles', {
   enumerable: true,
@@ -23912,7 +23423,7 @@ Object.defineProperty(exports, 'dataStyles', {
   }
 });
 
-var _ZoomContainer = __webpack_require__(46);
+var _ZoomContainer = __webpack_require__(61);
 
 Object.defineProperty(exports, 'ZoomContainer', {
   enumerable: true,
@@ -23921,7 +23432,7 @@ Object.defineProperty(exports, 'ZoomContainer', {
   }
 });
 
-var _widget = __webpack_require__(110);
+var _widget = __webpack_require__(127);
 
 Object.defineProperty(exports, 'EscherMapView', {
   enumerable: true,
@@ -23936,33 +23447,33 @@ Object.defineProperty(exports, 'EscherMapModel', {
   }
 });
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
 var _preact2 = _interopRequireDefault(_preact);
 
-var _baconjs = __webpack_require__(37);
+var _baconjs = __webpack_require__(47);
 
 var _baconjs2 = _interopRequireDefault(_baconjs);
 
-var _mousetrap = __webpack_require__(53);
+var _mousetrap = __webpack_require__(68);
 
 var _mousetrap2 = _interopRequireDefault(_mousetrap);
 
-var _vkbeautify = __webpack_require__(40);
+var _vkbeautify = __webpack_require__(52);
 
 var _vkbeautify2 = _interopRequireDefault(_vkbeautify);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
-var _d3Request = __webpack_require__(31);
+var _d3Request = __webpack_require__(40);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var version = exports.version = "1.8.0"; /**
+var version = exports.version = "1.7.3"; /**
                                                 * @license
                                                 *
                                                 * Escher
@@ -24008,8 +23519,9 @@ var libs = exports.libs = {
 };
 
 /***/ }),
-/* 58 */,
-/* 59 */
+/* 74 */,
+/* 75 */,
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
@@ -24195,7 +23707,7 @@ var saveAs = saveAs || (function(view) {
 
 if ( true && module.exports) {
   module.exports.saveAs = saveAs;
-} else if (( true && __webpack_require__(44) !== null) && (__webpack_require__(45) !== null)) {
+} else if (( true && __webpack_require__(56) !== null) && (__webpack_require__(57) !== null)) {
   !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
     return saveAs;
   }).call(exports, __webpack_require__, exports, module),
@@ -24204,7 +23716,7 @@ if ( true && module.exports) {
 
 
 /***/ }),
-/* 60 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24212,31 +23724,31 @@ if ( true && module.exports) {
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _PlacedDiv = __webpack_require__(35);
+var _PlacedDiv = __webpack_require__(45);
 
 var _PlacedDiv2 = _interopRequireDefault(_PlacedDiv);
 
-var _completely = __webpack_require__(61);
+var _completely = __webpack_require__(78);
 
 var _completely2 = _interopRequireDefault(_completely);
 
-var _DirectionArrow = __webpack_require__(62);
+var _DirectionArrow = __webpack_require__(79);
 
 var _DirectionArrow2 = _interopRequireDefault(_DirectionArrow);
 
-var _CobraModel = __webpack_require__(36);
+var _CobraModel = __webpack_require__(46);
 
 var _CobraModel2 = _interopRequireDefault(_CobraModel);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24624,13 +24136,13 @@ var BuildInput = function () {
 exports.default = BuildInput;
 
 /***/ }),
-/* 61 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var utils = _interopRequireWildcard(_utils);
 
@@ -25064,7 +24576,7 @@ module.exports = function (container, config) {
     **/
 
 /***/ }),
-/* 62 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25072,13 +24584,13 @@ module.exports = function (container, config) {
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var utils = _interopRequireWildcard(_utils);
 
-var _d3Drag = __webpack_require__(22);
+var _d3Drag = __webpack_require__(25);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -25208,7 +24720,7 @@ var DirectionArrow = function () {
 exports.default = DirectionArrow;
 
 /***/ }),
-/* 63 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25244,14 +24756,14 @@ exports.default = DirectionArrow;
  *
  */
 
-var utils = __webpack_require__(4);
-var dataStyles = __webpack_require__(20);
+var utils = __webpack_require__(2);
+var dataStyles = __webpack_require__(23);
 
-var _require = __webpack_require__(115),
+var _require = __webpack_require__(132),
     gsap = _require.gsap;
 
-var CallbackManager = __webpack_require__(21).default;
-var d3_format = __webpack_require__(7).format;
+var CallbackManager = __webpack_require__(24).default;
+var d3_format = __webpack_require__(38).format;
 
 var Draw = utils.make_class();
 // instance methods
@@ -25490,6 +25002,56 @@ function create_segment(enter_selection) {
  * @return {}
  */
 function update_segment(update_selection, scale, cobra_model, drawn_nodes, defs, has_data_on_reactions) {
+
+  // define the function to handle the animation of the reaction data
+  function handleAnimation(entries, observer) {
+    entries.forEach(function (entry) {
+      // get the node
+      var node = entry.target;
+      // check if the element is in the viewport
+      if (entry.isIntersecting) {
+        // show the animation when the element is in the viewport
+        var dataBindByD3 = node.__data__;
+        if (has_data_on_reactions && show_reaction_data_animation && dataBindByD3.data) {
+          var fluxData = dataBindByD3.data;
+          var velocity = scale.reaction_animation_duration(fluxData);
+          // Check if the animation is already running and the velocity has changed
+          if (node.animation && node.animation.data !== velocity) {
+            node.animation.kill();
+            node.animation = null;
+          }
+
+          if (!node.animation) {
+            var node_length = node.getTotalLength();
+            var direction = dataBindByD3.data_string.startsWith("-") ? 1 : -1;
+            node.setAttribute("stroke-dasharray", scale.reaction_size(fluxData) + ', ' + scale.reaction_size(fluxData));
+            node.animation = gsap.to(node, {
+              strokeDashoffset: direction * node_length * 2,
+              repeat: -1,
+              ease: "none",
+              // insure the animation restarts if the velocity changes
+              immediateRender: true,
+              duration: velocity * node_length / 100,
+              data: velocity
+            });
+          } else {
+            node.setAttribute("stroke-dasharray", scale.reaction_size(fluxData) + ', ' + scale.reaction_size(fluxData));
+            node.animation.play(); // show the animation
+          }
+        }
+      } else {
+        // stop the animation when the element is not in the viewport
+        if (node.animation) {
+          node.removeAttribute("stroke-dasharray");
+          node.animation.pause(); // stop the animation
+        }
+      }
+    });
+  }
+
+  // define the observer for the intersection to stop the animation when the element is not in the viewport
+  var observer = new IntersectionObserver(handleAnimation, { threshold: 0.1 });
+
   var reaction_data_styles = this.settings.get('reaction_styles');
   var should_size = has_data_on_reactions && reaction_data_styles.indexOf('size') !== -1;
   var should_color = has_data_on_reactions && reaction_data_styles.indexOf('color') !== -1;
@@ -25501,7 +25063,7 @@ function update_segment(update_selection, scale, cobra_model, drawn_nodes, defs,
   var hide_secondary_metabolites = this.settings.get('hide_secondary_metabolites');
   var primary_r = this.settings.get('primary_metabolite_radius');
   var secondary_r = this.settings.get('secondary_metabolite_radius');
-  // show the reaction data animation 
+  // show the reaction data animation
   var show_reaction_data_animation = this.settings.get('show_reaction_data_animation');
 
   var objectMouseover = this.behavior.reactionObjectMouseover;
@@ -25584,36 +25146,10 @@ function update_segment(update_selection, scale, cobra_model, drawn_nodes, defs,
     }
   }).each(function (d, i, nodes) {
     var node = nodes[0];
-    var f = d.data;
-    var velocity = scale.reaction_animation_duration(f);
-    var kill_node_animation = function kill_node_animation(node) {
-      if (node.animation) {
-        node.animation.kill(); // Stop the animation
-        node.animation = null; // Clean up the reference
-      }
-    };
-
-    if (show_reaction_data_animation && has_data_on_reactions && d.data) {
-      // Check if the animation is already running and the velocity has changed
-      if (node.animation && node.animation.data !== velocity) {
-        kill_node_animation(node);
-      }
-      var node_length = node.getTotalLength();
-      var direction = d.data_string.startsWith("-") ? 1 : -1;
-      node.setAttribute('stroke-dasharray', '' + (scale.reaction_size(f), scale.reaction_size(f)));
-      node.animation = gsap.to(node, {
-        strokeDashoffset: direction * node_length * 2,
-        repeat: -1,
-        ease: "none",
-        // insure the animation restarts if the velocity changes
-        immediateRender: true,
-        duration: velocity * node_length / 100,
-        data: velocity
-      });
-    } else {
-      node.removeAttribute('stroke-dasharray');
-      kill_node_animation(node);
-    }
+    // make the intersection observer callback can be triggered by the redraw
+    handleAnimation([{ target: node }], observer);
+    // observe the node
+    observer.observe(node);
   }).attr('pointer-events', 'visibleStroke').on('mouseover', objectMouseover).on('mouseout', objectMouseout);
 
   // new arrowheads
@@ -26006,7 +25542,7 @@ function displacedCoords(reactionArrowDisplacement, start, end, displace) {
 }
 
 /***/ }),
-/* 64 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26014,11 +25550,11 @@ function displacedCoords(reactionArrowDisplacement, start, end, displace) {
 
 exports.__esModule = true;
 
-var _scalePresets = __webpack_require__(50);
+var _scalePresets = __webpack_require__(65);
 
 var _scalePresets2 = _interopRequireDefault(_scalePresets);
 
-var _d3Scale = __webpack_require__(112);
+var _d3Scale = __webpack_require__(129);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26163,7 +25699,7 @@ var Scale = function () {
 exports.default = Scale;
 
 /***/ }),
-/* 65 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26171,19 +25707,19 @@ exports.default = Scale;
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var utils = _interopRequireWildcard(_utils);
 
-var _CallbackManager = __webpack_require__(21);
+var _CallbackManager = __webpack_require__(24);
 
 var _CallbackManager2 = _interopRequireDefault(_CallbackManager);
 
-var _d3Drag = __webpack_require__(22);
+var _d3Drag = __webpack_require__(25);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
@@ -26375,7 +25911,7 @@ var Canvas = function () {
 exports.default = Canvas;
 
 /***/ }),
-/* 66 */
+/* 83 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -26403,7 +25939,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 67 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26411,9 +25947,9 @@ module.exports = function(module) {
 
 exports.__esModule = true;
 
-var _d3Brush = __webpack_require__(114);
+var _d3Brush = __webpack_require__(131);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -26550,7 +26086,7 @@ var Brush = function () {
 exports.default = Brush;
 
 /***/ }),
-/* 68 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26558,7 +26094,7 @@ exports.default = Brush;
 
 exports.__esModule = true;
 
-var _PlacedDiv = __webpack_require__(35);
+var _PlacedDiv = __webpack_require__(45);
 
 var _PlacedDiv2 = _interopRequireDefault(_PlacedDiv);
 
@@ -26726,7 +26262,7 @@ var TextEditInput = function () {
 exports.default = TextEditInput;
 
 /***/ }),
-/* 69 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26734,27 +26270,27 @@ exports.default = TextEditInput;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
-var _ScaleSelector = __webpack_require__(70);
+var _ScaleSelector = __webpack_require__(87);
 
 var _ScaleSelector2 = _interopRequireDefault(_ScaleSelector);
 
-var _ScaleSlider = __webpack_require__(71);
+var _ScaleSlider = __webpack_require__(88);
 
 var _ScaleSlider2 = _interopRequireDefault(_ScaleSlider);
 
-var _ScaleSelection = __webpack_require__(80);
+var _ScaleSelection = __webpack_require__(97);
 
 var _ScaleSelection2 = _interopRequireDefault(_ScaleSelection);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-__webpack_require__(81);
+__webpack_require__(98);
 
-var _scalePresets = __webpack_require__(50);
+var _scalePresets = __webpack_require__(65);
 
 var _scalePresets2 = _interopRequireDefault(_scalePresets);
 
@@ -27505,7 +27041,7 @@ var SettingsMenu = function (_Component) {
 exports.default = SettingsMenu;
 
 /***/ }),
-/* 70 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27513,7 +27049,7 @@ exports.default = SettingsMenu;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -27593,7 +27129,7 @@ var ScaleSelector = function (_Component) {
 exports.default = ScaleSelector;
 
 /***/ }),
-/* 71 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27601,21 +27137,21 @@ exports.default = ScaleSelector;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
-var _Picker = __webpack_require__(72);
+var _Picker = __webpack_require__(89);
 
 var _Picker2 = _interopRequireDefault(_Picker);
 
-var _immutabilityHelper = __webpack_require__(76);
+var _immutabilityHelper = __webpack_require__(93);
 
 var _immutabilityHelper2 = _interopRequireDefault(_immutabilityHelper);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-__webpack_require__(78);
+__webpack_require__(95);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27940,7 +27476,7 @@ var ScaleSlider = function (_Component) {
         ),
         this.props.type === "Reaction" && (0, _preact.h)(
           'label',
-          { title: 'How many seconds are needed to complete the animation for every 100 SVG paths' },
+          { title: 'How many seconds are required to animate every 100 units of the SVG path length' },
           'Duration:'
         )
       ),
@@ -27997,7 +27533,7 @@ var ScaleSlider = function (_Component) {
 exports.default = ScaleSlider;
 
 /***/ }),
-/* 72 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28005,13 +27541,13 @@ exports.default = ScaleSlider;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
-var _d3Drag = __webpack_require__(22);
+var _d3Drag = __webpack_require__(25);
 
-__webpack_require__(73);
+__webpack_require__(90);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -28229,11 +27765,11 @@ var Picker = function (_Component) {
 exports.default = Picker;
 
 /***/ }),
-/* 73 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(74);
+var content = __webpack_require__(91);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -28247,18 +27783,18 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 74 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(12);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(11);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".escher-container .picker {\n  top: 35px;\n  margin-left: -7px;\n  position: absolute;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.escher-container .pickerBox {\n  position: absolute;\n  cursor: pointer;\n  background: rgba(0, 0, 0, 0.375);\n  width: 14px;\n  height: 35px;\n  top: -35px\n}\n\n.escher-container .scaleTrack .rightOptions {\n  position: absolute;\n  left: -76px;\n}\n\n.escher-container .pickerOptions {\n  box-shadow: 0 2px 14px #c5c5c5;\n  margin-top: 1px;\n  display: inline-flex;\n  flex-direction: column;\n  width: 90px;\n}\n\n.escher-container .pickerOptions * {\n  font-size: 12px;\n}\n\n.escher-container .pickerOptions .option {\n  padding: 3px 0px;\n}\n\n.escher-container .pickerOptions .typePicker {\n  width: 20px;\n  position: absolute;\n  left: 70px;\n  top: 1px;\n  right: 0px;\n  height: 14px;\n  background-color: rgb(232, 232, 232);\n}\n\n.escher-container .pickerOptions .colorOptions {\n  display: inline-flex;\n}\n\n.escher-container .colorOptions .colorText {\n  padding: 3px 0px;\n  width: 100%;\n}\n\n.escher-container .colorOptions .colorWheel {\n  padding: 0px;\n  position: absolute;\n  right: 0;\n  height: 24px;\n  width: 21px;\n  border: 1px solid black;\n}\n\n.escher-container .picker .trashDiv {\n  position: absolute;\n  top: -56px;\n  font-size: 17px;\n}\n\n.escher-container .picker .trashDiv * {\n  font-size: 17px;\n  cursor: pointer;\n}\n\n.escher-container .picker .icon-trash-empty {\n  margin: -5px;\n}\n\n.escher-container .scaleEditor :disabled {\n  background: #f1ecfa;\n}\n\n.escher-container .scaleEditor input[type=color]:disabled {\n  margin-top: 1px;\n}\n", ""]);
@@ -28267,7 +27803,7 @@ module.exports = exports;
 
 
 /***/ }),
-/* 75 */
+/* 92 */
 /***/ (function(module, exports) {
 
 
@@ -28362,10 +27898,10 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 76 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var invariant = __webpack_require__(77);
+var invariant = __webpack_require__(94);
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var splice = Array.prototype.splice;
@@ -28641,7 +28177,7 @@ function invariantMapOrSet(target, command) {
 
 
 /***/ }),
-/* 77 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28693,11 +28229,11 @@ module.exports = invariant;
 
 
 /***/ }),
-/* 78 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(79);
+var content = __webpack_require__(96);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -28711,18 +28247,18 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 79 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(12);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(11);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".escher-container .scaleEditor * {\n  font-size: 12px;\n  color: #777;\n  box-sizing: border-box;\n}\n\n.escher-container .scaleEditor {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.escher-container .scaleTrack {\n  position: relative;\n  display: flex;\n  height: 30px;\n  margin-bottom: 9px;\n  margin-top: 30px;\n  margin-left: 55px;\n  font-size: 15px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.escher-container .scaleTrack.disabled {\n  background: #f1ecfa;\n  color: #b19ec0;\n  padding: 4px 0;\n  justify-content: center;\n}\n\n.escher-container .gradient {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  cursor: pointer;\n}\n\n.escher-container .scaleLabels {\n  display: inline-flex;\n  flex-direction: column;\n  font-size: 12px;\n}\n\n.escher-container .scaleLabels label {\n  padding: 4px 0;\n}\n\n.escher-container .noDataStyle {\n  position: relative;\n  margin-top: 20px;\n}\n\n.escher-container .noDataStyle .styleHeader {\n  font-size: 12px;\n  font-weight: bold;\n}\n\n.escher-container .noDataStyle label {\n  margin-right: 5px;\n}\n\n.escher-container .noDataStyle input[type=text] {\n  margin-right: 10px;\n  padding: 3px 0px;\n  width: 86px;\n}\n\n.escher-container .noDataStyle input[type=color] {\n  position: absolute;\n  padding: 0px;\n  border: 1px solid black;\n  left: 103px;\n  height: 24px;\n  width: 21px;\n}\n\n.escher-container .scaleEditor .icon-plus {\n  cursor: pointer;\n  position: absolute;\n  font-size: 14px;\n  right: 19px;\n}\n", ""]);
@@ -28731,7 +28267,7 @@ module.exports = exports;
 
 
 /***/ }),
-/* 80 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28739,7 +28275,7 @@ module.exports = exports;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -28797,11 +28333,11 @@ var ScaleSelection = function (_Component) {
 exports.default = ScaleSelection;
 
 /***/ }),
-/* 81 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(82);
+var content = __webpack_require__(99);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -28815,18 +28351,18 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 82 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(12);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(11);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".escher-container .settingsBackground {\n  box-sizing: border-box;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 9;\n  background: rgba(0,0,0,.4);\n  padding: 5% 0 80px;\n  text-align: center;\n}\n\n.escher-container .scale-editor .domain-input {\n  color: #333;\n}\n\n.escher-container .settingsBoxContainer button {\n  position: absolute;\n  top: 5px;\n  right: 20px;\n  z-index: 10;\n  text-align: center;\n  vertical-align: middle;\n  font-weight: normal!important;\n  width: 34px;\n  height: 30px;\n  margin: 0;\n  padding: unset;\n  font-size: 14px!important;\n  border-radius: 3px;\n  -ms-touch-action: none;\n  touch-action: none;\n}\n\n.escher-container .settingsBoxContainer button:active {\n  background-image: linear-gradient(#3F4141, #474949 6%, #4F5151);\n}\n\n.escher-container .settingsBoxContainer .discardChanges {\n  right: 60px;\n}\n\n.escher-container .settingsBoxContainer {\n  color: rgb(119, 119, 119);\n  display: inline-block;\n  position: relative;\n  width: 90%;\n  max-width: 520px;\n  height: 100%;\n  z-index: 10;\n}\n\n.escher-container .settingsBox {\n  font-size: 13px;\n  box-sizing: border-box;\n  display: inline-block;\n  max-height: 100%;\n  width: 100%;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  background: rgba(255, 255, 255, 0.953);\n  padding: 8px;\n  margin: 0;\n  border: 1px solid #ddd;\n  text-align: left;\n}\n\n.escher-container .settingsBox * {\n  box-sizing: border-box;\n}\n\n.escher-container .settingsBox .title {\n  font-size: 17px;\n  font-weight: 700;\n  color: #777777;\n}\n\n.escher-container .settingsBox .subheading {\n  font-size: 13px;\n  font-weight: 700;\n  margin-top: 15px;\n  color: #777777;\n}\n\n.escher-container .settingsBox table {\n  border-collapse: collapse;\n}\n\n.escher-container .settingsBox label {\n  display: inline;\n}\n\n.escher-container .settingsBox .radioSelection {\n  cursor: default;\n}\n\n.escher-container .radioSelection td {\n  padding: 3px 5px;\n}\n\n.escher-container .radioSelection input[type=radio] {\n  margin: 0;\n  margin-top: 4px;\n  margin-right: 4px;\n}\n\n.escher-container .radioSelection .optionLabel {\n  width: 88px;\n}\n\n.escher-container .radioSelection .optionLabelWide {\n  width: 192px;\n}\n\n.escher-container .radioSelection .optionGroup {\n  margin-right: 10px\n}\n\n.escher-container .settingsBox .singleLine {\n  display: flex;\n}\n\n.escher-container .settingsContainer label {\n  display: block;\n  margin-bottom: 0;\n}\n\n.escher-container .settingsBoxContainer input[type=checkbox] {\n  margin: 0;\n  margin-top: 4px;\n  margin-right: 4px;\n}\n\n.escher-container .settingsTip {\n  font-size: 13px;\n}\n\n.escher-container .settingsBoxContainer hr {\n  margin: 18px 0;\n  border: 0;\n  border-top: 1px solid #dddddd;\n}\n\n.escher-container .scaleTitle {\n  margin-top: 15px;\n  display: flex;\n  justify-content: space-between;\n}\n\n.escher-container .selector {\n  position: relative;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  padding-top: 2px;\n}\n\n.escher-container .selectorTitle {\n  background-color: white;\n  border: 1px solid #a9a9a9;\n  padding-left: 4px;\n  cursor: default;\n  width: 162px;\n}\n\n.escher-container .selectorTitle:hover:not(.disabled) {\n  border-color: black;\n}\n\n.escher-container .selectorTitle.disabled {\n  background-color: #f1ecfa;\n}\n\n.escher-container .selectorMenu {\n  position: absolute;\n  z-index: 4;\n  background-color: white;\n  border: 1px solid #a9a9a9;\n  min-width: 162px;\n}\n\n.escher-container .scaleSelection {\n  cursor: default;\n  padding: 0 6px;\n  display: flex;\n  justify-content: space-between;\n}\n\n.escher-container .scaleSelection:hover {\n  background-color: dodgerblue;\n  color: white;\n}\n\n.escher-container .settingsBox .icon-sort-down {\n  position: absolute;\n  top: 0;\n}\n\n.escher-container .settingsBox .tooltipOption {\n  margin-left: 10px;\n}\n", ""]);
@@ -28835,7 +28371,7 @@ module.exports = exports;
 
 
 /***/ }),
-/* 83 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28843,13 +28379,13 @@ module.exports = exports;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
-var _Dropdown = __webpack_require__(84);
+var _Dropdown = __webpack_require__(101);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
-var _MenuButton = __webpack_require__(87);
+var _MenuButton = __webpack_require__(104);
 
 var _MenuButton2 = _interopRequireDefault(_MenuButton);
 
@@ -29203,6 +28739,27 @@ var MenuBar = function (_Component) {
         })
       ),
       (0, _preact.h)(
+        'div',
+        { className: 'switch-container' },
+        (0, _preact.h)(
+          'label',
+          { className: 'switch tooltip' },
+          (0, _preact.h)('input', { type: 'checkbox',
+            onClick: function onClick() {
+              _this3.props.settings.set('show_reaction_data_animation', !_this3.props.settings.get('show_reaction_data_animation'));
+              _this3.props.settings.acceptChanges();
+            },
+            checked: this.props.settings.get('show_reaction_data_animation')
+          }),
+          (0, _preact.h)('span', { className: 'slider' }),
+          (0, _preact.h)(
+            'span',
+            { className: 'tooltiptext' },
+            'If checked, then show the animation when reaction data is loaded.'
+          )
+        )
+      ),
+      (0, _preact.h)(
         'a',
         { className: 'helpButton', target: '#', href: 'https://escher.readthedocs.org' },
         '?'
@@ -29216,7 +28773,7 @@ var MenuBar = function (_Component) {
 exports.default = MenuBar;
 
 /***/ }),
-/* 84 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29224,9 +28781,9 @@ exports.default = MenuBar;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
-__webpack_require__(85);
+__webpack_require__(102);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -29335,11 +28892,11 @@ var Dropdown = function (_Component) {
 exports.default = Dropdown;
 
 /***/ }),
-/* 85 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(86);
+var content = __webpack_require__(103);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -29353,27 +28910,27 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 86 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(12);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(11);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".escher-container .menu-bar {\n  box-sizing: border-box;\n  list-style-type: none;\n  padding: 0;\n  padding-right: 20px;\n  position: relative;\n  margin: 5px 0px;\n  background-color: white;\n  border: 1px solid #ddd;\n  display: inline-flex;\n  box-sizing: border-box;\n  width: 100%;\n  justify-content: space-between;\n}\n\n.escher-container .dropdown {\n  position: relative;\n  float: left;\n  box-sizing: border-box;\n  font-size: 12px;\n  border-radius: 3px;\n\n  /* these sometimes get overridden */\n  margin: 0 !important;\n  font-weight: normal !important;\n\n  text-align: center;\n  vertical-align: middle;\n  -ms-touch-action: none;\n  touch-action: none;\n  cursor: pointer;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.escher-container .dropdownButton {\n  color: #d9230f!important;\n  border: 1px solid transparent;\n  padding: 6px 9px;\n}\n\n.escher-container .helpButton {\n  color: #d9230f!important;\n  padding: 0px 5px;\n  background-color: #f5f5f5!important;\n  border: 0!important;\n  text-decoration: unset;\n  height: fit-content;\n  position: absolute;\n  right: 0;\n  font-size: 12px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.escher-container .dropdownButton:focus, .escher-container .helpButton:focus {\n  color: #91170a!important;\n  text-decoration: underline;\n}\n\n.escher-container .dropdownButton:hover, .escher-container .helpButton:hover {\n  color: #91170a!important;\n  text-decoration: underline;\n}\n\n.escher-container .menu-bar .icon-sort-down {\n  position: absolute;\n  font-size: 10px;\n  margin-left: -5px;\n}\n\n@media (min-width: 550px) {\n  .escher-container .menu-bar {\n    padding-right: 25px;\n  }\n\n  .escher-container .dropdown {\n    font-size: 18px;\n  }\n\n  .escher-container .dropdownButton {\n    padding: 6px 10px;\n    padding-right: 16px;\n  }\n\n  .escher-container .helpButton {\n    font-size: 16px;\n  }\n\n  .escher-container .menu-bar .icon-sort-down {\n    font-size: 14px;\n  }\n}\n\n.escher-container .menu {\n  box-sizing: border-box;\n  font-weight: normal!important;\n  word-spacing: 0;\n  position: absolute;\n  white-space: nowrap;\n  top: 103%;\n  left: -1%;\n  z-index: 1000;\n  display: block;\n  float: none;\n  min-width: 160px;\n  padding: 5px 0;\n  list-style: none;\n  font-size: 13px;\n  box-shadow: 0 6px 12px rgba(0,0,0,0.175);\n  background-clip: padding-box;\n  border: 1px solid #ddd;\n  background-color: rgba(255, 255, 255, 0.95);\n  border-radius: 0;\n  margin: 0;\n  text-align: left;\n}\n\n.escher-container #rightMenu {\n  left: auto;\n  right: -2%;\n}\n\n.escher-container .menu li:hover {\n  background-color: #d9230f;\n  color: #FFFFFF;\n}\n\n.escher-container .menu li, .menu label {\n  font-size: 15px;\n  display: block;\n  color: #444444;\n\n  /* these sometimes get overridden */\n  font-weight: normal !important;\n  margin: 0 !important;\n}\n\n.escher-container .menu.ul.li {\n  background-color: rgba(255, 255, 255, 0.95);\n}\n\n.escher-container .menuButton {\n  box-sizing: border-box;\n  width: 100%;\n  padding: 5px 20px;\n  margin: 0;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.escher-container label:focus, .menuButton:focus {\n  background-color: #d9230f;\n  color: #FFFFFF;\n}\n\n.escher-container .menuButton:hover {\n  background-color: #d9230f;\n  color: #FFFFFF;\n}\n\n.escher-container input[type=\"file\"] {\n  display: none;\n}\n\n.escher-container #disabled {\n  color: #e0e0e0;\n}\n\n.escher-container #disabled:hover, #disabled:focus {\n  background-color: rgba(255, 255, 255, 0.95);\n  cursor: default;\n}\n", ""]);
+exports.push([module.i, ".escher-container .menu-bar {\n  box-sizing: border-box;\n  list-style-type: none;\n  padding: 0;\n  padding-right: 20px;\n  position: relative;\n  margin: 5px 0px;\n  background-color: white;\n  border: 1px solid #ddd;\n  display: inline-flex;\n  box-sizing: border-box;\n  width: 100%;\n  justify-content: space-between;\n}\n\n.escher-container .dropdown {\n  position: relative;\n  float: left;\n  box-sizing: border-box;\n  font-size: 12px;\n  border-radius: 3px;\n\n  /* these sometimes get overridden */\n  margin: 0 !important;\n  font-weight: normal !important;\n\n  text-align: center;\n  vertical-align: middle;\n  -ms-touch-action: none;\n  touch-action: none;\n  cursor: pointer;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.escher-container .dropdownButton {\n  color: #d9230f!important;\n  border: 1px solid transparent;\n  padding: 6px 9px;\n}\n\n.escher-container .helpButton {\n  color: #d9230f!important;\n  padding: 0px 5px;\n  background-color: #f5f5f5!important;\n  border: 0!important;\n  text-decoration: unset;\n  height: fit-content;\n  position: absolute;\n  right: 0;\n  font-size: 12px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.escher-container .dropdownButton:focus, .escher-container .helpButton:focus {\n  color: #91170a!important;\n  text-decoration: underline;\n}\n\n.escher-container .dropdownButton:hover, .escher-container .helpButton:hover {\n  color: #91170a!important;\n  text-decoration: underline;\n}\n\n.escher-container .menu-bar .icon-sort-down {\n  position: absolute;\n  font-size: 10px;\n  margin-left: -5px;\n}\n\n@media (min-width: 550px) {\n  .escher-container .menu-bar {\n    padding-right: 25px;\n  }\n\n  .escher-container .dropdown {\n    font-size: 18px;\n  }\n\n  .escher-container .dropdownButton {\n    padding: 6px 10px;\n    padding-right: 16px;\n  }\n\n  .escher-container .helpButton {\n    font-size: 16px;\n  }\n\n  .escher-container .menu-bar .icon-sort-down {\n    font-size: 14px;\n  }\n}\n\n.escher-container .menu {\n  box-sizing: border-box;\n  font-weight: normal!important;\n  word-spacing: 0;\n  position: absolute;\n  white-space: nowrap;\n  top: 103%;\n  left: -1%;\n  z-index: 1000;\n  display: block;\n  float: none;\n  min-width: 160px;\n  padding: 5px 0;\n  list-style: none;\n  font-size: 13px;\n  box-shadow: 0 6px 12px rgba(0,0,0,0.175);\n  background-clip: padding-box;\n  border: 1px solid #ddd;\n  background-color: rgba(255, 255, 255, 0.95);\n  border-radius: 0;\n  margin: 0;\n  text-align: left;\n}\n\n.escher-container #rightMenu {\n  left: auto;\n  right: -2%;\n}\n\n.escher-container .menu li:hover {\n  background-color: #d9230f;\n  color: #FFFFFF;\n}\n\n.escher-container .menu li, .menu label {\n  font-size: 15px;\n  display: block;\n  color: #444444;\n\n  /* these sometimes get overridden */\n  font-weight: normal !important;\n  margin: 0 !important;\n}\n\n.escher-container .menu.ul.li {\n  background-color: rgba(255, 255, 255, 0.95);\n}\n\n.escher-container .menuButton {\n  box-sizing: border-box;\n  width: 100%;\n  padding: 5px 20px;\n  margin: 0;\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.escher-container label:focus, .menuButton:focus {\n  background-color: #d9230f;\n  color: #FFFFFF;\n}\n\n.escher-container .menuButton:hover {\n  background-color: #d9230f;\n  color: #FFFFFF;\n}\n\n.escher-container input[type=\"file\"] {\n  display: none;\n}\n\n.escher-container #disabled {\n  color: #e0e0e0;\n}\n\n.escher-container #disabled:hover, #disabled:focus {\n  background-color: rgba(255, 255, 255, 0.95);\n  cursor: default;\n}\n\n.switch {\n  position: relative;\n  display: inline-block;\n  width: 50px;\n  height: 25px;\n  vertical-align: middle;\n}\n\n.switch input {\n  opacity: 0;\n  width: 0;\n  height: 0;\n}\n\n.slider {\n  position: absolute;\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ccc;\n  transition: .4s;\n  border-radius: 25px;\n}\n\n.slider:before {\n  position: absolute;\n  content: \"\";\n  height: 19px;\n  width: 19px;\n  left: 3px;\n  bottom: 3px;\n  background-color: white;\n  transition: .4s;\n  border-radius: 50%;\n}\n\ninput:checked + .slider {\n  background-color: #d9230f;\n}\n\ninput:checked + .slider:before {\n  transform: translateX(25px);\n}\n\n.switch-container {\n  display: flex;\n  align-items: center;\n}\n\n.switch-description {\n  margin-right: 10px;\n  font-size: 16px;\n}\n\n/* Tooltip styling */\n.tooltip {\n  position: relative;\n  display: inline-block;\n}\n\n.tooltip .tooltiptext {\n  visibility: hidden;\n  width: 120px;\n  background-color: black;\n  color: #fff;\n  text-align: center;\n  border-radius: 6px;\n  padding: 5px;\n  position: absolute;\n  z-index: 1;\n  top: 125%; /* Position the tooltip below the switch */\n  left: 50%;\n  margin-left: -60px;\n  opacity: 0;\n  transition: opacity 0.3s;\n}\n\n.tooltip .tooltiptext::after {\n  content: \"\";\n  position: absolute;\n  bottom: 100%; /* At the top of the tooltip */\n  left: 50%;\n  margin-left: -5px;\n  border-width: 5px;\n  border-style: solid;\n  border-color: transparent transparent black transparent;\n}\n\n.tooltip:hover .tooltiptext {\n  visibility: visible;\n  opacity: 1;\n}\n\n", ""]);
 // Exports
 module.exports = exports;
 
 
 /***/ }),
-/* 87 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29381,17 +28938,17 @@ module.exports = exports;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _dataStyles = __webpack_require__(20);
+var _dataStyles = __webpack_require__(23);
 
 var dataStyles = _interopRequireWildcard(_dataStyles);
 
@@ -29508,7 +29065,7 @@ var MenuButton = function (_Component) {
 exports.default = MenuButton;
 
 /***/ }),
-/* 88 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29516,11 +29073,11 @@ exports.default = MenuButton;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
-__webpack_require__(89);
+__webpack_require__(106);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
@@ -29738,11 +29295,11 @@ var SearchBar = function (_Component) {
 exports.default = SearchBar;
 
 /***/ }),
-/* 89 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(90);
+var content = __webpack_require__(107);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -29756,18 +29313,18 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 90 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(12);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(11);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".escher-container .search-container {\n  display: flex;\n  flex-direction: row;\n  background-color: rgba(255, 255, 255, 0.95);\n  padding: 3px;\n  border: 1px solid #DDD;\n}\n\n.escher-container .search-container .search-field {\n  flex: 0 0 auto;\n  color: #777;\n  border: 1px solid #DDD;\n  width: 114px;\n  height: 29px;\n  border-radius: 3px;\n  font-size: 13px;\n}\n\n.escher-container .search-container .search-counter {\n  flex: 1;\n  color: #777;\n  font-size: 13px;\n  padding: 9px 0 0 6px;\n}\n\n.escher-container .search-container .search-bar-button {\n  flex: 0 0 auto;\n  border-radius: 4px;\n  text-align: center;\n  vertical-align: middle;\n  font-size: 14px;\n  font-weight: 400;\n  height: 29px;\n  width: 34px;\n  margin: 3px;\n}\n\n.escher-container .search-container .search-bar-button.left {\n  border-top-right-radius: 0px;\n  border-bottom-right-radius: 0px;\n  margin-right: 0;\n}\n\n.escher-container .search-container .search-bar-button.right {\n  border-top-left-radius: 0px;\n  border-bottom-left-radius: 0px;\n  margin-left: 0;\n}\n\n.escher-container .search-container .search-bar-button:active {\n  background-image: linear-gradient(#3F4141, #474949 6%, #4F5151);\n}\n", ""]);
@@ -29776,7 +29333,7 @@ module.exports = exports;
 
 
 /***/ }),
-/* 91 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29784,9 +29341,9 @@ module.exports = exports;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
-__webpack_require__(92);
+__webpack_require__(109);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -30010,11 +29567,11 @@ var ButtonPanel = function (_Component) {
 exports.default = ButtonPanel;
 
 /***/ }),
-/* 92 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(93);
+var content = __webpack_require__(110);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -30028,18 +29585,18 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 93 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(12);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(11);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".escher-container .button-panel {\n  position: absolute;\n  left: 4px;\n  top: 20%;\n  margin-top: -32px;\n  padding-left: 0;\n  touch-action: none;\n}\n\n.escher-container .button-panel>li {\n  margin-top: 5px;\n  display: block;\n\n  /* these sometimes get overridden */\n  margin-left: 0 !important;\n}\n\n.escher-container .grouping {\n  display: block;\n}\n\n.escher-container .buttonGroup {\n  display: block;\n  margin-bottom: -1px;\n  padding: 5px 0px;\n  border-radius: 0;\n}\n\n.escher-container .grouping>.buttonGroup:first-child {\n  border-top-left-radius: 4px;\n  border-top-right-radius: 4px;\n}\n\n.escher-container .grouping>.buttonGroup:last-child {\n  border-bottom-left-radius: 4px;\n  border-bottom-right-radius: 4px;\n}\n\n.escher-container .button-panel>.grouping:last-child {\n  margin-top: 4px;\n}\n\n.escher-container #currentMode,\n.escher-container .active-button {\n  background-image: linear-gradient(#8F4F3F,#834c3c 6%,#8d3a2d) !important;\n}\n\n.escher-container .buttonGroup.btn {\n  margin-top: -1px;\n}\n\n.escher-container .button {\n  border-radius: 4px;\n}\n\n.escher-container .button.btn, .escher-container .buttonGroup.btn {\n  padding: unset;\n  color: white!important;\n  border: 1px solid #474949;\n  background-image: linear-gradient(#4F5151, #474949 6%, #3F4141);\n  background-color: white;\n  text-align: center;\n  vertical-align: middle;\n  cursor: pointer;\n  font-size: 14px!important;\n  font-weight: 400;\n  width: 40px;\n  height: 40px;\n}\n\n.escher-container .button-panel .button:active, .escher-container .buttonGroup label:active, .escher-container .button-panel .buttonGroup:active {\n  background-image: linear-gradient(#3F4141, #474949 6%, #4F5151);\n}\n\n.escher-container .button-panel .fa {\n  font-size: 24px;\n}\n\n/* Icons */\n.escher-container .button-panel [class^='icon-'] {\n  font-size: 23px;\n}\n", ""]);
@@ -30048,7 +29605,7 @@ module.exports = exports;
 
 
 /***/ }),
-/* 94 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30056,19 +29613,19 @@ module.exports = exports;
 
 exports.__esModule = true;
 
-var _CallbackManager = __webpack_require__(21);
+var _CallbackManager = __webpack_require__(24);
 
 var _CallbackManager2 = _interopRequireDefault(_CallbackManager);
 
-var _PlacedDiv = __webpack_require__(35);
+var _PlacedDiv = __webpack_require__(45);
 
 var _PlacedDiv2 = _interopRequireDefault(_PlacedDiv);
 
-var _renderWrapper = __webpack_require__(56);
+var _renderWrapper = __webpack_require__(71);
 
 var _renderWrapper2 = _interopRequireDefault(_renderWrapper);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
@@ -30296,7 +29853,7 @@ var TooltipContainer = function () {
 exports.default = TooltipContainer;
 
 /***/ }),
-/* 95 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30304,11 +29861,11 @@ exports.default = TooltipContainer;
 
 exports.__esModule = true;
 
-var _preact = __webpack_require__(6);
+var _preact = __webpack_require__(4);
 
-__webpack_require__(96);
+__webpack_require__(113);
 
-var _utils = __webpack_require__(4);
+var _utils = __webpack_require__(2);
 
 var utils = _interopRequireWildcard(_utils);
 
@@ -30406,11 +29963,11 @@ var DefaultTooltip = function (_Component) {
 exports.default = DefaultTooltip;
 
 /***/ }),
-/* 96 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(97);
+var content = __webpack_require__(114);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -30424,18 +29981,18 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 97 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(12);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(11);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".escher-container .default-tooltip {\n  box-sizing: border-box;\n  min-width: 300px;\n  min-height: 100px;\n  border-radius: 2px;\n  border: 1px solid #b58787;\n  padding: 7px;\n  background-color: #fff;\n  text-align: left;\n  font-size: 16px;\n  font-family: sans-serif;\n  color: #111;\n  box-shadow: 4px 6px 20px 0px rgba(0, 0, 0, 0.4);\n}\n\n.escher-container .default-tooltip .id{\n  font-size: 18px;\n  font-weight: bold;\n}\n\n.escher-container .default-tooltip button {\n  border-radius: 3px;\n  background-color: #eee;\n  border: 1px solid #ddd;\n  margin-top: 4px;\n  font-size: 16px;\n  padding: 3px 6px;\n}\n\n.escher-container .default-tooltip .top-right {\n  position: absolute;\n  top: 4px;\n  right: 4px;\n}\n\n.escher-container .default-tooltip .top-right * {\n  float: right;\n  text-align: right;\n}\n\n.escher-container .default-tooltip .top-right a {\n  font-size: 11px;\n  color: #999;\n  cursor: pointer;\n}\n.escher-container .default-tooltip .top-right a:hover {\n  color: #444;\n  text-decoration: underline;\n}\n\n.escher-container .default-tooltip .type-label {\n  font-size: 15px;\n  color: #d27066;\n  background-color: #ffeded;\n  border-radius: 2px;\n  margin: 0 0 0 10px;\n  padding: 0 5px;\n}\n", ""]);
@@ -30444,11 +30001,11 @@ module.exports = exports;
 
 
 /***/ }),
-/* 98 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(99);
+var content = __webpack_require__(116);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -30462,24 +30019,24 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 99 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(12);
-var ___CSS_LOADER_GET_URL_IMPORT___ = __webpack_require__(100);
-var ___CSS_LOADER_URL_IMPORT_0___ = __webpack_require__(101);
-var ___CSS_LOADER_URL_IMPORT_1___ = __webpack_require__(102);
-var ___CSS_LOADER_URL_IMPORT_2___ = __webpack_require__(103);
-var ___CSS_LOADER_URL_IMPORT_3___ = __webpack_require__(104);
-var ___CSS_LOADER_URL_IMPORT_4___ = __webpack_require__(105);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(11);
+var ___CSS_LOADER_GET_URL_IMPORT___ = __webpack_require__(117);
+var ___CSS_LOADER_URL_IMPORT_0___ = __webpack_require__(118);
+var ___CSS_LOADER_URL_IMPORT_1___ = __webpack_require__(119);
+var ___CSS_LOADER_URL_IMPORT_2___ = __webpack_require__(120);
+var ___CSS_LOADER_URL_IMPORT_3___ = __webpack_require__(121);
+var ___CSS_LOADER_URL_IMPORT_4___ = __webpack_require__(122);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_0___);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_0___, { hash: "#iefix" });
@@ -30494,7 +30051,7 @@ module.exports = exports;
 
 
 /***/ }),
-/* 100 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30534,41 +30091,41 @@ module.exports = function (url, options) {
 };
 
 /***/ }),
-/* 101 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = "data:application/vnd.ms-fontobject;base64,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"
 
 /***/ }),
-/* 102 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = "data:application/font-woff2;base64,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"
 
 /***/ }),
-/* 103 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = "data:application/font-woff;base64,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"
 
 /***/ }),
-/* 104 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = "data:application/octet-stream;base64,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"
 
 /***/ }),
-/* 105 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxtZXRhZGF0YT5Db3B5cmlnaHQgKEMpIDIwMTcgYnkgb3JpZ2luYWwgYXV0aG9ycyBAIGZvbnRlbGxvLmNvbTwvbWV0YWRhdGE+CjxkZWZzPgo8Zm9udCBpZD0iZm9udGVsbG8iIGhvcml6LWFkdi14PSIxMDAwIiA+Cjxmb250LWZhY2UgZm9udC1mYW1pbHk9ImZvbnRlbGxvIiBmb250LXdlaWdodD0iNDAwIiBmb250LXN0cmV0Y2g9Im5vcm1hbCIgdW5pdHMtcGVyLWVtPSIxMDAwIiBhc2NlbnQ9Ijg1MCIgZGVzY2VudD0iLTE1MCIgLz4KPG1pc3NpbmctZ2x5cGggaG9yaXotYWR2LXg9IjEwMDAiIC8+CjxnbHlwaCBnbHlwaC1uYW1lPSJvayIgdW5pY29kZT0iJiN4ZTgwMDsiIGQ9Ik05MzMgNTM0cTAtMjItMTYtMzhsLTQwNC00MDQtNzYtNzZxLTE2LTE1LTM4LTE1dC0zOCAxNWwtNzYgNzYtMjAyIDIwMnEtMTUgMTYtMTUgMzh0MTUgMzhsNzYgNzZxMTYgMTYgMzggMTZ0MzgtMTZsMTY0LTE2NSAzNjYgMzY3cTE2IDE2IDM4IDE2dDM4LTE2bDc2LTc2cTE2LTE1IDE2LTM4eiIgaG9yaXotYWR2LXg9IjEwMDAiIC8+Cgo8Z2x5cGggZ2x5cGgtbmFtZT0iY2FuY2VsIiB1bmljb2RlPSImI3hlODAxOyIgZD0iTTcyNCAxMTJxMC0yMi0xNS0zOGwtNzYtNzZxLTE2LTE1LTM4LTE1dC0zOCAxNWwtMTY0IDE2NS0xNjQtMTY1cS0xNi0xNS0zOC0xNXQtMzggMTVsLTc2IDc2cS0xNiAxNi0xNiAzOHQxNiAzOGwxNjQgMTY0LTE2NCAxNjRxLTE2IDE2LTE2IDM4dDE2IDM4bDc2IDc2cTE2IDE2IDM4IDE2dDM4LTE2bDE2NC0xNjQgMTY0IDE2NHExNiAxNiAzOCAxNnQzOC0xNmw3Ni03NnExNS0xNSAxNS0zOHQtMTUtMzhsLTE2NC0xNjQgMTY0LTE2NHExNS0xNSAxNS0zOHoiIGhvcml6LWFkdi14PSI3ODUuNyIgLz4KCjxnbHlwaCBnbHlwaC1uYW1lPSJwbHVzIiB1bmljb2RlPSImI3hlODAyOyIgZD0iTTc4NiA0Mzl2LTEwN3EwLTIyLTE2LTM4dC0zOC0xNWgtMjMydi0yMzNxMC0yMi0xNi0zN3QtMzgtMTZoLTEwN3EtMjIgMC0zOCAxNnQtMTUgMzd2MjMzaC0yMzJxLTIzIDAtMzggMTV0LTE2IDM4djEwN3EwIDIzIDE2IDM4dDM4IDE2aDIzMnYyMzJxMCAyMiAxNSAzOHQzOCAxNmgxMDdxMjMgMCAzOC0xNnQxNi0zOHYtMjMyaDIzMnEyMyAwIDM4LTE2dDE2LTM4eiIgaG9yaXotYWR2LXg9Ijc4NS43IiAvPgoKPGdseXBoIGdseXBoLW5hbWU9ImRvd24tYmlnIiB1bmljb2RlPSImI3hlODAzOyIgZD0iTTg5OSAzODZxMC0zMC0yMS01MGwtMzYzLTM2NHEtMjItMjEtNTEtMjEtMjkgMC01MCAyMWwtMzYzIDM2NHEtMjEgMjAtMjEgNTAgMCAyOSAyMSA1MWw0MSA0MXEyMiAyMSA1MSAyMSAyOSAwIDUwLTIxbDE2NC0xNjR2MzkzcTAgMjkgMjEgNTB0NTEgMjJoNzFxMjkgMCA1MC0yMnQyMS01MHYtMzkzbDE2NSAxNjRxMjAgMjEgNTAgMjEgMjkgMCA1MS0yMWw0MS00MXEyMS0yMiAyMS01MXoiIGhvcml6LWFkdi14PSI5MjguNiIgLz4KCjxnbHlwaCBnbHlwaC1uYW1lPSJsZWZ0LWJpZyIgdW5pY29kZT0iJiN4ZTgwNDsiIGQ9Ik04NTcgMzUwdi03MXEwLTMwLTE4LTUxdC00Ny0yMWgtMzkzbDE2NC0xNjRxMjEtMjAgMjEtNTB0LTIxLTUwbC00Mi00M3EtMjEtMjAtNTEtMjAtMjkgMC01MCAyMGwtMzY0IDM2NHEtMjAgMjEtMjAgNTAgMCAyOSAyMCA1MWwzNjQgMzYzcTIxIDIxIDUwIDIxIDI5IDAgNTEtMjFsNDItNDFxMjEtMjIgMjEtNTF0LTIxLTUxbC0xNjQtMTY0aDM5M3EyOSAwIDQ3LTIwdDE4LTUxeiIgaG9yaXotYWR2LXg9Ijg1Ny4xIiAvPgoKPGdseXBoIGdseXBoLW5hbWU9InJpZ2h0LWJpZyIgdW5pY29kZT0iJiN4ZTgwNTsiIGQ9Ik04MjEgMzE0cTAtMzAtMjAtNTBsLTM2My0zNjRxLTIyLTIwLTUxLTIwLTI5IDAtNTAgMjBsLTQyIDQycS0yMiAyMS0yMiA1MXQyMiA1MWwxNjMgMTYzaC0zOTNxLTI5IDAtNDcgMjF0LTE4IDUxdjcxcTAgMzAgMTggNTF0NDcgMjBoMzkzbC0xNjMgMTY1cS0yMiAyMC0yMiA1MHQyMiA1MGw0MiA0MnEyMSAyMSA1MCAyMSAyOSAwIDUxLTIxbDM2My0zNjNxMjAtMjAgMjAtNTF6IiBob3Jpei1hZHYteD0iODU3LjEiIC8+Cgo8Z2x5cGggZ2x5cGgtbmFtZT0idXAtYmlnIiB1bmljb2RlPSImI3hlODA2OyIgZD0iTTg5OSAzMDhxMC0yOC0yMS01MGwtNDEtNDJxLTIyLTIxLTUxLTIxLTMwIDAtNTAgMjFsLTE2NSAxNjR2LTM5M3EwLTI5LTIwLTQ3dC01MS0xOWgtNzFxLTMwIDAtNTEgMTl0LTIxIDQ3djM5M2wtMTY0LTE2NHEtMjAtMjEtNTAtMjF0LTUwIDIxbC00MiA0MnEtMjEgMjEtMjEgNTAgMCAzMCAyMSA1MWwzNjMgMzYzcTIwIDIxIDUwIDIxIDMwIDAgNTEtMjFsMzYzLTM2M3EyMS0yMiAyMS01MXoiIGhvcml6LWFkdi14PSI5MjguNiIgLz4KCjxnbHlwaCBnbHlwaC1uYW1lPSJsZWZ0LW9wZW4iIHVuaWNvZGU9IiYjeGU4MDc7IiBkPSJNNjU0IDY4MmwtMjk3LTI5NiAyOTctMjk3cTEwLTEwIDEwLTI1dC0xMC0yNWwtOTMtOTNxLTExLTEwLTI1LTEwdC0yNSAxMGwtNDE0IDQxNXEtMTEgMTAtMTEgMjV0MTEgMjVsNDE0IDQxNHExMCAxMSAyNSAxMXQyNS0xMWw5My05M3ExMC0xMCAxMC0yNXQtMTAtMjV6IiBob3Jpei1hZHYteD0iNzE0LjMiIC8+Cgo8Z2x5cGggZ2x5cGgtbmFtZT0icmlnaHQtb3BlbiIgdW5pY29kZT0iJiN4ZTgwODsiIGQ9Ik02MTggMzYxbC00MTQtNDE1cS0xMS0xMC0yNS0xMHQtMjUgMTBsLTkzIDkzcS0xMSAxMS0xMSAyNXQxMSAyNWwyOTYgMjk3LTI5NiAyOTZxLTExIDExLTExIDI1dDExIDI1bDkzIDkzcTEwIDExIDI1IDExdDI1LTExbDQxNC00MTRxMTAtMTEgMTAtMjV0LTEwLTI1eiIgaG9yaXotYWR2LXg9IjcxNC4zIiAvPgoKPGdseXBoIGdseXBoLW5hbWU9IndyZW5jaCIgdW5pY29kZT0iJiN4ZTgwOTsiIGQ9Ik0yMTQgMjlxMCAxNC0xMCAyNXQtMjUgMTAtMjUtMTAtMTEtMjUgMTEtMjUgMjUtMTEgMjUgMTEgMTAgMjV6IG0zNjAgMjM0bC0zODEtMzgxcS0yMS0yMC01MC0yMC0yOSAwLTUxIDIwbC01OSA2MXEtMjEgMjAtMjEgNTAgMCAyOSAyMSA1MWwzODAgMzgwcTIyLTU1IDY0LTk3dDk3LTY0eiBtMzU0IDI0M3EwLTIyLTEzLTU5LTI3LTc1LTkyLTEyMnQtMTQ0LTQ2cS0xMDQgMC0xNzcgNzN0LTczIDE3NyA3MyAxNzYgMTc3IDc0cTMyIDAgNjctMTB0NjAtMjZxOS02IDktMTV0LTktMTZsLTE2My05NHYtMTI1bDEwOC02MHEyIDIgNDQgMjd0NzUgNDUgNDAgMjBxOCAwIDEzLTV0NS0xNHoiIGhvcml6LWFkdi14PSI5MjguNiIgLz4KCjxnbHlwaCBnbHlwaC1uYW1lPSJyZXNpemUtZnVsbCIgdW5pY29kZT0iJiN4ZTgwYTsiIGQ9Ik00MjEgMjYxcTAtNy01LTEzbC0xODUtMTg1IDgwLTgxcTEwLTEwIDEwLTI1dC0xMC0yNS0yNS0xMWgtMjUwcS0xNSAwLTI1IDExdC0xMSAyNXYyNTBxMCAxNSAxMSAyNXQyNSAxMSAyNS0xMWw4MC04MCAxODYgMTg1cTUgNiAxMiA2dDEzLTZsNjQtNjNxNS02IDUtMTN6IG00MzYgNDgydi0yNTBxMC0xNS0xMC0yNXQtMjYtMTEtMjUgMTFsLTgwIDgwLTE4NS0xODVxLTYtNi0xMy02dC0xMyA2bC02NCA2NHEtNSA1LTUgMTJ0NSAxM2wxODYgMTg1LTgxIDgxcS0xMCAxMC0xMCAyNXQxMCAyNSAyNSAxMWgyNTBxMTUgMCAyNi0xMXQxMC0yNXoiIGhvcml6LWFkdi14PSI4NTcuMSIgLz4KCjxnbHlwaCBnbHlwaC1uYW1lPSJjdyIgdW5pY29kZT0iJiN4ZTgwYjsiIGQ9Ik04NTcgNzA3di0yNTBxMC0xNC0xMC0yNXQtMjYtMTFoLTI1MHEtMjMgMC0zMiAyMy0xMCAyMiA3IDM4bDc3IDc3cS04MiA3Ny0xOTQgNzctNTggMC0xMTEtMjN0LTkxLTYxLTYxLTkxLTIzLTExMSAyMy0xMTEgNjEtOTEgOTEtNjEgMTExLTIzcTY2IDAgMTI1IDI5dDEwMCA4MnE0IDYgMTMgNyA4IDAgMTQtNWw3Ni03N3E1LTQgNi0xMXQtNS0xM3EtNjAtNzQtMTQ3LTExNHQtMTgyLTQxcS04NyAwLTE2NyAzNHQtMTM2IDkyLTkyIDEzNy0zNCAxNjYgMzQgMTY2IDkyIDEzNyAxMzYgOTIgMTY3IDM0cTgyIDAgMTU4LTMxdDEzNy04OGw3MiA3MnExNyAxOCAzOSA4IDIyLTkgMjItMzN6IiBob3Jpei1hZHYteD0iODU3LjEiIC8+Cgo8Z2x5cGggZ2x5cGgtbmFtZT0idHJhc2gtZW1wdHkiIHVuaWNvZGU9IiYjeGU4MGU7IiBkPSJNMjg2IDQzOXYtMzIxcTAtOC01LTEzdC0xMy01aC0zNnEtOCAwLTEzIDV0LTUgMTN2MzIxcTAgOCA1IDEzdDEzIDVoMzZxOCAwIDEzLTV0NS0xM3ogbTE0MyAwdi0zMjFxMC04LTUtMTN0LTEzLTVoLTM2cS04IDAtMTMgNXQtNSAxM3YzMjFxMCA4IDUgMTN0MTMgNWgzNnE4IDAgMTMtNXQ1LTEzeiBtMTQyIDB2LTMyMXEwLTgtNS0xM3QtMTItNWgtMzZxLTggMC0xMyA1dC01IDEzdjMyMXEwIDggNSAxM3QxMyA1aDM2cTcgMCAxMi01dDUtMTN6IG03Mi00MDR2NTI5aC01MDB2LTUyOXEwLTEyIDQtMjJ0OC0xNSA2LTVoNDY0cTIgMCA2IDV0OCAxNSA0IDIyeiBtLTM3NSA2MDFoMjUwbC0yNyA2NXEtNCA1LTkgNmgtMTc3cS02LTEtMTAtNnogbTUxOC0xOHYtMzZxMC04LTUtMTN0LTEzLTVoLTU0di01MjlxMC00Ni0yNi04MHQtNjMtMzRoLTQ2NHEtMzcgMC02MyAzM3QtMjcgNzl2NTMxaC01M3EtOCAwLTEzIDV0LTUgMTN2MzZxMCA4IDUgMTN0MTMgNWgxNzJsMzkgOTNxOSAyMSAzMSAzNXQ0NCAxNWgxNzhxMjMgMCA0NC0xNXQzMC0zNWwzOS05M2gxNzNxOCAwIDEzLTV0NS0xM3oiIGhvcml6LWFkdi14PSI3ODUuNyIgLz4KCjxnbHlwaCBnbHlwaC1uYW1lPSJmb250IiB1bmljb2RlPSImI3hlODBmOyIgZD0iTTQwNSA1MzhsLTk1LTI1MXExOCAwIDc2LTF0ODktMXExMSAwIDMyIDEtNDggMTQxLTEwMiAyNTJ6IG0tNDA1LTYxN2wxIDQ0cTEzIDQgMzEgN3QzMiA2IDI4IDggMjUgMTcgMTcgMjhsMTMyIDM0NCAxNTYgNDA0aDcycTQtOCA2LTEybDExNC0yNjhxMTktNDMgNjAtMTQ0dDYzLTE1M3E5LTE5IDMzLTgwdDQwLTk0cTExLTI2IDE5LTMyIDExLTkgNDktMTd0NDctMTFxNC0yMiA0LTMyIDAtMy0xLTh0MC03cS0zNSAwLTEwNiA1dC0xMDcgNHEtNDIgMC0xMjAtNHQtOTktNHEwIDI0IDIgNDNsNzMgMTZxMSAwIDcgMXQ5IDIgOCAzIDkgNCA2IDQgNSA2IDEgOHEwIDktMTcgNTR0LTQwIDk5LTI0IDU2bC0yNTEgMXEtMTQtMzItNDMtMTA5dC0yOC05MXEwLTEyIDgtMjF0MjQtMTQgMjctNyAzMi01IDIzLTJxMS0xMSAxLTMyIDAtNS0xLTE2LTMzIDAtOTggNnQtOTcgNnEtNSAwLTE1LTN0LTEyLTJxLTQ1LTgtMTA1LTh6IiBob3Jpei1hZHYteD0iOTI4LjYiIC8+Cgo8Z2x5cGggZ2x5cGgtbmFtZT0iem9vbS1pbiIgdW5pY29kZT0iJiN4ZTgxMDsiIGQ9Ik01NzEgNDA0di0zNnEwLTctNS0xM3QtMTItNWgtMTI1di0xMjVxMC03LTYtMTN0LTEyLTVoLTM2cS03IDAtMTMgNXQtNSAxM3YxMjVoLTEyNXEtNyAwLTEyIDV0LTYgMTN2MzZxMCA3IDYgMTJ0MTIgNWgxMjV2MTI1cTAgOCA1IDEzdDEzIDVoMzZxNyAwIDEyLTV0Ni0xM3YtMTI1aDEyNXE3IDAgMTItNXQ1LTEyeiBtNzItMThxMCAxMDMtNzMgMTc2dC0xNzcgNzQtMTc3LTc0LTczLTE3NiA3My0xNzcgMTc3LTczIDE3NyA3MyA3MyAxNzd6IG0yODYtNDY1cTAtMjktMjEtNTB0LTUxLTIxcS0zMCAwLTUwIDIxbC0xOTEgMTkxcS0xMDAtNjktMjIzLTY5LTgwIDAtMTUzIDMxdC0xMjUgODQtODQgMTI1LTMxIDE1MyAzMSAxNTIgODQgMTI2IDEyNSA4NCAxNTMgMzEgMTUzLTMxIDEyNS04NCA4NC0xMjYgMzEtMTUycTAtMTIzLTY5LTIyM2wxOTEtMTkxcTIxLTIxIDIxLTUxeiIgaG9yaXotYWR2LXg9IjkyOC42IiAvPgoKPGdseXBoIGdseXBoLW5hbWU9Inpvb20tb3V0IiB1bmljb2RlPSImI3hlODExOyIgZD0iTTU3MSA0MDR2LTM2cTAtNy01LTEzdC0xMi01aC0zMjJxLTcgMC0xMiA1dC02IDEzdjM2cTAgNyA2IDEydDEyIDVoMzIycTcgMCAxMi01dDUtMTJ6IG03Mi0xOHEwIDEwMy03MyAxNzZ0LTE3NyA3NC0xNzctNzQtNzMtMTc2IDczLTE3NyAxNzctNzMgMTc3IDczIDczIDE3N3ogbTI4Ni00NjVxMC0yOS0yMS01MHQtNTEtMjFxLTMwIDAtNTAgMjFsLTE5MSAxOTFxLTEwMC02OS0yMjMtNjktODAgMC0xNTMgMzF0LTEyNSA4NC04NCAxMjUtMzEgMTUzIDMxIDE1MiA4NCAxMjYgMTI1IDg0IDE1MyAzMSAxNTMtMzEgMTI1LTg0IDg0LTEyNiAzMS0xNTJxMC0xMjMtNjktMjIzbDE5MS0xOTFxMjEtMjEgMjEtNTF6IiBob3Jpei1hZHYteD0iOTI4LjYiIC8+Cgo8Z2x5cGggZ2x5cGgtbmFtZT0ibW92ZSIgdW5pY29kZT0iJiN4ZjA0NzsiIGQ9Ik0xMDAwIDM1MHEwLTE0LTExLTI1bC0xNDItMTQzcS0xMS0xMS0yNi0xMXQtMjUgMTEtMTAgMjV2NzJoLTIxNXYtMjE1aDcycTE0IDAgMjUtMTB0MTEtMjUtMTEtMjVsLTE0My0xNDNxLTEwLTExLTI1LTExdC0yNSAxMWwtMTQzIDE0M3EtMTEgMTAtMTEgMjV0MTEgMjUgMjUgMTBoNzJ2MjE1aC0yMTV2LTcycTAtMTQtMTAtMjV0LTI1LTExLTI1IDExbC0xNDMgMTQzcS0xMSAxMS0xMSAyNXQxMSAyNWwxNDMgMTQzcTEwIDExIDI1IDExdDI1LTExIDEwLTI1di03MmgyMTV2MjE1aC03MnEtMTQgMC0yNSAxMHQtMTEgMjUgMTEgMjZsMTQzIDE0MnExMSAxMSAyNSAxMXQyNS0xMWwxNDMtMTQycTExLTExIDExLTI2dC0xMS0yNS0yNS0xMGgtNzJ2LTIxNWgyMTV2NzJxMCAxNCAxMCAyNXQyNSAxMSAyNi0xMWwxNDItMTQzcTExLTEwIDExLTI1eiIgaG9yaXotYWR2LXg9IjEwMDAiIC8+Cgo8Z2x5cGggZ2x5cGgtbmFtZT0icmVzaXplLWZ1bGwtYWx0IiB1bmljb2RlPSImI3hmMGIyOyIgZD0iTTcxNiA1NDhsLTE5OC0xOTggMTk4LTE5OCA4MCA4MHExNyAxOCAzOSA4IDIyLTkgMjItMzN2LTI1MHEwLTE0LTEwLTI1dC0yNi0xMWgtMjUwcS0yMyAwLTMyIDIzLTEwIDIxIDcgMzhsODEgODEtMTk4IDE5OC0xOTgtMTk4IDgwLTgxcTE3LTE3IDgtMzgtMTAtMjMtMzMtMjNoLTI1MHEtMTUgMC0yNSAxMXQtMTEgMjV2MjUwcTAgMjQgMjIgMzMgMjIgMTAgMzktOGw4MC04MCAxOTggMTk4LTE5OCAxOTgtODAtODBxLTExLTExLTI1LTExLTcgMC0xNCAzLTIyIDktMjIgMzN2MjUwcTAgMTQgMTEgMjV0MjUgMTFoMjUwcTIzIDAgMzMtMjMgOS0yMS04LTM4bC04MC04MSAxOTgtMTk4IDE5OCAxOTgtODEgODFxLTE3IDE3LTcgMzggOSAyMyAzMiAyM2gyNTBxMTUgMCAyNi0xMXQxMC0yNXYtMjUwcTAtMjQtMjItMzMtNy0zLTE0LTMtMTQgMC0yNSAxMXoiIGhvcml6LWFkdi14PSI4NTcuMSIgLz4KCjxnbHlwaCBnbHlwaC1uYW1lPSJibGFuayIgdW5pY29kZT0iJiN4ZjBjODsiIGQ9Ik04NTcgNjE4di01MzZxMC02Ni00Ny0xMTN0LTExNC00OGgtNTM1cS02NyAwLTExNCA0OHQtNDcgMTEzdjUzNnEwIDY2IDQ3IDExM3QxMTQgNDhoNTM1cTY3IDAgMTE0LTQ4dDQ3LTExM3oiIGhvcml6LWFkdi14PSI4NTcuMSIgLz4KCjxnbHlwaCBnbHlwaC1uYW1lPSJzb3J0LWRvd24iIHVuaWNvZGU9IiYjeGYwZGQ7IiBkPSJNNTcxIDI0M3EwLTE1LTEwLTI1bC0yNTAtMjUwcS0xMS0xMS0yNS0xMXQtMjUgMTFsLTI1MCAyNTBxLTExIDEwLTExIDI1dDExIDI1IDI1IDExaDUwMHExNCAwIDI1LTExdDEwLTI1eiIgaG9yaXotYWR2LXg9IjU3MS40IiAvPgoKPGdseXBoIGdseXBoLW5hbWU9Im1vdXNlLXBvaW50ZXIiIHVuaWNvZGU9IiYjeGYyNDU7IiBkPSJNNjMyIDI2OHExOC0xNyA4LTM4LTktMjMtMzMtMjNoLTIxM2wxMTItMjY2cTYtMTMgMC0yN3QtMTktMTlsLTk5LTQycS0xNC02LTI3IDB0LTE5IDE5bC0xMDcgMjUyLTE3NC0xNzRxLTExLTExLTI1LTExLTcgMC0xNCAzLTIyIDEwLTIyIDMzdjgzOXEwIDI0IDIyIDMzIDcgMyAxNCAzIDE1IDAgMjUtMTF6IiBob3Jpei1hZHYteD0iNzE0LjMiIC8+CjwvZm9udD4KPC9kZWZzPgo8L3N2Zz4="
 
 /***/ }),
-/* 106 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(107);
+var content = __webpack_require__(124);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -30582,27 +30139,27 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(13)(content, options);
+var update = __webpack_require__(12)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 107 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(12);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(11);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "/* Containers */\n\n/* The top level container for an Escher Builder */\n.escher-container {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif !important;\n  background-color: #F3F3F3;\n  text-align: center;\n  position: relative;\n  font-size: 14px;\n  color: #333333;\n}\n\n/* Applied to the body when Escher fills the screen. This stops browser from\nshowing scroll-end animations. */\nhtml.fill-screen {\n  height: 100%;\n  width: 100%;\n}\nbody.fill-screen {\n  margin: 0;\n  position: relative;\n  overflow: hidden;\n  height: 100%;\n  width: 100%;\n}\n\n/* Applied to top level container (generally .escher-container) when Escher\nfills the screen. These make sure Escher completely fills the screen, even after\nresizes. */\n.fill-screen-div {\n  margin: 0;\n  padding: 0;\n  position: fixed;\n  top: 0px;\n  bottom: 0px;\n  left: 0px;\n  right: 0px;\n  width: 100% !important;\n  height: 100% !important;\n  z-index: 1000;\n}\n\n/* The zoom container classes. */\n.escher-container .escher-zoom-container,\n.escher-container .escher-3d-transform-container,\n.escher-container svg.escher-svg {\n  width: 100% !important;\n  height: 100% !important;\n  overflow: hidden;\n}\n\n/* SVG text should not be selectable */\n.escher-container svg text {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Status */\n.escher-container #status {\n  position:absolute;\n  bottom:10px;\n  left: 20px;\n  color: red;\n  background-color: white;\n  font-size: 16px\n}\n\n/* Search & Menu */\n.escher-container .search-menu-container {\n  position: absolute;\n  width: 100%;\n  top: 0px;\n  left: 0px;\n  margin: 0;\n  text-align: center;\n  pointer-events: none;\n}\n.escher-container .search-menu-container-inline {\n  box-sizing: border-box;\n  width: 320px;\n  display: inline-block;\n  text-align: left;\n  pointer-events: auto;\n}\n@media (min-width: 550px) {\n  .escher-container .search-menu-container-inline {\n    width: 410px;\n  }\n}\n\n/* Reaction input */\n.escher-container #rxn-input {\n  z-index: 10;\n  width: 200px;\n}\n.escher-container .input-close-button {\n  position: absolute;\n  right: 0px;\n  width: 18px;\n  bottom: 0px;\n  padding: 0px;\n  border-width: 0px;\n  margin: 0px;\n  background: none;\n  font-size: 20px;\n  font-weight: normal;\n  top: -8px;\n}\n.escher-container .input-close-button:hover {\n  color: #ff3333;\n  font-weight: bold;\n}\n\n/* text edit input */\n.escher-container #text-edit-input input {\n  width: 500px;\n  border: 1px solid #cccccc;\n  font-size: 22px;\n}\n\n.escher-container #tooltip-container {\n  -ms-touch-action: none;\n  touch-action: none;\n}\n\n/* Buttons */\n.escher-container .btn {\n  color: white!important;\n  border: 1px solid #2E2F2F;\n  background-image: linear-gradient(#4F5151, #474949 6%, #3F4141);\n  background-color: white;\n  cursor: pointer;\n}\n\n.escher-container .btn:active {\n  background-image: linear-gradient(#3F4141, #474949 6%, #4F5151);\n}\n", ""]);
+exports.push([module.i, "/* Containers */\n\n/* The top level container for an Escher Builder */\n.escher-container {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif !important;\n  background-color: #F3F3F3;\n  text-align: center;\n  position: relative;\n  font-size: 14px;\n  color: #333333;\n}\n\n/* Applied to the body when Escher fills the screen. This stops browser from\nshowing scroll-end animations. */\nhtml.fill-screen {\n  height: 100%;\n  width: 100%;\n}\nbody.fill-screen {\n  margin: 0;\n  position: relative;\n  overflow: hidden;\n  height: 100%;\n  width: 100%;\n}\n\n/* Applied to top level container (generally .escher-container) when Escher\nfills the screen. These make sure Escher completely fills the screen, even after\nresizes. */\n.fill-screen-div {\n  margin: 0;\n  padding: 0;\n  position: fixed;\n  top: 0px;\n  bottom: 0px;\n  left: 0px;\n  right: 0px;\n  width: 100% !important;\n  height: 100% !important;\n  z-index: 1000;\n}\n\n/* The zoom container classes. */\n.escher-container .escher-zoom-container,\n.escher-container .escher-3d-transform-container,\n.escher-container svg.escher-svg {\n  width: 100% !important;\n  height: 100% !important;\n  overflow: hidden;\n}\n\n/* SVG text should not be selectable */\n.escher-container svg text {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Status */\n.escher-container #status {\n  position:absolute;\n  bottom:10px;\n  left: 20px;\n  color: red;\n  background-color: white;\n  font-size: 16px\n}\n\n/* Search & Menu */\n.escher-container .search-menu-container {\n  position: absolute;\n  width: 100%;\n  top: 0px;\n  left: 0px;\n  margin: 0;\n  text-align: center;\n  pointer-events: none;\n}\n.escher-container .search-menu-container-inline {\n  box-sizing: border-box;\n  width: 320px;\n  display: inline-block;\n  text-align: left;\n  pointer-events: auto;\n}\n@media (min-width: 550px) {\n  .escher-container .search-menu-container-inline {\n    width: 470px;\n  }\n}\n\n/* Reaction input */\n.escher-container #rxn-input {\n  z-index: 10;\n  width: 200px;\n}\n.escher-container .input-close-button {\n  position: absolute;\n  right: 0px;\n  width: 18px;\n  bottom: 0px;\n  padding: 0px;\n  border-width: 0px;\n  margin: 0px;\n  background: none;\n  font-size: 20px;\n  font-weight: normal;\n  top: -8px;\n}\n.escher-container .input-close-button:hover {\n  color: #ff3333;\n  font-weight: bold;\n}\n\n/* text edit input */\n.escher-container #text-edit-input input {\n  width: 500px;\n  border: 1px solid #cccccc;\n  font-size: 22px;\n}\n\n.escher-container #tooltip-container {\n  -ms-touch-action: none;\n  touch-action: none;\n}\n\n/* Buttons */\n.escher-container .btn {\n  color: white!important;\n  border: 1px solid #2E2F2F;\n  background-image: linear-gradient(#4F5151, #474949 6%, #3F4141);\n  background-color: white;\n  cursor: pointer;\n}\n\n.escher-container .btn:active {\n  background-image: linear-gradient(#3F4141, #474949 6%, #4F5151);\n}\n", ""]);
 // Exports
 module.exports = exports;
 
 
 /***/ }),
-/* 108 */
+/* 125 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30610,7 +30167,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("svg.escher-svg #mouse-node {\n  fill: none;\n}\nsvg.escher-svg #canvas {\n  stroke: #ccc;\n  stroke-width: 7px;\n  fill: white;\n}\nsvg.escher-svg .resize-rect {\n  fill: black;\n  opacity: 0;\n  stroke: none;\n}\nsvg.escher-svg .label {\n  font-family: sans-serif;\n  font-style: italic;\n  font-weight: bold;\n  font-size: 8px;\n  fill: black;\n  stroke: none;\n  text-rendering: optimizelegibility;\n  cursor: default;\n}\nsvg.escher-svg .reaction-label {\n  font-size: 30px;\n  fill: rgb(32, 32, 120);\n  text-rendering: optimizelegibility;\n}\nsvg.escher-svg .node-label {\n  font-size: 20px;\n}\nsvg.escher-svg .gene-label {\n  font-size: 18px;\n  fill: rgb(32, 32, 120);\n  text-rendering: optimizelegibility;\n  cursor: default;\n}\nsvg.escher-svg .text-label .label {\n  font-size: 50px;\n}\nsvg.escher-svg .text-label-input {\n  font-size: 50px;\n}\nsvg.escher-svg .node-circle {\n  stroke-width: 2px;\n}\nsvg.escher-svg .midmarker-circle, svg.escher-svg .multimarker-circle {\n  fill: white;\n  fill-opacity: 0.2;\n  stroke: rgb(50, 50, 50);\n}\nsvg.escher-svg g.selected .node-circle{\n  stroke-width: 6px;\n  stroke: rgb(20, 113, 199);\n}\nsvg.escher-svg g.selected .label {\n  fill: rgb(20, 113, 199);\n}\nsvg.escher-svg .metabolite-circle {\n  stroke: rgb(162, 69, 16);\n  fill: rgb(224, 134, 91);\n}\nsvg.escher-svg g.selected .metabolite-circle {\n  stroke: rgb(5, 2, 0);\n}\nsvg.escher-svg .segment {\n  stroke: #334E75;\n  stroke-width: 10px;\n  fill: none;\n}\nsvg.escher-svg .arrowhead {\n  fill: #334E75;\n}\nsvg.escher-svg .stoichiometry-label-rect {\n  fill: white;\n  opacity: 0.5;\n}\nsvg.escher-svg .stoichiometry-label {\n  fill: #334E75;\n  font-size: 17px;\n}\nsvg.escher-svg .membrane {\n  fill: none;\n  stroke: rgb(255, 187, 0);\n}\nsvg.escher-svg .brush .extent {\n  fill-opacity: 0.1;\n  fill: black;\n  stroke: #fff;\n  shape-rendering: crispEdges;\n}\nsvg.escher-svg #brush-container .background {\n  fill: none;\n}\nsvg.escher-svg .bezier-circle {\n  fill: rgb(255,255,255);\n}\nsvg.escher-svg .bezier-circle.b1 {\n  stroke: red;\n}\nsvg.escher-svg .bezier-circle.b2 {\n  stroke: blue;\n}\nsvg.escher-svg .connect-line{\n  stroke: rgb(200,200,200);\n}\nsvg.escher-svg .direction-arrow {\n  cursor: default;\n  stroke: black;\n  stroke-width: 1px;\n  fill: white;\n  opacity: 0.3;\n}\nsvg.escher-svg .start-reaction-target {\n  stroke: rgb(100,100,100);\n  fill: none;\n  opacity: 0.5;\n}\nsvg.escher-svg .rotation-center-line {\n  stroke: red;\n  stroke-width: 5px;\n}\nsvg.escher-svg .highlight {\n  fill: #D97000;\n  text-decoration: underline;\n}\nsvg.escher-svg .node-to-combine {\n  stroke-width: 12px !important;\n}\n");
 
 /***/ }),
-/* 109 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30618,8 +30175,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /** DataMenu */
 
-var utils = __webpack_require__(4);
-var d3_json = __webpack_require__(31).json;
+var utils = __webpack_require__(2);
+var d3_json = __webpack_require__(40).json;
 
 module.exports = function (options) {
     var o = utils.set_options(options, {
@@ -30707,7 +30264,7 @@ module.exports = function (options) {
 };
 
 /***/ }),
-/* 110 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30716,13 +30273,13 @@ module.exports = function (options) {
 exports.__esModule = true;
 exports.EscherMapModel = exports.EscherMapView = undefined;
 
-var _Builder = __webpack_require__(39);
+var _Builder = __webpack_require__(51);
 
 var _Builder2 = _interopRequireDefault(_Builder);
 
-var _d3Selection = __webpack_require__(2);
+var _d3Selection = __webpack_require__(1);
 
-var _underscore = __webpack_require__(5);
+var _underscore = __webpack_require__(3);
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
@@ -30741,10 +30298,10 @@ var EscherMapModel = exports.EscherMapModel = null;
 // @jupyter-widgets/base is optional, so only initialize if it's called
 var base = void 0;
 try {
-  base = __webpack_require__(111);
+  base = __webpack_require__(128);
 } catch (e) {}
 if (base) {
-  var version = "1.8.0";
+  var version = "1.7.3";
 
   // These options can be set without explicitly redrawing the map. List is
   // probably not complete.
@@ -30913,14 +30470,14 @@ if (base) {
 }
 
 /***/ }),
-/* 111 */
+/* 128 */
 /***/ (function(module, exports) {
 
-if(typeof __WEBPACK_EXTERNAL_MODULE__111__ === 'undefined') {var e = new Error("Cannot find module '@jupyter-widgets/base'"); e.code = 'MODULE_NOT_FOUND'; throw e;}
-module.exports = __WEBPACK_EXTERNAL_MODULE__111__;
+if(typeof __WEBPACK_EXTERNAL_MODULE__128__ === 'undefined') {var e = new Error("Cannot find module '@jupyter-widgets/base'"); e.code = 'MODULE_NOT_FOUND'; throw e;}
+module.exports = __WEBPACK_EXTERNAL_MODULE__128__;
 
 /***/ }),
-/* 112 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30946,7 +30503,7 @@ __webpack_require__.d(__webpack_exports__, "schemeCategory10", function() { retu
 __webpack_require__.d(__webpack_exports__, "schemeCategory20b", function() { return /* reexport */ category20b; });
 __webpack_require__.d(__webpack_exports__, "schemeCategory20c", function() { return /* reexport */ category20c; });
 __webpack_require__.d(__webpack_exports__, "schemeCategory20", function() { return /* reexport */ category20; });
-__webpack_require__.d(__webpack_exports__, "interpolateCubehelixDefault", function() { return /* reexport */ cubehelix; });
+__webpack_require__.d(__webpack_exports__, "interpolateCubehelixDefault", function() { return /* reexport */ d3_scale_src_cubehelix; });
 __webpack_require__.d(__webpack_exports__, "interpolateRainbow", function() { return /* reexport */ src_rainbow; });
 __webpack_require__.d(__webpack_exports__, "interpolateWarm", function() { return /* reexport */ warm; });
 __webpack_require__.d(__webpack_exports__, "interpolateCool", function() { return /* reexport */ cool; });
@@ -31256,7 +30813,7 @@ function tickStep(start, stop, count) {
     // Convert number of thresholds into uniform thresholds.
     if (!Array.isArray(tz)) {
       tz = tickStep(x0, x1, tz);
-      tz = src_range(Math.ceil(x0 / tz) * tz, Math.floor(x1 / tz) * tz, tz); // exclusive
+      tz = src_range(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
     }
 
     // Remove any thresholds outside the domain.
@@ -31577,7 +31134,7 @@ function transpose_length(d) {
   return src_transpose(arguments);
 });
 
-// CONCATENATED MODULE: ./node_modules/d3-array/index.js
+// CONCATENATED MODULE: ./node_modules/d3-array/src/index.js
 
 
 
@@ -31606,8 +31163,8 @@ function transpose_length(d) {
 
 
 
-// EXTERNAL MODULE: ./node_modules/d3-collection/index.js + 6 modules
-var d3_collection = __webpack_require__(30);
+// EXTERNAL MODULE: ./node_modules/d3-collection/src/index.js + 6 modules
+var src = __webpack_require__(36);
 
 // CONCATENATED MODULE: ./node_modules/d3-scale/src/array.js
 var src_array_array = Array.prototype;
@@ -31622,7 +31179,7 @@ var array_slice = src_array_array.slice;
 var implicit = {name: "implicit"};
 
 function ordinal(range) {
-  var index = Object(d3_collection["a" /* map */])(),
+  var index = Object(src["a" /* map */])(),
       domain = [],
       unknown = implicit;
 
@@ -31639,7 +31196,7 @@ function ordinal(range) {
 
   scale.domain = function(_) {
     if (!arguments.length) return domain.slice();
-    domain = [], index = Object(d3_collection["a" /* map */])();
+    domain = [], index = Object(src["a" /* map */])();
     var i = -1, n = _.length, d, key;
     while (++i < n) if (!index.has(key = (d = _[i]) + "")) index.set(key, domain.push(d));
     return scale;
@@ -31766,8 +31323,18 @@ function point() {
   return pointish(band().paddingInner(1));
 }
 
-// EXTERNAL MODULE: ./node_modules/d3-interpolate/index.js + 21 modules
-var d3_interpolate = __webpack_require__(3);
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/number.js
+var src_number = __webpack_require__(5);
+
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/value.js + 4 modules
+var src_value = __webpack_require__(135);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/round.js
+/* harmony default export */ var src_round = (function(a, b) {
+  return a = +a, b = +b, function(t) {
+    return Math.round(a * (1 - t) + b * t);
+  };
+});
 
 // CONCATENATED MODULE: ./node_modules/d3-scale/src/constant.js
 /* harmony default export */ var src_constant = (function(x) {
@@ -31777,7 +31344,7 @@ var d3_interpolate = __webpack_require__(3);
 });
 
 // CONCATENATED MODULE: ./node_modules/d3-scale/src/number.js
-/* harmony default export */ var src_number = (function(x) {
+/* harmony default export */ var d3_scale_src_number = (function(x) {
   return +x;
 });
 
@@ -31853,7 +31420,7 @@ function copy(source, target) {
 function continuous(deinterpolate, reinterpolate) {
   var domain = unit,
       range = unit,
-      interpolate = d3_interpolate["a" /* interpolate */],
+      interpolate = src_value["a" /* default */],
       clamp = false,
       piecewise,
       output,
@@ -31874,7 +31441,7 @@ function continuous(deinterpolate, reinterpolate) {
   };
 
   scale.domain = function(_) {
-    return arguments.length ? (domain = array_map.call(_, src_number), rescale()) : domain.slice();
+    return arguments.length ? (domain = array_map.call(_, d3_scale_src_number), rescale()) : domain.slice();
   };
 
   scale.range = function(_) {
@@ -31882,7 +31449,7 @@ function continuous(deinterpolate, reinterpolate) {
   };
 
   scale.rangeRound = function(_) {
-    return range = array_slice.call(_), interpolate = d3_interpolate["e" /* interpolateRound */], rescale();
+    return range = array_slice.call(_), interpolate = src_round, rescale();
   };
 
   scale.clamp = function(_) {
@@ -31896,8 +31463,20 @@ function continuous(deinterpolate, reinterpolate) {
   return rescale();
 }
 
-// EXTERNAL MODULE: ./node_modules/d3-format/index.js + 15 modules
-var d3_format = __webpack_require__(7);
+// EXTERNAL MODULE: ./node_modules/d3-format/src/formatSpecifier.js
+var formatSpecifier = __webpack_require__(31);
+
+// EXTERNAL MODULE: ./node_modules/d3-format/src/precisionPrefix.js
+var precisionPrefix = __webpack_require__(59);
+
+// EXTERNAL MODULE: ./node_modules/d3-format/src/defaultLocale.js
+var defaultLocale = __webpack_require__(39);
+
+// EXTERNAL MODULE: ./node_modules/d3-format/src/precisionRound.js
+var precisionRound = __webpack_require__(60);
+
+// EXTERNAL MODULE: ./node_modules/d3-format/src/precisionFixed.js
+var precisionFixed = __webpack_require__(58);
 
 // CONCATENATED MODULE: ./node_modules/d3-scale/src/tickFormat.js
 
@@ -31908,28 +31487,28 @@ var d3_format = __webpack_require__(7);
       stop = domain[domain.length - 1],
       step = tickStep(start, stop, count == null ? 10 : count),
       precision;
-  specifier = Object(d3_format["formatSpecifier"])(specifier == null ? ",f" : specifier);
+  specifier = Object(formatSpecifier["b" /* default */])(specifier == null ? ",f" : specifier);
   switch (specifier.type) {
     case "s": {
       var value = Math.max(Math.abs(start), Math.abs(stop));
-      if (specifier.precision == null && !isNaN(precision = Object(d3_format["precisionPrefix"])(step, value))) specifier.precision = precision;
-      return Object(d3_format["formatPrefix"])(specifier, value);
+      if (specifier.precision == null && !isNaN(precision = Object(precisionPrefix["a" /* default */])(step, value))) specifier.precision = precision;
+      return Object(defaultLocale["c" /* formatPrefix */])(specifier, value);
     }
     case "":
     case "e":
     case "g":
     case "p":
     case "r": {
-      if (specifier.precision == null && !isNaN(precision = Object(d3_format["precisionRound"])(step, Math.max(Math.abs(start), Math.abs(stop))))) specifier.precision = precision - (specifier.type === "e");
+      if (specifier.precision == null && !isNaN(precision = Object(precisionRound["a" /* default */])(step, Math.max(Math.abs(start), Math.abs(stop))))) specifier.precision = precision - (specifier.type === "e");
       break;
     }
     case "f":
     case "%": {
-      if (specifier.precision == null && !isNaN(precision = Object(d3_format["precisionFixed"])(step))) specifier.precision = precision - (specifier.type === "%") * 2;
+      if (specifier.precision == null && !isNaN(precision = Object(precisionFixed["a" /* default */])(step))) specifier.precision = precision - (specifier.type === "%") * 2;
       break;
     }
   }
-  return Object(d3_format["format"])(specifier);
+  return Object(defaultLocale["b" /* format */])(specifier);
 });
 
 // CONCATENATED MODULE: ./node_modules/d3-scale/src/linear.js
@@ -31994,7 +31573,7 @@ function linearish(scale) {
 }
 
 function linear() {
-  var scale = continuous(deinterpolateLinear, d3_interpolate["c" /* interpolateNumber */]);
+  var scale = continuous(deinterpolateLinear, src_number["a" /* default */]);
 
   scale.copy = function() {
     return copy(scale, linear());
@@ -32018,7 +31597,7 @@ function identity_identity() {
   scale.invert = scale;
 
   scale.domain = scale.range = function(_) {
-    return arguments.length ? (domain = array_map.call(_, src_number), scale) : domain.slice();
+    return arguments.length ? (domain = array_map.call(_, d3_scale_src_number), scale) : domain.slice();
   };
 
   scale.copy = function() {
@@ -32153,7 +31732,7 @@ function log() {
 
   scale.tickFormat = function(count, specifier) {
     if (specifier == null) specifier = base === 10 ? ".0e" : ",";
-    if (typeof specifier !== "function") specifier = Object(d3_format["format"])(specifier);
+    if (typeof specifier !== "function") specifier = Object(defaultLocale["b" /* format */])(specifier);
     if (count === Infinity) return specifier;
     if (count == null) count = 10;
     var k = Math.max(1, base * count / scale.ticks().length); // TODO fast estimate?
@@ -32361,10 +31940,12 @@ var t0 = new Date,
 function newInterval(floori, offseti, count, field) {
 
   function interval(date) {
-    return floori(date = new Date(+date)), date;
+    return floori(date = arguments.length === 0 ? new Date : new Date(+date)), date;
   }
 
-  interval.floor = interval;
+  interval.floor = function(date) {
+    return floori(date = new Date(+date)), date;
+  };
 
   interval.ceil = function(date) {
     return floori(date = new Date(date - 1)), offseti(date, 1), floori(date), date;
@@ -32424,33 +32005,50 @@ function newInterval(floori, offseti, count, field) {
   return interval;
 }
 
-// CONCATENATED MODULE: ./node_modules/d3-time/src/millisecond.js
+// CONCATENATED MODULE: ./node_modules/d3-time/src/year.js
 
 
-var millisecond_millisecond = newInterval(function() {
-  // noop
+var year_year = newInterval(function(date) {
+  date.setMonth(0, 1);
+  date.setHours(0, 0, 0, 0);
 }, function(date, step) {
-  date.setTime(+date + step);
+  date.setFullYear(date.getFullYear() + step);
 }, function(start, end) {
-  return end - start;
+  return end.getFullYear() - start.getFullYear();
+}, function(date) {
+  return date.getFullYear();
 });
 
 // An optimized implementation for this simple case.
-millisecond_millisecond.every = function(k) {
-  k = Math.floor(k);
-  if (!isFinite(k) || !(k > 0)) return null;
-  if (!(k > 1)) return millisecond_millisecond;
-  return newInterval(function(date) {
-    date.setTime(Math.floor(date / k) * k);
+year_year.every = function(k) {
+  return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : newInterval(function(date) {
+    date.setFullYear(Math.floor(date.getFullYear() / k) * k);
+    date.setMonth(0, 1);
+    date.setHours(0, 0, 0, 0);
   }, function(date, step) {
-    date.setTime(+date + step * k);
-  }, function(start, end) {
-    return (end - start) / k;
+    date.setFullYear(date.getFullYear() + step * k);
   });
 };
 
-/* harmony default export */ var src_millisecond = (millisecond_millisecond);
-var milliseconds = millisecond_millisecond.range;
+/* harmony default export */ var src_year = (year_year);
+var years = year_year.range;
+
+// CONCATENATED MODULE: ./node_modules/d3-time/src/month.js
+
+
+var month_month = newInterval(function(date) {
+  date.setDate(1);
+  date.setHours(0, 0, 0, 0);
+}, function(date, step) {
+  date.setMonth(date.getMonth() + step);
+}, function(start, end) {
+  return end.getMonth() - start.getMonth() + (end.getFullYear() - start.getFullYear()) * 12;
+}, function(date) {
+  return date.getMonth();
+});
+
+/* harmony default export */ var src_month = (month_month);
+var months = month_month.range;
 
 // CONCATENATED MODULE: ./node_modules/d3-time/src/duration.js
 var durationSecond = 1e3;
@@ -32458,76 +32056,6 @@ var durationMinute = 6e4;
 var durationHour = 36e5;
 var durationDay = 864e5;
 var durationWeek = 6048e5;
-
-// CONCATENATED MODULE: ./node_modules/d3-time/src/second.js
-
-
-
-var second_second = newInterval(function(date) {
-  date.setTime(Math.floor(date / durationSecond) * durationSecond);
-}, function(date, step) {
-  date.setTime(+date + step * durationSecond);
-}, function(start, end) {
-  return (end - start) / durationSecond;
-}, function(date) {
-  return date.getUTCSeconds();
-});
-
-/* harmony default export */ var src_second = (second_second);
-var seconds = second_second.range;
-
-// CONCATENATED MODULE: ./node_modules/d3-time/src/minute.js
-
-
-
-var minute_minute = newInterval(function(date) {
-  date.setTime(Math.floor(date / durationMinute) * durationMinute);
-}, function(date, step) {
-  date.setTime(+date + step * durationMinute);
-}, function(start, end) {
-  return (end - start) / durationMinute;
-}, function(date) {
-  return date.getMinutes();
-});
-
-/* harmony default export */ var src_minute = (minute_minute);
-var minutes = minute_minute.range;
-
-// CONCATENATED MODULE: ./node_modules/d3-time/src/hour.js
-
-
-
-var hour_hour = newInterval(function(date) {
-  var offset = date.getTimezoneOffset() * durationMinute % durationHour;
-  if (offset < 0) offset += durationHour;
-  date.setTime(Math.floor((+date - offset) / durationHour) * durationHour + offset);
-}, function(date, step) {
-  date.setTime(+date + step * durationHour);
-}, function(start, end) {
-  return (end - start) / durationHour;
-}, function(date) {
-  return date.getHours();
-});
-
-/* harmony default export */ var src_hour = (hour_hour);
-var hours = hour_hour.range;
-
-// CONCATENATED MODULE: ./node_modules/d3-time/src/day.js
-
-
-
-var day_day = newInterval(function(date) {
-  date.setHours(0, 0, 0, 0);
-}, function(date, step) {
-  date.setDate(date.getDate() + step);
-}, function(start, end) {
-  return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationDay;
-}, function(date) {
-  return date.getDate() - 1;
-});
-
-/* harmony default export */ var src_day = (day_day);
-var days = day_day.range;
 
 // CONCATENATED MODULE: ./node_modules/d3-time/src/week.js
 
@@ -32560,101 +32088,101 @@ var thursdays = thursday.range;
 var fridays = friday.range;
 var saturdays = saturday.range;
 
-// CONCATENATED MODULE: ./node_modules/d3-time/src/month.js
+// CONCATENATED MODULE: ./node_modules/d3-time/src/day.js
 
 
-var month_month = newInterval(function(date) {
-  date.setDate(1);
+
+var day_day = newInterval(function(date) {
   date.setHours(0, 0, 0, 0);
 }, function(date, step) {
-  date.setMonth(date.getMonth() + step);
+  date.setDate(date.getDate() + step);
 }, function(start, end) {
-  return end.getMonth() - start.getMonth() + (end.getFullYear() - start.getFullYear()) * 12;
+  return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationDay;
 }, function(date) {
-  return date.getMonth();
+  return date.getDate() - 1;
 });
 
-/* harmony default export */ var src_month = (month_month);
-var months = month_month.range;
+/* harmony default export */ var src_day = (day_day);
+var days = day_day.range;
 
-// CONCATENATED MODULE: ./node_modules/d3-time/src/year.js
-
-
-var year_year = newInterval(function(date) {
-  date.setMonth(0, 1);
-  date.setHours(0, 0, 0, 0);
-}, function(date, step) {
-  date.setFullYear(date.getFullYear() + step);
-}, function(start, end) {
-  return end.getFullYear() - start.getFullYear();
-}, function(date) {
-  return date.getFullYear();
-});
-
-// An optimized implementation for this simple case.
-year_year.every = function(k) {
-  return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : newInterval(function(date) {
-    date.setFullYear(Math.floor(date.getFullYear() / k) * k);
-    date.setMonth(0, 1);
-    date.setHours(0, 0, 0, 0);
-  }, function(date, step) {
-    date.setFullYear(date.getFullYear() + step * k);
-  });
-};
-
-/* harmony default export */ var src_year = (year_year);
-var years = year_year.range;
-
-// CONCATENATED MODULE: ./node_modules/d3-time/src/utcMinute.js
+// CONCATENATED MODULE: ./node_modules/d3-time/src/hour.js
 
 
 
-var utcMinute = newInterval(function(date) {
-  date.setUTCSeconds(0, 0);
-}, function(date, step) {
-  date.setTime(+date + step * durationMinute);
-}, function(start, end) {
-  return (end - start) / durationMinute;
-}, function(date) {
-  return date.getUTCMinutes();
-});
-
-/* harmony default export */ var src_utcMinute = (utcMinute);
-var utcMinutes = utcMinute.range;
-
-// CONCATENATED MODULE: ./node_modules/d3-time/src/utcHour.js
-
-
-
-var utcHour = newInterval(function(date) {
-  date.setUTCMinutes(0, 0, 0);
+var hour_hour = newInterval(function(date) {
+  date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond - date.getMinutes() * durationMinute);
 }, function(date, step) {
   date.setTime(+date + step * durationHour);
 }, function(start, end) {
   return (end - start) / durationHour;
 }, function(date) {
-  return date.getUTCHours();
+  return date.getHours();
 });
 
-/* harmony default export */ var src_utcHour = (utcHour);
-var utcHours = utcHour.range;
+/* harmony default export */ var src_hour = (hour_hour);
+var hours = hour_hour.range;
 
-// CONCATENATED MODULE: ./node_modules/d3-time/src/utcDay.js
+// CONCATENATED MODULE: ./node_modules/d3-time/src/minute.js
 
 
 
-var utcDay = newInterval(function(date) {
-  date.setUTCHours(0, 0, 0, 0);
+var minute_minute = newInterval(function(date) {
+  date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond);
 }, function(date, step) {
-  date.setUTCDate(date.getUTCDate() + step);
+  date.setTime(+date + step * durationMinute);
 }, function(start, end) {
-  return (end - start) / durationDay;
+  return (end - start) / durationMinute;
 }, function(date) {
-  return date.getUTCDate() - 1;
+  return date.getMinutes();
 });
 
-/* harmony default export */ var src_utcDay = (utcDay);
-var utcDays = utcDay.range;
+/* harmony default export */ var src_minute = (minute_minute);
+var minutes = minute_minute.range;
+
+// CONCATENATED MODULE: ./node_modules/d3-time/src/second.js
+
+
+
+var second_second = newInterval(function(date) {
+  date.setTime(date - date.getMilliseconds());
+}, function(date, step) {
+  date.setTime(+date + step * durationSecond);
+}, function(start, end) {
+  return (end - start) / durationSecond;
+}, function(date) {
+  return date.getUTCSeconds();
+});
+
+/* harmony default export */ var src_second = (second_second);
+var seconds = second_second.range;
+
+// CONCATENATED MODULE: ./node_modules/d3-time/src/millisecond.js
+
+
+var millisecond_millisecond = newInterval(function() {
+  // noop
+}, function(date, step) {
+  date.setTime(+date + step);
+}, function(start, end) {
+  return end - start;
+});
+
+// An optimized implementation for this simple case.
+millisecond_millisecond.every = function(k) {
+  k = Math.floor(k);
+  if (!isFinite(k) || !(k > 0)) return null;
+  if (!(k > 1)) return millisecond_millisecond;
+  return newInterval(function(date) {
+    date.setTime(Math.floor(date / k) * k);
+  }, function(date, step) {
+    date.setTime(+date + step * k);
+  }, function(start, end) {
+    return (end - start) / k;
+  });
+};
+
+/* harmony default export */ var src_millisecond = (millisecond_millisecond);
+var milliseconds = millisecond_millisecond.range;
 
 // CONCATENATED MODULE: ./node_modules/d3-time/src/utcWeek.js
 
@@ -32687,22 +32215,22 @@ var utcThursdays = utcThursday.range;
 var utcFridays = utcFriday.range;
 var utcSaturdays = utcSaturday.range;
 
-// CONCATENATED MODULE: ./node_modules/d3-time/src/utcMonth.js
+// CONCATENATED MODULE: ./node_modules/d3-time/src/utcDay.js
 
 
-var utcMonth = newInterval(function(date) {
-  date.setUTCDate(1);
+
+var utcDay = newInterval(function(date) {
   date.setUTCHours(0, 0, 0, 0);
 }, function(date, step) {
-  date.setUTCMonth(date.getUTCMonth() + step);
+  date.setUTCDate(date.getUTCDate() + step);
 }, function(start, end) {
-  return end.getUTCMonth() - start.getUTCMonth() + (end.getUTCFullYear() - start.getUTCFullYear()) * 12;
+  return (end - start) / durationDay;
 }, function(date) {
-  return date.getUTCMonth();
+  return date.getUTCDate() - 1;
 });
 
-/* harmony default export */ var src_utcMonth = (utcMonth);
-var utcMonths = utcMonth.range;
+/* harmony default export */ var src_utcDay = (utcDay);
+var utcDays = utcDay.range;
 
 // CONCATENATED MODULE: ./node_modules/d3-time/src/utcYear.js
 
@@ -32732,37 +32260,6 @@ utcYear.every = function(k) {
 /* harmony default export */ var src_utcYear = (utcYear);
 var utcYears = utcYear.range;
 
-// CONCATENATED MODULE: ./node_modules/d3-time/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // CONCATENATED MODULE: ./node_modules/d3-time-format/src/locale.js
 
 
@@ -32784,8 +32281,8 @@ function utcDate(d) {
   return new Date(Date.UTC(d.y, d.m, d.d, d.H, d.M, d.S, d.L));
 }
 
-function newYear(y) {
-  return {y: y, m: 0, d: 1, H: 0, M: 0, S: 0, L: 0};
+function newDate(y, m, d) {
+  return {y: y, m: m, d: d, H: 0, M: 0, S: 0, L: 0};
 }
 
 function formatLocale(locale) {
@@ -32818,6 +32315,8 @@ function formatLocale(locale) {
     "d": formatDayOfMonth,
     "e": formatDayOfMonth,
     "f": formatMicroseconds,
+    "g": formatYearISO,
+    "G": formatFullYearISO,
     "H": formatHour24,
     "I": formatHour12,
     "j": formatDayOfYear,
@@ -32825,6 +32324,7 @@ function formatLocale(locale) {
     "m": formatMonthNumber,
     "M": formatMinutes,
     "p": formatPeriod,
+    "q": formatQuarter,
     "Q": formatUnixTimestamp,
     "s": formatUnixTimestampSeconds,
     "S": formatSeconds,
@@ -32850,6 +32350,8 @@ function formatLocale(locale) {
     "d": formatUTCDayOfMonth,
     "e": formatUTCDayOfMonth,
     "f": formatUTCMicroseconds,
+    "g": formatUTCYearISO,
+    "G": formatUTCFullYearISO,
     "H": formatUTCHour24,
     "I": formatUTCHour12,
     "j": formatUTCDayOfYear,
@@ -32857,6 +32359,7 @@ function formatLocale(locale) {
     "m": formatUTCMonthNumber,
     "M": formatUTCMinutes,
     "p": formatUTCPeriod,
+    "q": formatUTCQuarter,
     "Q": formatUnixTimestamp,
     "s": formatUnixTimestampSeconds,
     "S": formatUTCSeconds,
@@ -32882,6 +32385,8 @@ function formatLocale(locale) {
     "d": parseDayOfMonth,
     "e": parseDayOfMonth,
     "f": parseMicroseconds,
+    "g": parseYear,
+    "G": parseFullYear,
     "H": parseHour24,
     "I": parseHour24,
     "j": parseDayOfYear,
@@ -32889,6 +32394,7 @@ function formatLocale(locale) {
     "m": parseMonthNumber,
     "M": parseMinutes,
     "p": parsePeriod,
+    "q": parseQuarter,
     "Q": parseUnixTimestamp,
     "s": parseUnixTimestampSeconds,
     "S": parseSeconds,
@@ -32941,32 +32447,39 @@ function formatLocale(locale) {
     };
   }
 
-  function newParse(specifier, newDate) {
+  function newParse(specifier, Z) {
     return function(string) {
-      var d = newYear(1900),
+      var d = newDate(1900, undefined, 1),
           i = parseSpecifier(d, specifier, string += "", 0),
           week, day;
       if (i != string.length) return null;
 
       // If a UNIX timestamp is specified, return it.
       if ("Q" in d) return new Date(d.Q);
+      if ("s" in d) return new Date(d.s * 1000 + ("L" in d ? d.L : 0));
+
+      // If this is utcParse, never use the local timezone.
+      if (Z && !("Z" in d)) d.Z = 0;
 
       // The am-pm flag is 0 for AM, and 1 for PM.
       if ("p" in d) d.H = d.H % 12 + d.p * 12;
+
+      // If the month was not specified, inherit from the quarter.
+      if (d.m === undefined) d.m = "q" in d ? d.q : 0;
 
       // Convert day-of-week and week-of-year to day-of-year.
       if ("V" in d) {
         if (d.V < 1 || d.V > 53) return null;
         if (!("w" in d)) d.w = 1;
         if ("Z" in d) {
-          week = utcDate(newYear(d.y)), day = week.getUTCDay();
+          week = utcDate(newDate(d.y, 0, 1)), day = week.getUTCDay();
           week = day > 4 || day === 0 ? utcMonday.ceil(week) : utcMonday(week);
           week = src_utcDay.offset(week, (d.V - 1) * 7);
           d.y = week.getUTCFullYear();
           d.m = week.getUTCMonth();
           d.d = week.getUTCDate() + (d.w + 6) % 7;
         } else {
-          week = newDate(newYear(d.y)), day = week.getDay();
+          week = localDate(newDate(d.y, 0, 1)), day = week.getDay();
           week = day > 4 || day === 0 ? monday.ceil(week) : monday(week);
           week = src_day.offset(week, (d.V - 1) * 7);
           d.y = week.getFullYear();
@@ -32975,7 +32488,7 @@ function formatLocale(locale) {
         }
       } else if ("W" in d || "U" in d) {
         if (!("w" in d)) d.w = "u" in d ? d.u % 7 : "W" in d ? 1 : 0;
-        day = "Z" in d ? utcDate(newYear(d.y)).getUTCDay() : newDate(newYear(d.y)).getDay();
+        day = "Z" in d ? utcDate(newDate(d.y, 0, 1)).getUTCDay() : localDate(newDate(d.y, 0, 1)).getDay();
         d.m = 0;
         d.d = "W" in d ? (d.w + 6) % 7 + d.W * 7 - (day + 5) % 7 : d.w + d.U * 7 - (day + 6) % 7;
       }
@@ -32989,7 +32502,7 @@ function formatLocale(locale) {
       }
 
       // Otherwise, all fields are in local time.
-      return newDate(d);
+      return localDate(d);
     };
   }
 
@@ -33072,6 +32585,10 @@ function formatLocale(locale) {
     return locale_periods[+(d.getHours() >= 12)];
   }
 
+  function formatQuarter(d) {
+    return 1 + ~~(d.getMonth() / 3);
+  }
+
   function formatUTCShortWeekday(d) {
     return locale_shortWeekdays[d.getUTCDay()];
   }
@@ -33092,6 +32609,10 @@ function formatLocale(locale) {
     return locale_periods[+(d.getUTCHours() >= 12)];
   }
 
+  function formatUTCQuarter(d) {
+    return 1 + ~~(d.getUTCMonth() / 3);
+  }
+
   return {
     format: function(specifier) {
       var f = newFormat(specifier += "", formats);
@@ -33099,7 +32620,7 @@ function formatLocale(locale) {
       return f;
     },
     parse: function(specifier) {
-      var p = newParse(specifier += "", localDate);
+      var p = newParse(specifier += "", false);
       p.toString = function() { return specifier; };
       return p;
     },
@@ -33109,7 +32630,7 @@ function formatLocale(locale) {
       return f;
     },
     utcParse: function(specifier) {
-      var p = newParse(specifier, utcDate);
+      var p = newParse(specifier += "", true);
       p.toString = function() { return specifier; };
       return p;
     }
@@ -33182,6 +32703,11 @@ function parseZone(d, string, i) {
   return n ? (d.Z = n[1] ? 0 : -(n[2] + (n[3] || "00")), i + n[0].length) : -1;
 }
 
+function parseQuarter(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 1));
+  return n ? (d.q = n[0] * 3 - 3, i + n[0].length) : -1;
+}
+
 function parseMonthNumber(d, string, i) {
   var n = numberRe.exec(string.slice(i, i + 2));
   return n ? (d.m = n[0] - 1, i + n[0].length) : -1;
@@ -33234,7 +32760,7 @@ function parseUnixTimestamp(d, string, i) {
 
 function parseUnixTimestampSeconds(d, string, i) {
   var n = numberRe.exec(string.slice(i));
-  return n ? (d.Q = (+n[0]) * 1000, i + n[0].length) : -1;
+  return n ? (d.s = +n[0], i + n[0].length) : -1;
 }
 
 function formatDayOfMonth(d, p) {
@@ -33279,12 +32805,16 @@ function formatWeekdayNumberMonday(d) {
 }
 
 function formatWeekNumberSunday(d, p) {
-  return pad(sunday.count(src_year(d), d), p, 2);
+  return pad(sunday.count(src_year(d) - 1, d), p, 2);
+}
+
+function dISO(d) {
+  var day = d.getDay();
+  return (day >= 4 || day === 0) ? thursday(d) : thursday.ceil(d);
 }
 
 function formatWeekNumberISO(d, p) {
-  var day = d.getDay();
-  d = (day >= 4 || day === 0) ? thursday(d) : thursday.ceil(d);
+  d = dISO(d);
   return pad(thursday.count(src_year(d), d) + (src_year(d).getDay() === 4), p, 2);
 }
 
@@ -33293,14 +32823,25 @@ function formatWeekdayNumberSunday(d) {
 }
 
 function formatWeekNumberMonday(d, p) {
-  return pad(monday.count(src_year(d), d), p, 2);
+  return pad(monday.count(src_year(d) - 1, d), p, 2);
 }
 
 function locale_formatYear(d, p) {
   return pad(d.getFullYear() % 100, p, 2);
 }
 
+function formatYearISO(d, p) {
+  d = dISO(d);
+  return pad(d.getFullYear() % 100, p, 2);
+}
+
 function formatFullYear(d, p) {
+  return pad(d.getFullYear() % 10000, p, 4);
+}
+
+function formatFullYearISO(d, p) {
+  var day = d.getDay();
+  d = (day >= 4 || day === 0) ? thursday(d) : thursday.ceil(d);
   return pad(d.getFullYear() % 10000, p, 4);
 }
 
@@ -33353,12 +32894,16 @@ function formatUTCWeekdayNumberMonday(d) {
 }
 
 function formatUTCWeekNumberSunday(d, p) {
-  return pad(utcSunday.count(src_utcYear(d), d), p, 2);
+  return pad(utcSunday.count(src_utcYear(d) - 1, d), p, 2);
+}
+
+function UTCdISO(d) {
+  var day = d.getUTCDay();
+  return (day >= 4 || day === 0) ? utcThursday(d) : utcThursday.ceil(d);
 }
 
 function formatUTCWeekNumberISO(d, p) {
-  var day = d.getUTCDay();
-  d = (day >= 4 || day === 0) ? utcThursday(d) : utcThursday.ceil(d);
+  d = UTCdISO(d);
   return pad(utcThursday.count(src_utcYear(d), d) + (src_utcYear(d).getUTCDay() === 4), p, 2);
 }
 
@@ -33367,14 +32912,25 @@ function formatUTCWeekdayNumberSunday(d) {
 }
 
 function formatUTCWeekNumberMonday(d, p) {
-  return pad(utcMonday.count(src_utcYear(d), d), p, 2);
+  return pad(utcMonday.count(src_utcYear(d) - 1, d), p, 2);
 }
 
 function formatUTCYear(d, p) {
   return pad(d.getUTCFullYear() % 100, p, 2);
 }
 
+function formatUTCYearISO(d, p) {
+  d = UTCdISO(d);
+  return pad(d.getUTCFullYear() % 100, p, 2);
+}
+
 function formatUTCFullYear(d, p) {
+  return pad(d.getUTCFullYear() % 10000, p, 4);
+}
+
+function formatUTCFullYearISO(d, p) {
+  var day = d.getUTCDay();
+  d = (day >= 4 || day === 0) ? utcThursday(d) : utcThursday.ceil(d);
   return pad(d.getUTCFullYear() % 10000, p, 4);
 }
 
@@ -33403,7 +32959,7 @@ var timeParse;
 var utcFormat;
 var utcParse;
 
-defaultLocale({
+defaultLocale_defaultLocale({
   dateTime: "%x, %X",
   date: "%-m/%-d/%Y",
   time: "%-I:%M:%S %p",
@@ -33414,7 +32970,7 @@ defaultLocale({
   shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 });
 
-function defaultLocale(definition) {
+function defaultLocale_defaultLocale(definition) {
   defaultLocale_locale = formatLocale(definition);
   timeFormat = defaultLocale_locale.format;
   timeParse = defaultLocale_locale.parse;
@@ -33422,42 +32978,6 @@ function defaultLocale(definition) {
   utcParse = defaultLocale_locale.utcParse;
   return defaultLocale_locale;
 }
-
-// CONCATENATED MODULE: ./node_modules/d3-time-format/src/isoFormat.js
-
-
-var isoSpecifier = "%Y-%m-%dT%H:%M:%S.%LZ";
-
-function formatIsoNative(date) {
-  return date.toISOString();
-}
-
-var formatIso = Date.prototype.toISOString
-    ? formatIsoNative
-    : utcFormat(isoSpecifier);
-
-/* harmony default export */ var isoFormat = (formatIso);
-
-// CONCATENATED MODULE: ./node_modules/d3-time-format/src/isoParse.js
-
-
-
-function parseIsoNative(string) {
-  var date = new Date(string);
-  return isNaN(date) ? null : date;
-}
-
-var parseIso = +new Date("2000-01-01T00:00:00.000Z")
-    ? parseIsoNative
-    : utcParse(isoSpecifier);
-
-/* harmony default export */ var isoParse = (parseIso);
-
-// CONCATENATED MODULE: ./node_modules/d3-time-format/index.js
-
-
-
-
 
 // CONCATENATED MODULE: ./node_modules/d3-scale/src/time.js
 
@@ -33485,7 +33005,7 @@ function time_number(t) {
 }
 
 function calendar(year, month, week, day, hour, minute, second, millisecond, format) {
-  var scale = continuous(deinterpolateLinear, d3_interpolate["c" /* interpolateNumber */]),
+  var scale = continuous(deinterpolateLinear, src_number["a" /* default */]),
       invert = scale.invert,
       domain = scale.domain;
 
@@ -33596,6 +33116,57 @@ function calendar(year, month, week, day, hour, minute, second, millisecond, for
   return calendar(src_year, src_month, sunday, src_day, src_hour, src_minute, src_second, src_millisecond, timeFormat).domain([new Date(2000, 0, 1), new Date(2000, 0, 2)]);
 });
 
+// CONCATENATED MODULE: ./node_modules/d3-time/src/utcMonth.js
+
+
+var utcMonth = newInterval(function(date) {
+  date.setUTCDate(1);
+  date.setUTCHours(0, 0, 0, 0);
+}, function(date, step) {
+  date.setUTCMonth(date.getUTCMonth() + step);
+}, function(start, end) {
+  return end.getUTCMonth() - start.getUTCMonth() + (end.getUTCFullYear() - start.getUTCFullYear()) * 12;
+}, function(date) {
+  return date.getUTCMonth();
+});
+
+/* harmony default export */ var src_utcMonth = (utcMonth);
+var utcMonths = utcMonth.range;
+
+// CONCATENATED MODULE: ./node_modules/d3-time/src/utcHour.js
+
+
+
+var utcHour = newInterval(function(date) {
+  date.setUTCMinutes(0, 0, 0);
+}, function(date, step) {
+  date.setTime(+date + step * durationHour);
+}, function(start, end) {
+  return (end - start) / durationHour;
+}, function(date) {
+  return date.getUTCHours();
+});
+
+/* harmony default export */ var src_utcHour = (utcHour);
+var utcHours = utcHour.range;
+
+// CONCATENATED MODULE: ./node_modules/d3-time/src/utcMinute.js
+
+
+
+var utcMinute = newInterval(function(date) {
+  date.setUTCSeconds(0, 0);
+}, function(date, step) {
+  date.setTime(+date + step * durationMinute);
+}, function(start, end) {
+  return (end - start) / durationMinute;
+}, function(date) {
+  return date.getUTCMinutes();
+});
+
+/* harmony default export */ var src_utcMinute = (utcMinute);
+var utcMinutes = utcMinute.range;
+
 // CONCATENATED MODULE: ./node_modules/d3-scale/src/utcTime.js
 
 
@@ -33632,24 +33203,128 @@ function calendar(year, month, week, day, hour, minute, second, millisecond, for
 
 /* harmony default export */ var category20 = (colors("1f77b4aec7e8ff7f0effbb782ca02c98df8ad62728ff98969467bdc5b0d58c564bc49c94e377c2f7b6d27f7f7fc7c7c7bcbd22dbdb8d17becf9edae5"));
 
-// EXTERNAL MODULE: ./node_modules/d3-color/index.js + 5 modules
-var d3_color = __webpack_require__(1);
+// EXTERNAL MODULE: ./node_modules/d3-color/src/define.js
+var define = __webpack_require__(14);
+
+// EXTERNAL MODULE: ./node_modules/d3-color/src/color.js
+var color = __webpack_require__(16);
+
+// CONCATENATED MODULE: ./node_modules/d3-color/src/math.js
+var deg2rad = Math.PI / 180;
+var rad2deg = 180 / Math.PI;
+
+// CONCATENATED MODULE: ./node_modules/d3-color/src/cubehelix.js
+
+
+
+
+var A = -0.14861,
+    B = +1.78277,
+    C = -0.29227,
+    D = -0.90649,
+    E = +1.97294,
+    ED = E * D,
+    EB = E * B,
+    BC_DA = B * C - D * A;
+
+function cubehelixConvert(o) {
+  if (o instanceof Cubehelix) return new Cubehelix(o.h, o.s, o.l, o.opacity);
+  if (!(o instanceof color["b" /* Rgb */])) o = Object(color["g" /* rgbConvert */])(o);
+  var r = o.r / 255,
+      g = o.g / 255,
+      b = o.b / 255,
+      l = (BC_DA * b + ED * r - EB * g) / (BC_DA + ED - EB),
+      bl = b - l,
+      k = (E * (g - l) - C * bl) / D,
+      s = Math.sqrt(k * k + bl * bl) / (E * l * (1 - l)), // NaN if l=0 or l=1
+      h = s ? Math.atan2(k, bl) * rad2deg - 120 : NaN;
+  return new Cubehelix(h < 0 ? h + 360 : h, s, l, o.opacity);
+}
+
+function cubehelix_cubehelix(h, s, l, opacity) {
+  return arguments.length === 1 ? cubehelixConvert(h) : new Cubehelix(h, s, l, opacity == null ? 1 : opacity);
+}
+
+function Cubehelix(h, s, l, opacity) {
+  this.h = +h;
+  this.s = +s;
+  this.l = +l;
+  this.opacity = +opacity;
+}
+
+Object(define["a" /* default */])(Cubehelix, cubehelix_cubehelix, Object(define["b" /* extend */])(color["a" /* Color */], {
+  brighter: function(k) {
+    k = k == null ? color["c" /* brighter */] : Math.pow(color["c" /* brighter */], k);
+    return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
+  },
+  darker: function(k) {
+    k = k == null ? color["d" /* darker */] : Math.pow(color["d" /* darker */], k);
+    return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
+  },
+  rgb: function() {
+    var h = isNaN(this.h) ? 0 : (this.h + 120) * deg2rad,
+        l = +this.l,
+        a = isNaN(this.s) ? 0 : this.s * l * (1 - l),
+        cosh = Math.cos(h),
+        sinh = Math.sin(h);
+    return new color["b" /* Rgb */](
+      255 * (l + a * (A * cosh + B * sinh)),
+      255 * (l + a * (C * cosh + D * sinh)),
+      255 * (l + a * (E * cosh)),
+      this.opacity
+    );
+  }
+}));
+
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/color.js
+var src_color = __webpack_require__(15);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/cubehelix.js
+
+
+
+function src_cubehelix_cubehelix(hue) {
+  return (function cubehelixGamma(y) {
+    y = +y;
+
+    function cubehelix(start, end) {
+      var h = hue((start = cubehelix_cubehelix(start)).h, (end = cubehelix_cubehelix(end)).h),
+          s = Object(src_color["a" /* default */])(start.s, end.s),
+          l = Object(src_color["a" /* default */])(start.l, end.l),
+          opacity = Object(src_color["a" /* default */])(start.opacity, end.opacity);
+      return function(t) {
+        start.h = h(t);
+        start.s = s(t);
+        start.l = l(Math.pow(t, y));
+        start.opacity = opacity(t);
+        return start + "";
+      };
+    }
+
+    cubehelix.gamma = cubehelixGamma;
+
+    return cubehelix;
+  })(1);
+}
+
+/* harmony default export */ var src_cubehelix = (src_cubehelix_cubehelix(src_color["c" /* hue */]));
+var cubehelixLong = src_cubehelix_cubehelix(src_color["a" /* default */]);
 
 // CONCATENATED MODULE: ./node_modules/d3-scale/src/cubehelix.js
 
 
 
-/* harmony default export */ var cubehelix = (Object(d3_interpolate["b" /* interpolateCubehelixLong */])(Object(d3_color["b" /* cubehelix */])(300, 0.5, 0.0), Object(d3_color["b" /* cubehelix */])(-240, 0.5, 1.0)));
+/* harmony default export */ var d3_scale_src_cubehelix = (cubehelixLong(cubehelix_cubehelix(300, 0.5, 0.0), cubehelix_cubehelix(-240, 0.5, 1.0)));
 
 // CONCATENATED MODULE: ./node_modules/d3-scale/src/rainbow.js
 
 
 
-var warm = Object(d3_interpolate["b" /* interpolateCubehelixLong */])(Object(d3_color["b" /* cubehelix */])(-100, 0.75, 0.35), Object(d3_color["b" /* cubehelix */])(80, 1.50, 0.8));
+var warm = cubehelixLong(cubehelix_cubehelix(-100, 0.75, 0.35), cubehelix_cubehelix(80, 1.50, 0.8));
 
-var cool = Object(d3_interpolate["b" /* interpolateCubehelixLong */])(Object(d3_color["b" /* cubehelix */])(260, 0.75, 0.35), Object(d3_color["b" /* cubehelix */])(80, 1.50, 0.8));
+var cool = cubehelixLong(cubehelix_cubehelix(260, 0.75, 0.35), cubehelix_cubehelix(80, 1.50, 0.8));
 
-var rainbow = Object(d3_color["b" /* cubehelix */])();
+var rainbow = cubehelix_cubehelix();
 
 /* harmony default export */ var src_rainbow = (function(t) {
   if (t < 0 || t > 1) t -= Math.floor(t);
@@ -33751,7 +33426,7 @@ function sequential(interpolator) {
 
 
 /***/ }),
-/* 113 */
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33759,33 +33434,96 @@ function sequential(interpolator) {
 __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "zoom", function() { return /* reexport */ src_zoom; });
+__webpack_require__.d(__webpack_exports__, "zoom", function() { return /* reexport */ d3_zoom_src_zoom; });
 __webpack_require__.d(__webpack_exports__, "zoomTransform", function() { return /* reexport */ transform_transform; });
 __webpack_require__.d(__webpack_exports__, "zoomIdentity", function() { return /* reexport */ identity; });
 
-// EXTERNAL MODULE: ./node_modules/d3-dispatch/index.js + 1 modules
-var d3_dispatch = __webpack_require__(10);
+// EXTERNAL MODULE: ./node_modules/d3-dispatch/src/dispatch.js
+var dispatch = __webpack_require__(134);
 
 // EXTERNAL MODULE: ./node_modules/d3-drag/src/nodrag.js
-var nodrag = __webpack_require__(27);
+var nodrag = __webpack_require__(30);
 
-// EXTERNAL MODULE: ./node_modules/d3-interpolate/index.js + 21 modules
-var d3_interpolate = __webpack_require__(3);
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/zoom.js
+var rho = Math.SQRT2,
+    rho2 = 2,
+    rho4 = 4,
+    epsilon2 = 1e-12;
+
+function cosh(x) {
+  return ((x = Math.exp(x)) + 1 / x) / 2;
+}
+
+function sinh(x) {
+  return ((x = Math.exp(x)) - 1 / x) / 2;
+}
+
+function tanh(x) {
+  return ((x = Math.exp(2 * x)) - 1) / (x + 1);
+}
+
+// p0 = [ux0, uy0, w0]
+// p1 = [ux1, uy1, w1]
+/* harmony default export */ var src_zoom = (function(p0, p1) {
+  var ux0 = p0[0], uy0 = p0[1], w0 = p0[2],
+      ux1 = p1[0], uy1 = p1[1], w1 = p1[2],
+      dx = ux1 - ux0,
+      dy = uy1 - uy0,
+      d2 = dx * dx + dy * dy,
+      i,
+      S;
+
+  // Special case for u0 ≅ u1.
+  if (d2 < epsilon2) {
+    S = Math.log(w1 / w0) / rho;
+    i = function(t) {
+      return [
+        ux0 + t * dx,
+        uy0 + t * dy,
+        w0 * Math.exp(rho * t * S)
+      ];
+    }
+  }
+
+  // General case.
+  else {
+    var d1 = Math.sqrt(d2),
+        b0 = (w1 * w1 - w0 * w0 + rho4 * d2) / (2 * w0 * rho2 * d1),
+        b1 = (w1 * w1 - w0 * w0 - rho4 * d2) / (2 * w1 * rho2 * d1),
+        r0 = Math.log(Math.sqrt(b0 * b0 + 1) - b0),
+        r1 = Math.log(Math.sqrt(b1 * b1 + 1) - b1);
+    S = (r1 - r0) / rho;
+    i = function(t) {
+      var s = t * S,
+          coshr0 = cosh(r0),
+          u = w0 / (rho2 * d1) * (coshr0 * tanh(rho * s + r0) - sinh(r0));
+      return [
+        ux0 + u * dx,
+        uy0 + u * dy,
+        w0 * coshr0 / cosh(rho * s + r0)
+      ];
+    }
+  }
+
+  i.duration = S * 1000;
+
+  return i;
+});
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/on.js
-var on = __webpack_require__(9);
+var on = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/mouse.js
-var mouse = __webpack_require__(42);
+var mouse = __webpack_require__(54);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/select.js
-var src_select = __webpack_require__(28);
+var src_select = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/touch.js
-var touch = __webpack_require__(43);
+var touch = __webpack_require__(55);
 
-// EXTERNAL MODULE: ./node_modules/d3-transition/index.js + 38 modules
-var d3_transition = __webpack_require__(19);
+// EXTERNAL MODULE: ./node_modules/d3-transition/src/index.js + 33 modules
+var src = __webpack_require__(22);
 
 // CONCATENATED MODULE: ./node_modules/d3-zoom/src/constant.js
 /* harmony default export */ var constant = (function(x) {
@@ -33918,7 +33656,7 @@ function defaultConstrain(transform, extent, translateExtent) {
   );
 }
 
-/* harmony default export */ var src_zoom = (function() {
+/* harmony default export */ var d3_zoom_src_zoom = (function() {
   var filter = defaultFilter,
       extent = defaultExtent,
       constrain = defaultConstrain,
@@ -33927,8 +33665,8 @@ function defaultConstrain(transform, extent, translateExtent) {
       scaleExtent = [0, Infinity],
       translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]],
       duration = 250,
-      interpolate = d3_interpolate["i" /* interpolateZoom */],
-      listeners = Object(d3_dispatch["a" /* dispatch */])("start", "zoom", "end"),
+      interpolate = src_zoom,
+      listeners = Object(dispatch["a" /* default */])("start", "zoom", "end"),
       touchstarting,
       touchending,
       touchDelay = 500,
@@ -34102,7 +33840,7 @@ function defaultConstrain(transform, extent, translateExtent) {
     // Otherwise, capture the mouse point and location at the start.
     else {
       g.mouse = [p, t.invert(p)];
-      Object(d3_transition["a" /* interrupt */])(this);
+      Object(src["a" /* interrupt */])(this);
       g.start();
     }
 
@@ -34127,7 +33865,7 @@ function defaultConstrain(transform, extent, translateExtent) {
     Object(nodrag["a" /* default */])(on["c" /* event */].view);
     nopropagation();
     g.mouse = [p, this.__zoom.invert(p)];
-    Object(d3_transition["a" /* interrupt */])(this);
+    Object(src["a" /* interrupt */])(this);
     g.start();
 
     function mousemoved() {
@@ -34179,7 +33917,7 @@ function defaultConstrain(transform, extent, translateExtent) {
 
     if (started) {
       if (g.taps < 2) touchstarting = setTimeout(function() { touchstarting = null; }, touchDelay);
-      Object(d3_transition["a" /* interrupt */])(this);
+      Object(src["a" /* interrupt */])(this);
       g.start();
     }
   }
@@ -34293,7 +34031,7 @@ function defaultConstrain(transform, extent, translateExtent) {
 
 
 /***/ }),
-/* 114 */
+/* 131 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34306,26 +34044,26 @@ __webpack_require__.d(__webpack_exports__, "brushX", function() { return /* reex
 __webpack_require__.d(__webpack_exports__, "brushY", function() { return /* reexport */ brushY; });
 __webpack_require__.d(__webpack_exports__, "brushSelection", function() { return /* reexport */ brushSelection; });
 
-// EXTERNAL MODULE: ./node_modules/d3-dispatch/index.js + 1 modules
-var d3_dispatch = __webpack_require__(10);
+// EXTERNAL MODULE: ./node_modules/d3-dispatch/src/dispatch.js
+var dispatch = __webpack_require__(134);
 
 // EXTERNAL MODULE: ./node_modules/d3-drag/src/nodrag.js
-var nodrag = __webpack_require__(27);
+var nodrag = __webpack_require__(30);
 
-// EXTERNAL MODULE: ./node_modules/d3-interpolate/index.js + 21 modules
-var d3_interpolate = __webpack_require__(3);
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/value.js + 4 modules
+var value = __webpack_require__(135);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/selection/on.js
-var on = __webpack_require__(9);
+var on = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/select.js
-var src_select = __webpack_require__(28);
+var src_select = __webpack_require__(32);
 
 // EXTERNAL MODULE: ./node_modules/d3-selection/src/mouse.js
-var mouse = __webpack_require__(42);
+var mouse = __webpack_require__(54);
 
-// EXTERNAL MODULE: ./node_modules/d3-transition/index.js + 38 modules
-var d3_transition = __webpack_require__(19);
+// EXTERNAL MODULE: ./node_modules/d3-transition/src/index.js + 33 modules
+var src = __webpack_require__(22);
 
 // CONCATENATED MODULE: ./node_modules/d3-brush/src/constant.js
 /* harmony default export */ var constant = (function(x) {
@@ -34491,7 +34229,7 @@ function brushY() {
 function brush_brush(dim) {
   var extent = defaultExtent,
       filter = defaultFilter,
-      listeners = Object(d3_dispatch["a" /* dispatch */])(brush, "start", "brush", "end"),
+      listeners = Object(dispatch["a" /* default */])(brush, "start", "brush", "end"),
       handleSize = 6,
       touchending;
 
@@ -34553,7 +34291,7 @@ function brush_brush(dim) {
                 emit = emitter(that, arguments),
                 selection0 = state.selection,
                 selection1 = dim.input(typeof selection === "function" ? selection.apply(this, arguments) : selection, state.extent),
-                i = Object(d3_interpolate["a" /* interpolate */])(selection0, selection1);
+                i = Object(value["a" /* default */])(selection0, selection1);
 
             function tween(t) {
               state.selection = t === 1 && empty(selection1) ? null : i(t);
@@ -34572,7 +34310,7 @@ function brush_brush(dim) {
                 selection1 = dim.input(typeof selection === "function" ? selection.apply(that, args) : selection, state.extent),
                 emit = emitter(that, args).beforestart();
 
-            Object(d3_transition["a" /* interrupt */])(that);
+            Object(src["a" /* interrupt */])(that);
             state.selection = selection1 == null || empty(selection1) ? null : selection1;
             redraw.call(that);
             emit.start().brush().end();
@@ -34708,7 +34446,7 @@ function brush_brush(dim) {
     }
 
     nopropagation();
-    Object(d3_transition["a" /* interrupt */])(that);
+    Object(src["a" /* interrupt */])(that);
     redraw.call(that);
     emit.start();
 
@@ -34899,7 +34637,7 @@ function brush_brush(dim) {
 
 
 /***/ }),
-/* 115 */
+/* 132 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -41004,6 +40742,217 @@ gsap.registerPlugin(CSSPlugin);
 var gsapWithCSS = gsap.registerPlugin(CSSPlugin) || gsap,
     // to protect from tree shaking
 TweenMaxWithCSS = gsapWithCSS.core.Tween;
+
+
+/***/ }),
+/* 133 */,
+/* 134 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var noop = {value: function() {}};
+
+function dispatch() {
+  for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
+    if (!(t = arguments[i] + "") || (t in _) || /[\s.]/.test(t)) throw new Error("illegal type: " + t);
+    _[t] = [];
+  }
+  return new Dispatch(_);
+}
+
+function Dispatch(_) {
+  this._ = _;
+}
+
+function parseTypenames(typenames, types) {
+  return typenames.trim().split(/^|\s+/).map(function(t) {
+    var name = "", i = t.indexOf(".");
+    if (i >= 0) name = t.slice(i + 1), t = t.slice(0, i);
+    if (t && !types.hasOwnProperty(t)) throw new Error("unknown type: " + t);
+    return {type: t, name: name};
+  });
+}
+
+Dispatch.prototype = dispatch.prototype = {
+  constructor: Dispatch,
+  on: function(typename, callback) {
+    var _ = this._,
+        T = parseTypenames(typename + "", _),
+        t,
+        i = -1,
+        n = T.length;
+
+    // If no callback was specified, return the callback of the given type and name.
+    if (arguments.length < 2) {
+      while (++i < n) if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name))) return t;
+      return;
+    }
+
+    // If a type was specified, set the callback for the given type and name.
+    // Otherwise, if a null callback was specified, remove callbacks of the given name.
+    if (callback != null && typeof callback !== "function") throw new Error("invalid callback: " + callback);
+    while (++i < n) {
+      if (t = (typename = T[i]).type) _[t] = set(_[t], typename.name, callback);
+      else if (callback == null) for (t in _) _[t] = set(_[t], typename.name, null);
+    }
+
+    return this;
+  },
+  copy: function() {
+    var copy = {}, _ = this._;
+    for (var t in _) copy[t] = _[t].slice();
+    return new Dispatch(copy);
+  },
+  call: function(type, that) {
+    if ((n = arguments.length - 2) > 0) for (var args = new Array(n), i = 0, n, t; i < n; ++i) args[i] = arguments[i + 2];
+    if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
+    for (t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
+  },
+  apply: function(type, that, args) {
+    if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
+    for (var t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
+  }
+};
+
+function get(type, name) {
+  for (var i = 0, n = type.length, c; i < n; ++i) {
+    if ((c = type[i]).name === name) {
+      return c.value;
+    }
+  }
+}
+
+function set(type, name, callback) {
+  for (var i = 0, n = type.length; i < n; ++i) {
+    if (type[i].name === name) {
+      type[i] = noop, type = type.slice(0, i).concat(type.slice(i + 1));
+      break;
+    }
+  }
+  if (callback != null) type.push({name: name, value: callback});
+  return type;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (dispatch);
+
+
+/***/ }),
+/* 135 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/d3-color/src/color.js
+var color = __webpack_require__(16);
+
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/rgb.js + 2 modules
+var rgb = __webpack_require__(49);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/numberArray.js
+/* harmony default export */ var numberArray = (function(a, b) {
+  if (!b) b = [];
+  var n = a ? Math.min(b.length, a.length) : 0,
+      c = b.slice(),
+      i;
+  return function(t) {
+    for (i = 0; i < n; ++i) c[i] = a[i] * (1 - t) + b[i] * t;
+    return c;
+  };
+});
+
+function isNumberArray(x) {
+  return ArrayBuffer.isView(x) && !(x instanceof DataView);
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/array.js
+
+
+
+/* harmony default export */ var array = (function(a, b) {
+  return (isNumberArray(b) ? numberArray : genericArray)(a, b);
+});
+
+function genericArray(a, b) {
+  var nb = b ? b.length : 0,
+      na = a ? Math.min(nb, a.length) : 0,
+      x = new Array(na),
+      c = new Array(nb),
+      i;
+
+  for (i = 0; i < na; ++i) x[i] = value(a[i], b[i]);
+  for (; i < nb; ++i) c[i] = b[i];
+
+  return function(t) {
+    for (i = 0; i < na; ++i) c[i] = x[i](t);
+    return c;
+  };
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/date.js
+/* harmony default export */ var date = (function(a, b) {
+  var d = new Date;
+  return a = +a, b = +b, function(t) {
+    return d.setTime(a * (1 - t) + b * t), d;
+  };
+});
+
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/number.js
+var number = __webpack_require__(5);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/object.js
+
+
+/* harmony default export */ var object = (function(a, b) {
+  var i = {},
+      c = {},
+      k;
+
+  if (a === null || typeof a !== "object") a = {};
+  if (b === null || typeof b !== "object") b = {};
+
+  for (k in b) {
+    if (k in a) {
+      i[k] = value(a[k], b[k]);
+    } else {
+      c[k] = b[k];
+    }
+  }
+
+  return function(t) {
+    for (k in i) c[k] = i[k](t);
+    return c;
+  };
+});
+
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/string.js
+var string = __webpack_require__(72);
+
+// EXTERNAL MODULE: ./node_modules/d3-interpolate/src/constant.js
+var constant = __webpack_require__(34);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/value.js
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ var value = __webpack_exports__["a"] = (function(a, b) {
+  var t = typeof b, c;
+  return b == null || t === "boolean" ? Object(constant["a" /* default */])(b)
+      : (t === "number" ? number["a" /* default */]
+      : t === "string" ? ((c = Object(color["e" /* default */])(b)) ? (b = c, rgb["a" /* default */]) : string["a" /* default */])
+      : b instanceof color["e" /* default */] ? rgb["a" /* default */]
+      : b instanceof Date ? date
+      : isNumberArray(b) ? numberArray
+      : Array.isArray(b) ? genericArray
+      : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object
+      : number["a" /* default */])(a, b);
+});
 
 
 /***/ })
