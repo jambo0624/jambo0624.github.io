@@ -24091,9 +24091,10 @@ function create_segment(enter_selection) {
  * @return {}
  */
 function update_segment(update_selection, scale, cobra_model, drawn_nodes, defs, has_data_on_reactions) {
+  var _this = this;
 
   // define the function to handle the animation of the reaction data
-  function handleAnimation(entries, observer) {
+  function handleAnimation(entries, observer, show_animation) {
     entries.forEach(function (entry) {
       // get the node
       var node = entry.target;
@@ -24101,7 +24102,7 @@ function update_segment(update_selection, scale, cobra_model, drawn_nodes, defs,
       if (entry.isIntersecting) {
         // show the animation when the element is in the viewport
         var dataBindByD3 = node.__data__;
-        if (has_data_on_reactions && show_reaction_data_animation && dataBindByD3.data) {
+        if (has_data_on_reactions && show_animation && dataBindByD3.data) {
           var fluxData = dataBindByD3.data;
           var velocity = scale.reaction_animation_duration(fluxData);
           var strokeDash = scale.reaction_size(fluxData) * 2;
@@ -24141,7 +24142,9 @@ function update_segment(update_selection, scale, cobra_model, drawn_nodes, defs,
   }
 
   // define the observer for the intersection to stop the animation when the element is not in the viewport
-  var observer = new IntersectionObserver(handleAnimation, { threshold: 0.1 });
+  var observer = new IntersectionObserver(function (entries) {
+    handleAnimation(entries, observer, _this.settings.get('show_reaction_data_animation'));
+  }, { threshold: 0.1 });
 
   var reaction_data_styles = this.settings.get('reaction_styles');
   var should_size = has_data_on_reactions && reaction_data_styles.indexOf('size') !== -1;
@@ -24154,7 +24157,7 @@ function update_segment(update_selection, scale, cobra_model, drawn_nodes, defs,
   var hide_secondary_metabolites = this.settings.get('hide_secondary_metabolites');
   var primary_r = this.settings.get('primary_metabolite_radius');
   var secondary_r = this.settings.get('secondary_metabolite_radius');
-  // show the reaction data animation 
+  // show the reaction data animation
   var show_reaction_data_animation = this.settings.get('show_reaction_data_animation');
 
   var objectMouseover = this.behavior.reactionObjectMouseover;
@@ -24238,7 +24241,7 @@ function update_segment(update_selection, scale, cobra_model, drawn_nodes, defs,
   }).each(function (d, i, nodes) {
     var node = nodes[0];
     // make the intersection observer callback can be triggered by the redraw
-    handleAnimation([{ target: node }], observer);
+    handleAnimation([{ target: node }], observer, show_reaction_data_animation);
     // observe the node
     observer.observe(node);
   }).attr('pointer-events', 'visibleStroke').on('mouseover', objectMouseover).on('mouseout', objectMouseout);

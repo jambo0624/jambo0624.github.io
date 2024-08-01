@@ -14,31 +14,24 @@
   document.addEventListener('DOMContentLoaded', () => {
     if (typeof escher !== 'undefined' && typeof escher.Builder !== 'undefined') {
       let map = {};
-      let model = {};
-      let reaction_data = [];
 
       const loadJSON = (url) => fetch(url).then(response => response.json());
 
       Promise.all([
         loadJSON('./escher/map.json'),
-        loadJSON('./escher/model.json'),
-        loadJSON('./escher/data.json')
       ])
-        .then(([mapData, modelData, reactionData]) => {
+        .then(([mapData]) => {
           map = mapData;
-          model = modelData;
-          reaction_data = reactionData;
 
           new escher.Builder(
             map,
-            model,
+            null,
             null,
             escher.libs.d3_select('#root'),
             {
               fill_screen: true,
               never_ask_before_quit: true,
               scroll_behavior: 'zoom',
-              reaction_data,
               show_reaction_data_animation: true,
             }
           );
